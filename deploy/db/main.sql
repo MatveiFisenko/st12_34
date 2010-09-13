@@ -1,4 +1,37 @@
 --
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) DEFAULT NULL,
+  `email` varchar(127) NOT NULL,
+  `username` varchar(31) NOT NULL DEFAULT '',
+  `password` char(50) NOT NULL,
+  `logins` int(10) unsigned NOT NULL DEFAULT '0',
+  `last_login` int(10) unsigned DEFAULT NULL,
+  `notify` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Flag incase admin opts in for email notifications',
+  `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniq_username` (`username`),
+  UNIQUE KEY `uniq_email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'Administrator','david@ushahidi.com','admin','bae4b17e9acbabf959654a4c496e577003e0b887c6f52803d7',5,1284376805,0,'2010-09-13 11:20:05');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `alert`
 --
 
@@ -1508,39 +1541,6 @@ LOCK TABLES `user_tokens` WRITE;
 /*!40000 ALTER TABLE `user_tokens` DISABLE KEYS */;
 INSERT INTO `user_tokens` VALUES (1,1,'0bc25144caff08bf0ca452c8aa49d3757bee0441','EcpeLIZLzaQy5GKKVv6rVVWJNTm5C6Ue',1284376684,1285586284);
 /*!40000 ALTER TABLE `user_tokens` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `users`
---
-
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(200) DEFAULT NULL,
-  `email` varchar(127) NOT NULL,
-  `username` varchar(31) NOT NULL DEFAULT '',
-  `password` char(50) NOT NULL,
-  `logins` int(10) unsigned NOT NULL DEFAULT '0',
-  `last_login` int(10) unsigned DEFAULT NULL,
-  `notify` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Flag incase admin opts in for email notifications',
-  `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uniq_username` (`username`),
-  UNIQUE KEY `uniq_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Administrator','david@ushahidi.com','admin','bae4b17e9acbabf959654a4c496e577003e0b887c6f52803d7',5,1284376805,0,'2010-09-13 11:20:05');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

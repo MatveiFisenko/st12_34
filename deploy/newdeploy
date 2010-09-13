@@ -1,0 +1,161 @@
+#!/bin/bash
+set -e
+set -o pipefail #exit on chain error.
+
+#Default verbosity behaviour.
+verbose="-q"
+silent="--silent"
+zverbose="--quiet --silent"
+quiet="-q"
+
+#Default source and destination.
+repo_path="https://212.158.164.130/svn/1234/"
+destination="212.158.164.131"
+server_port=22
+
+#Deploy type flags;
+depltype=0
+FLG_CODE=1
+FLG_SQL=4
+FLG_SQL_MIG=8
+
+#Parsing command line options
+while getopts "hvr:t:d:p:" opt; do
+
+	case $opt in
+
+		h) echo -e "Usage: $0 [-h] [-v] [-r http://autodoc.opensa.ru] [-t code]\n\n"\
+			"Example: $0 -v -v -t code -t sql -t sql_mig\n\n" \
+			"-h this help.\n" \
+			"-v Verbose output. Use twice for even more verbosity.\n" \
+			"-r \E[31mRepository\E[30m Sets repository path.\n" \
+			"-t \E[31mType\E[30m\n"\
+				"	\E[32mcode\E[30m		Deploy main code.\n" \
+				"	\E[32msql\E[30m		Warning! Drop database and recreate it from scratch.\n" \
+				"	\E[32msql_mig\E[30m		Apply SQL migrations. Warning! Current state is unknown.\n" \
+			"-d \E[31mServer name\E[30m		Deploy to server name.\n" \
+			"-p \E[31mServer port\E[30m		Remote server ssh port\n"
+		exit 0
+
+		;;
+
+		v)
+			set -x
+			if [[ $verbose = "" ]]; then #Increase verbosity.
+
+				verbose="-v"
+			else
+				verbose=""
+				zverbose="--silent"
+				silent=""
+				quiet=""
+			fi;
+
+		;;
+
+		r)
+
+			repo_path=$OPTARG
+
+		;;
+
+		t)
+
+			case $OPTARG in
+
+				code)	 	((depltype|=FLG_CODE)) ;;
+				sql)		((depltype|=FLG_SQL)) ;;
+				sql_mig)	((depltype|=FLG_SQL_MIG)) ;;
+
+			esac
+		;;
+
+		d)
+
+			destination=$OPTARG
+
+		;;
+
+		p)
+
+			server_port=$OPTARG
+
+		;;
+
+		\?)
+
+			echo "Invalid option" $opt
+			exit 1
+
+		;;
+	esac
+
+done
+
+#Deployment process.
+
+#Begin code deployment.
+if ((depltype & FLG_CODE)) ; then
+
+	mkdir /tmp/src.$$
+
+	cd /tmp/src.$$
+
+	svn export ${repo_path}trunk/code . --force $quiet
+
+	findCommand="find /var/www/1234/ -mindepth 1 -maxdepth 1 -print0"
+
+	ssh $verbose -p $server_port $USER@${destination} "$findCommand | xargs -0 rm -rf"
+
+	scp -C $verbose -P $server_port -r /tmp/src.$$/* $USER@${destination}:/var/www/1234/
+
+	ssh $verbose -p $server_port $USER@${destination} "$findCommand | xargs -0 chown $silent -R $USER:users"
+
+	ssh $verbose -p $server_port $USER@${destination} "$findCommand | xargs -0 chmod $silent -R u=rwX,g=rwX,o=rwX"
+
+	ssh $verbose -p $server_port $USER@${destination} chmod $silent -R u=rwX,g=rwX,o=rwX /var/www/1234/
+
+	rm -rf /tmp/src.$$
+
+fi
+#End code deployment.
+
+#Begin sql deployment.
+if (( depltype & FLG_SQL )); then
+	mkdir /tmp/depsql.$$
+
+	cd /tmp/depsql.$$
+
+	svn export ${repo_path}trunk/deploy/db . --force $quiet
+
+	read -e -s -p "Enter sql root password (server side): " root_pass;
+
+	db_name=ushahidi
+
+	echo "CREATE DATABASE IF NOT EXISTS $db_name DEFAULT CHARACTER SET = utf8; use $db_name; SET FOREIGN_KEY_CHECKS = 0;" | ssh $verbose -p $server_port $USER@${destination} mysql -uroot -p$root_pass --default-character-set=utf8
+	cat /tmp/depsql.$$/main.sql | ssh $verbose -p $server_port $USER@${destination} mysql -uroot -p$root_pass $db_name --default-character-set=utf8
+
+	rm -rf /tmp/depsql.$$
+fi
+#End sql deployment.
+
+#Begin sql_mig deployment.
+if (( depltype & FLG_SQL_MIG )); then
+
+	mkdir /tmp/deppatchsql.$$
+
+	cd /tmp/deppatchsql.$$
+
+	svn export ${repo_path}trunk/deploy/db/migrations . --force $quiet
+
+	read -e -s -p "Enter sql root password (server side): " root_pass;
+
+	db_name=ushahidi
+
+	cat /tmp/deppatchsql.$$/*.sql | ssh $verbose -p $server_port $USER@${destination} mysql -uroot -p$root_pass $db_name --default-character-set=utf8
+
+	rm -rf /tmp/deppatchsql.$$
+fi
+#End sql_mig deployment.
+
+echo "Success!"

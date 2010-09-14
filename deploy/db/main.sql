@@ -1243,7 +1243,7 @@ CREATE TABLE `scheduler` (
 
 LOCK TABLES `scheduler` WRITE;
 /*!40000 ALTER TABLE `scheduler` DISABLE KEYS */;
-INSERT INTO `scheduler` VALUES (1,'Feeds',1284499651,-1,-1,-1,0,'s_feeds',1),(2,'Alerts',1284499789,-1,-1,-1,-1,'s_alerts',1),(3,'Email',1284499652,-1,-1,-1,0,'s_email',1),(4,'Twitter',1284499652,-1,-1,-1,0,'s_twitter',1),(5,'Sharing',1284499652,-1,-1,-1,0,'s_sharing',1);
+INSERT INTO `scheduler` VALUES (1,'Feeds',1284499651,-1,-1,-1,0,'s_feeds',1),(2,'Alerts',1284501039,-1,-1,-1,-1,'s_alerts',1),(3,'Email',1284499652,-1,-1,-1,0,'s_email',1),(4,'Twitter',1284499652,-1,-1,-1,0,'s_twitter',1),(5,'Sharing',1284499652,-1,-1,-1,0,'s_sharing',1);
 /*!40000 ALTER TABLE `scheduler` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1261,7 +1261,7 @@ CREATE TABLE `scheduler_log` (
   `scheduler_status` varchar(20) DEFAULT NULL,
   `scheduler_date` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1270,7 +1270,7 @@ CREATE TABLE `scheduler_log` (
 
 LOCK TABLES `scheduler_log` WRITE;
 /*!40000 ALTER TABLE `scheduler_log` DISABLE KEYS */;
-INSERT INTO `scheduler_log` VALUES (1,1,'Feeds','200',1284376677),(2,2,'Alerts','200',1284376677),(3,3,'Email','200',1284376677),(4,4,'Twitter','200',1284376677),(5,5,'Sharing','200',1284376677),(6,1,'Feeds','200',1284499651),(7,2,'Alerts','200',1284499651),(8,3,'Email','200',1284499652),(9,4,'Twitter','200',1284499652),(10,5,'Sharing','200',1284499652),(11,2,'Alerts','200',1284499789);
+INSERT INTO `scheduler_log` VALUES (1,1,'Feeds','200',1284376677),(2,2,'Alerts','200',1284376677),(3,3,'Email','200',1284376677),(4,4,'Twitter','200',1284376677),(5,5,'Sharing','200',1284376677),(6,1,'Feeds','200',1284499651),(7,2,'Alerts','200',1284499651),(8,3,'Email','200',1284499652),(9,4,'Twitter','200',1284499652),(10,5,'Sharing','200',1284499652),(11,2,'Alerts','200',1284499789),(12,2,'Alerts','200',1284500866),(13,2,'Alerts','200',1284500966),(14,2,'Alerts','200',1284501039);
 /*!40000 ALTER TABLE `scheduler_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1398,7 +1398,7 @@ CREATE TABLE `settings` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` VALUES (1,'Статья 12.34','12.34','2matvei@gmail.com',NULL,'ru_KG','default',NULL,1,1,1,1,1,1,1,1,'CC0000','ABQIAAAAJeXYm06B0AvY6broIqjSLBQn5xc-Pro06ig4uZQ43k9LSSM1PRRE9iLKzceWBpX_ea-jlCC3B_5eKA','5CYeWbfV34E21JOW1a4.54Mf6e9jLNkD0HVzaKoQmJZi2qzmSZd5mD8X49x7',NULL,'',115,0,'nairobi','-1.2873000707050097','36.821451182008204',13,20,20,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','','','','','','2010-09-13 15:20:05',6348,'885d9efb80f0630207014113ae2081','localhost','localhost',25,'localhost','imap',0,'2matvei@gmail.com','25','1.1.0');
+INSERT INTO `settings` VALUES (1,'Статья 12.34','12.34','2matvei@gmail.com',NULL,'ru_RU','default',NULL,1,1,1,1,1,1,1,1,'CC0000','ABQIAAAAJeXYm06B0AvY6broIqjSLBQn5xc-Pro06ig4uZQ43k9LSSM1PRRE9iLKzceWBpX_ea-jlCC3B_5eKA','5CYeWbfV34E21JOW1a4.54Mf6e9jLNkD0HVzaKoQmJZi2qzmSZd5mD8X49x7',NULL,'',115,0,'nairobi','-1.2873000707050097','36.821451182008204',13,20,20,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','','','','','','2010-09-13 15:20:05',6348,'885d9efb80f0630207014113ae2081','localhost','localhost',25,'localhost','imap',0,'2matvei@gmail.com','25','1.1.0');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1523,7 +1523,7 @@ CREATE TABLE `user_tokens` (
 
 LOCK TABLES `user_tokens` WRITE;
 /*!40000 ALTER TABLE `user_tokens` DISABLE KEYS */;
-INSERT INTO `user_tokens` VALUES (1,1,'0bc25144caff08bf0ca452c8aa49d3757bee0441','EcpeLIZLzaQy5GKKVv6rVVWJNTm5C6Ue',1284376684,1285586284),(2,1,'20d86424de04bbaa278606db57e9eaa5714d6d5a','ttkWUZqWNgC0tyTVxEWTUD3NhhFGTTz1',1284499514,1285709114);
+INSERT INTO `user_tokens` VALUES (1,1,'0bc25144caff08bf0ca452c8aa49d3757bee0441','EcpeLIZLzaQy5GKKVv6rVVWJNTm5C6Ue',1284376684,1285586284),(2,1,'20d86424de04bbaa278606db57e9eaa5714d6d5a','1NmASFUKUXFhTKk52CZ6NFiqNe1gklcp',1284499514,1285709114);
 /*!40000 ALTER TABLE `user_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1556,7 +1556,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Administrator','david@ushahidi.com','admin','bae4b17e9acbabf959654a4c496e577003e0b887c6f52803d7',20,1284499639,0,'2010-09-14 21:27:19');
+INSERT INTO `users` VALUES (1,'Administrator','david@ushahidi.com','admin','bae4b17e9acbabf959654a4c496e577003e0b887c6f52803d7',21,1284500879,0,'2010-09-14 21:47:59');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1597,4 +1597,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2010-09-15  1:43:44
+-- Dump completed on 2010-09-15  1:56:31

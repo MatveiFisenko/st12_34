@@ -1,35 +1,19 @@
+-- MySQL dump 10.13  Distrib 5.1.37, for debian-linux-gnu (x86_64)
 --
--- Table structure for table `users`
---
+-- Host: localhost    Database: ushahidi
+-- ------------------------------------------------------
+-- Server version	5.1.37-1ubuntu5.4
 
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(200) DEFAULT NULL,
-  `email` varchar(127) NOT NULL,
-  `username` varchar(31) NOT NULL DEFAULT '',
-  `password` char(50) NOT NULL,
-  `logins` int(10) unsigned NOT NULL DEFAULT '0',
-  `last_login` int(10) unsigned DEFAULT NULL,
-  `notify` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Flag incase admin opts in for email notifications',
-  `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uniq_username` (`username`),
-  UNIQUE KEY `uniq_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Administrator','david@ushahidi.com','admin','bae4b17e9acbabf959654a4c496e577003e0b887c6f52803d7',5,1284376805,0,'2010-09-13 11:20:05');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `alert`
@@ -167,7 +151,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,0,'en_US',5,'RIOTS','RIOTS','9900CC',NULL,NULL,1),(2,0,'en_US',5,'DEATHS','DEATHS','3300FF',NULL,NULL,1),(3,0,'en_US',5,'PROPERTY LOSS','PROPERTY LOSS','663300',NULL,NULL,1),(4,0,'en_US',5,'SEXUAL ASSAULT','SEXUAL ASSAULT','CC0000',NULL,NULL,1),(5,0,'en_US',5,'INTERNALLY DISPLACED PEOPLE ','INTERNALLY DISPLACED PEOPLE 	','CC9933',NULL,NULL,1),(6,0,'en_US',5,'GOVERNMENT FORCES','GOVERNMENT FORCES','9999FF',NULL,NULL,1),(7,0,'en_US',5,'CIVILIANS','CIVILIANS','66CC00',NULL,NULL,1),(8,0,'en_US',5,'LOOTING','LOOTING','FFCC00',NULL,NULL,1),(9,0,'en_US',5,'PEACE EFFORTS','PEACE EFFORTS','FAEBD7',NULL,NULL,1);
+INSERT INTO `category` VALUES (4,0,'en_US',5,'Яма','Яма в дорожном покрытии','CC0000',NULL,NULL,1);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1259,7 +1243,7 @@ CREATE TABLE `scheduler` (
 
 LOCK TABLES `scheduler` WRITE;
 /*!40000 ALTER TABLE `scheduler` DISABLE KEYS */;
-INSERT INTO `scheduler` VALUES (1,'Feeds',1284376677,-1,-1,-1,0,'s_feeds',1),(2,'Alerts',1284376677,-1,-1,-1,-1,'s_alerts',1),(3,'Email',1284376677,-1,-1,-1,0,'s_email',1),(4,'Twitter',1284376677,-1,-1,-1,0,'s_twitter',1),(5,'Sharing',1284376677,-1,-1,-1,0,'s_sharing',1);
+INSERT INTO `scheduler` VALUES (1,'Feeds',1284499651,-1,-1,-1,0,'s_feeds',1),(2,'Alerts',1284499789,-1,-1,-1,-1,'s_alerts',1),(3,'Email',1284499652,-1,-1,-1,0,'s_email',1),(4,'Twitter',1284499652,-1,-1,-1,0,'s_twitter',1),(5,'Sharing',1284499652,-1,-1,-1,0,'s_sharing',1);
 /*!40000 ALTER TABLE `scheduler` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1277,7 +1261,7 @@ CREATE TABLE `scheduler_log` (
   `scheduler_status` varchar(20) DEFAULT NULL,
   `scheduler_date` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1286,7 +1270,7 @@ CREATE TABLE `scheduler_log` (
 
 LOCK TABLES `scheduler_log` WRITE;
 /*!40000 ALTER TABLE `scheduler_log` DISABLE KEYS */;
-INSERT INTO `scheduler_log` VALUES (1,1,'Feeds','200',1284376677),(2,2,'Alerts','200',1284376677),(3,3,'Email','200',1284376677),(4,4,'Twitter','200',1284376677),(5,5,'Sharing','200',1284376677);
+INSERT INTO `scheduler_log` VALUES (1,1,'Feeds','200',1284376677),(2,2,'Alerts','200',1284376677),(3,3,'Email','200',1284376677),(4,4,'Twitter','200',1284376677),(5,5,'Sharing','200',1284376677),(6,1,'Feeds','200',1284499651),(7,2,'Alerts','200',1284499651),(8,3,'Email','200',1284499652),(9,4,'Twitter','200',1284499652),(10,5,'Sharing','200',1284499652),(11,2,'Alerts','200',1284499789);
 /*!40000 ALTER TABLE `scheduler_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1530,7 +1514,7 @@ CREATE TABLE `user_tokens` (
   UNIQUE KEY `uniq_token` (`token`),
   KEY `fk_user_id` (`user_id`),
   CONSTRAINT `user_tokens_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1539,8 +1523,41 @@ CREATE TABLE `user_tokens` (
 
 LOCK TABLES `user_tokens` WRITE;
 /*!40000 ALTER TABLE `user_tokens` DISABLE KEYS */;
-INSERT INTO `user_tokens` VALUES (1,1,'0bc25144caff08bf0ca452c8aa49d3757bee0441','EcpeLIZLzaQy5GKKVv6rVVWJNTm5C6Ue',1284376684,1285586284);
+INSERT INTO `user_tokens` VALUES (1,1,'0bc25144caff08bf0ca452c8aa49d3757bee0441','EcpeLIZLzaQy5GKKVv6rVVWJNTm5C6Ue',1284376684,1285586284),(2,1,'20d86424de04bbaa278606db57e9eaa5714d6d5a','ttkWUZqWNgC0tyTVxEWTUD3NhhFGTTz1',1284499514,1285709114);
 /*!40000 ALTER TABLE `user_tokens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) DEFAULT NULL,
+  `email` varchar(127) NOT NULL,
+  `username` varchar(31) NOT NULL DEFAULT '',
+  `password` char(50) NOT NULL,
+  `logins` int(10) unsigned NOT NULL DEFAULT '0',
+  `last_login` int(10) unsigned DEFAULT NULL,
+  `notify` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Flag incase admin opts in for email notifications',
+  `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniq_username` (`username`),
+  UNIQUE KEY `uniq_email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'Administrator','david@ushahidi.com','admin','bae4b17e9acbabf959654a4c496e577003e0b887c6f52803d7',20,1284499639,0,'2010-09-14 21:27:19');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1570,3 +1587,14 @@ LOCK TABLES `verified` WRITE;
 /*!40000 ALTER TABLE `verified` DISABLE KEYS */;
 /*!40000 ALTER TABLE `verified` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2010-09-15  1:43:44

@@ -104,8 +104,8 @@
 		}
 
 		//Custom stylesheet
-
-		echo html::stylesheet(url::site().'themes/'.$site_style."/style.css");
+		if ( $site_style ) 
+			echo html::stylesheet(url::site().'themes/'.$site_style."/style.css");
 	?>
 
 	<!--[if IE 6]>

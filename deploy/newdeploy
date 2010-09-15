@@ -9,7 +9,7 @@ zverbose="--quiet --silent"
 quiet="-q"
 
 #Default source and destination.
-repo_path="https://212.158.164.130/svn/1234/"
+repo_path="http://212.158.164.130/svn/1234/"
 destination="212.158.164.131"
 server_port=22
 
@@ -109,11 +109,13 @@ if ((depltype & FLG_CODE)) ; then
 
 	scp -C $verbose -P $server_port -r /tmp/src.$$/* $USER@${destination}:/var/www/1234/
 
+	scp -C $verbose -P $server_port -r /tmp/src.$$/.htaccess $USER@${destination}:/var/www/1234/
+
 	ssh $verbose -p $server_port $USER@${destination} "$findCommand | xargs -0 chown $silent -R $USER:users"
 
 	ssh $verbose -p $server_port $USER@${destination} "$findCommand | xargs -0 chmod $silent -R u=rwX,g=rwX,o=rwX"
 
-	ssh $verbose -p $server_port $USER@${destination} chmod $silent -R u=rwX,g=rwX,o=rwX /var/www/1234/
+	ssh $verbose -p $server_port $USER@${destination} chmod $silent -R u=rwX,g=rwX,o=rwX /var/www/1234/*
 
 	rm -rf /tmp/src.$$
 

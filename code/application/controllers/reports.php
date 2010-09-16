@@ -537,8 +537,11 @@ class Reports_Controller extends Main_Controller {
 			(
 				'comment_author' => '',
 				'comment_description' => '',
+				'comment_direction' => '',
 				'comment_email' => '',
 				'comment_ip' => '',
+				'comment_scan' => '',
+				'comment_type' => '',
 				'captcha' => ''
 			);
 
@@ -552,7 +555,7 @@ class Reports_Controller extends Main_Controller {
 			{
 				// Instantiate Validation, use $post, so we don't overwrite $_POST fields with our own things
 
-				$post = Validation::factory($_POST);
+				$post = Validation::factory(array_merge($_POST,$_FILES));
 
 				// Add some filters
 
@@ -562,7 +565,14 @@ class Reports_Controller extends Main_Controller {
 
 				$post->add_rules('comment_author', 'required', 'length[3,100]');
 				$post->add_rules('comment_description', 'required');
+				$post->add_rules('comment_direction', 'required');
 				$post->add_rules('comment_email', 'required','email', 'length[4,100]');
+				if ($post->comment_type == 'official')
+				{
+  				$post->add_rules('comment_scan', 'upload::valid', 'upload::required', 
+  				                 'upload::type[gif,jpg,png]', 'upload::size[10M]');
+  			}
+				$post->add_rules('comment_type', 'required');
 				$post->add_rules('captcha', 'required', 'Captcha::valid');
 
 				// Test to see if things passed the rule checks
@@ -584,7 +594,10 @@ class Reports_Controller extends Main_Controller {
 							'email' => $post->comment_email,
 							'website' => "",
 							'body' => $post->comment_description,
-							'user_ip' => $_SERVER['REMOTE_ADDR']
+							'user_ip' => $_SERVER['REMOTE_ADDR'],
+							'type' => $post->comment_type,
+							'direction' => $post->comment_direction,
+							'scan' => $post->comment_scan
 						);
 
 						$config = array(
@@ -632,14 +645,37 @@ class Reports_Controller extends Main_Controller {
 						$comment_spam = 0;
 					}
 
-
 					$comment = new Comment_Model();
+
+          // Process scan image.
+  				$scan_filenames = upload::save('comment_scan');
+  				$new_scan_filename = '';
+					if (count($scan_filenames) > 0) {
+					  $new_scan_filename = $comment->id."_".time();
+
+					  // Resize original file to the same size to make sure that the file is image and it's safe.
+                      // Otherwise it may contain an XSR attacking header.
+					  $scan_image = Image::factory($scan_filenames[0]);
+					  $scan_image->resize($scan_image->width, $scan_image->height, Image::AUTO)
+						  ->save(Kohana::config('upload.directory', TRUE).$new_scan_filename.".jpg");
+
+					  // Create thumbnail
+					  Image::factory($scan_filenames[0])->resize(70,41,Image::HEIGHT)
+						  ->save(Kohana::config('upload.directory', TRUE).$new_scan_filename."_t.jpg");
+
+					  // Remove the temporary file
+					  unlink($scan_filenames[0]);
+					}
+
 					$comment->incident_id = $id;
 					$comment->comment_author = strip_tags($post->comment_author);
 					$comment->comment_description = strip_tags($post->comment_description);
 					$comment->comment_email = strip_tags($post->comment_email);
 					$comment->comment_ip = $_SERVER['REMOTE_ADDR'];
 					$comment->comment_date = date("Y-m-d H:i:s",time());
+					$comment->comment_type = $post->comment_type;
+  			  $comment->comment_scan = $new_scan_filename;
+					$comment->comment_direction = $post->comment_direction;
 
 					// Activate comment for now
 

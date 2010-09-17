@@ -119,6 +119,18 @@ $("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 										?>
 									</div>
 								</div>
+								<div class="report_row">
+									<h4><?php echo Kohana::lang('ui_main.pit_length'); ?></h4>
+                  <?php print form::input('pit_length', $form['pit_length'], ' class="text short"'); ?>
+                </div>
+								<div class="report_row">
+									<h4><?php echo Kohana::lang('ui_main.pit_width'); ?></h4>
+                  <?php print form::input('pit_width', $form['pit_width'], ' class="text short"'); ?>
+                </div>
+								<div class="report_row">
+									<h4><?php echo Kohana::lang('ui_main.pit_depth'); ?></h4>
+                  <?php print form::input('pit_depth', $form['pit_depth'], ' class="text short"'); ?>
+                </div>
 								
 								<div id="custom_forms">
 									

@@ -101,7 +101,25 @@
 					},
 					"incident_video[]": {
 						url: true
-					}
+					},
+					pit_length: {
+					  required: true,
+					  minlength: 1,
+					  maxlength: 10
+          },
+          pit_width: {
+            required: true,
+            minlength: 1,
+            maxlength: 10
+          },
+					pit_depth: {
+            required: true,
+            minlength: 1,
+            maxlength: 10
+          },
+				  "incident_photo[]": {
+				    required: true
+          }
 				},
 				messages: {
 					incident_title: {
@@ -147,7 +165,25 @@
 					},
 					"incident_news[]": {
 						url: "Please enter a valid Video link"
-					}	
+					},
+					pit_length: {
+					  required: "Пожалуйста, укажите длину ямы",
+					  minlength: "Количество символов в поле \"Длина ямы\" должно быть от 1 до 10",
+					  maxlength: "Количество символов в поле \"Длина ямы\" должно быть от 1 до 10"
+          },
+					pit_width: {
+					  required: "Пожалуйста, укажите ширину ямы",
+					  minlength: "Количество символов в поле \"Ширина ямы\" должно быть от 1 до 10",
+					  maxlength: "Количество символов в поле \"Ширина ямы\" должно быть от 1 до 10"
+          },
+					pit_depth: {
+					  required: "Пожалуйста, укажите глубину ямы",
+					  minlength: "Количество символов в поле \"Глубина ямы\" должно быть от 1 до 10",
+					  maxlength: "Количество символов в поле \"Глубина ямы\" должно быть от 1 до 10"
+          },
+          "incident_photo[]": {
+            required: "<div style=\"clear:both\">Обязательно должна быть приложена фотография</div>"
+          }
 				},
 				groups: {
 					incident_date_time: "incident_date incident_hour",

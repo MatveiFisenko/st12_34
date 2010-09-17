@@ -182,6 +182,18 @@
 			                        </ul>
 								</div>
 							</div>
+							<div class="row">
+								<h4><? echo Kohana::lang('ui_main.pit_length');?></h4>
+										<? print form::input('pit_length', $form['pit_length'], ' class="text"'); ?>
+							</div>
+							<div class="row">
+								<h4><? echo Kohana::lang('ui_main.pit_width');?></h4>
+										<? print form::input('pit_width', $form['pit_width'], ' class="text"'); ?>
+							</div>
+							<div class="row">
+								<h4><? echo Kohana::lang('ui_main.pit_depth');?></h4>
+										<? print form::input('pit_depth', $form['pit_depth'], ' class="text"'); ?>
+							</div>
 							<div id="custom_forms">
 								<?php
 								foreach ($disp_custom_fields as $field_id => $field_property)

@@ -27,12 +27,12 @@ $lang = array
 'driver_not_found' => 'The %s driver for the %s library could not be found',
 
 // Resource names
-'config' => 'config file',
-'controller' => 'controller',
-'helper' => 'helper',
-'library' => 'library',
-'driver' => 'driver',
-'model' => 'model',
-'view' => 'view',
+'config' => 'файл конфигурации',
+'controller' => 'контроллер',
+'helper' => 'помощник',
+'library' => 'библиотека',
+'driver' => 'драйвер',
+'model' => 'модель',
+'view' => 'вид',
 );
 

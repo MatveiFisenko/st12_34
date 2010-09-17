@@ -296,7 +296,10 @@ class Reports_Controller extends Admin_Controller
 			'incident_active' => '',
 			'incident_verified' => '',
 			'incident_source' => '',
-			'incident_information' => ''
+			'incident_information' => '',
+			'pit_length' => '',
+			'pit_width' => '',
+			'pit_depth' => ''
 	    );
 		
 		//  copy the form as errors, so the errors will be stored with keys corresponding to the form field names
@@ -475,6 +478,12 @@ class Reports_Controller extends Admin_Controller
 			$post->add_rules('longitude','required','between[-180,180]');	// Validate for maximum and minimum longitude values
 			$post->add_rules('location_name','required', 'length[3,200]');
 			
+      // Pit-specific :)
+      $post->add_rules('pit_length', 'required', 'length[1,10]');
+      $post->add_rules('pit_width', 'required', 'length[1,10]');
+      $post->add_rules('pit_depth', 'required', 'length[1,10]');
+
+			
 			//XXX: Hack to validate for no checkboxes checked
 			if (!isset($_POST['incident_category'])) {
 				$post->incident_category = "";
@@ -508,7 +517,7 @@ class Reports_Controller extends Admin_Controller
 	        }
 	
 			// Validate photo uploads
-			$post->add_rules('incident_photo', 'upload::valid', 'upload::type[gif,jpg,png]', 'upload::size[2M]');
+			$post->add_rules('incident_photo', 'upload::valid', 'upload::type[gif,jpg,png]', 'upload::size[10M]');
 			
 			
 			// Validate Personal Information
@@ -559,6 +568,10 @@ class Reports_Controller extends Admin_Controller
 				$incident->user_id = $_SESSION['auth_user']->id;
 				$incident->incident_title = $post->incident_title;
 				$incident->incident_description = $post->incident_description;
+
+				$incident->pit_length = $post->pit_length;
+				$incident->pit_width = $post->pit_width;
+				$incident->pit_depth = $post->pit_depth;
 				
 				$incident_date=explode("/",$post->incident_date);
 				// where the $_POST['date'] is a value posted by form in mm/dd/yyyy format
@@ -850,7 +863,10 @@ class Reports_Controller extends Admin_Controller
 						'incident_active' => $incident->incident_active,
 						'incident_verified' => $incident->incident_verified,
 						'incident_source' => $incident->incident_source,
-						'incident_information' => $incident->incident_information
+						'incident_information' => $incident->incident_information,
+						'pit_length' => $incident->pit_length,
+						'pit_width' => $incident->pit_width,
+						'pit_depth' => $incident->pit_depth
 				    );
 					
 					// Merge To Form Array For Display

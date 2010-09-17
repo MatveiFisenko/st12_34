@@ -200,7 +200,10 @@ class Reports_Controller extends Main_Controller {
 			'person_last' => '',
 			'person_email' => '',
 			'form_id'	  => '',
-			'custom_field' => array()
+			'custom_field' => array(),
+			'pit_length' => '',
+			'pit_width' => '',
+			'pit_depth' => ''
 		);
 		//	copy the form as errors, so the errors will be stored with keys corresponding to the form field names
 		$errors = $form;
@@ -257,6 +260,11 @@ class Reports_Controller extends Main_Controller {
 			$post->add_rules('latitude', 'required', 'between[-90,90]');
 			$post->add_rules('longitude', 'required', 'between[-180,180]');
 			$post->add_rules('location_name', 'required', 'length[3,200]');
+			
+			// Pit-specific :)
+			$post->add_rules('pit_length', 'required', 'length[1,10]');
+			$post->add_rules('pit_width', 'required', 'length[1,10]');
+			$post->add_rules('pit_depth', 'required', 'length[1,10]');
 
 			//XXX: Hack to validate for no checkboxes checked
 			if (!isset($_POST['incident_category'])) {
@@ -296,8 +304,8 @@ class Reports_Controller extends Main_Controller {
 			}
 
 			// Validate photo uploads
-			$post->add_rules('incident_photo', 'upload::valid',
-											 'upload::type[gif,jpg,png]', 'upload::size[2M]');
+			$post->add_rules('incident_photo', 'upload::valid', 
+											 'upload::type[gif,jpg,png]', 'upload::size[10M]');
 
 
 			// Validate Personal Information
@@ -334,6 +342,10 @@ class Reports_Controller extends Main_Controller {
 				$incident->user_id = 0;
 				$incident->incident_title = $post->incident_title;
 				$incident->incident_description = $post->incident_description;
+				
+				$incident->pit_length = $post->pit_length;
+				$incident->pit_width = $post->pit_width;
+				$incident->pit_depth = $post->pit_depth;
 
 				$incident_date=explode("/",$post->incident_date);
 
@@ -727,6 +739,11 @@ class Reports_Controller extends Main_Controller {
 			$this->template->content->incident_date = date('M j Y', strtotime($incident->incident_date));
 			$this->template->content->incident_time = date('H:i', strtotime($incident->incident_date));
 			$this->template->content->incident_category = $incident->incident_category;
+			
+			// Pit-specific
+			$this->template->content->pit_length = $incident->pit_length;
+			$this->template->content->pit_width = $incident->pit_width;
+			$this->template->content->pit_depth = $incident->pit_depth;
 
 			if ($incident->incident_rating == '')
 			{

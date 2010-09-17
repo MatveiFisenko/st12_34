@@ -501,6 +501,9 @@ class Api_Controller extends Controller {
 				."l.location_name AS locationname, "
 				."l.latitude AS locationlatitude, "
 				."l.longitude AS locationlongitude "
+				."i.pit_length AS pitlength "
+				."i.pit_width AS pitwidth "
+				."i.pit_depth AS pitdepth "
 				."FROM ".$this->table_prefix."incident AS i "
                 ."INNER JOIN ".$this->table_prefix."location as l on l.id = i.location_id "
                 ."$where $limit";
@@ -528,6 +531,9 @@ class Api_Controller extends Controller {
 			$xml->writeElement('name',$item->locationname);
 			$xml->writeElement('latitude',$item->locationlatitude);
 			$xml->writeElement('longitude',$item->locationlongitude);
+			$xml->writeElement('pitlength',$item->pitlength);
+			$xml->writeElement('pitwidth',$item->pitwidth);
+			$xml->writeElement('pitdepth',$item->pitdepth);
 			$xml->endElement();
 			$xml->startElement('categories');
 
@@ -749,7 +755,10 @@ class Api_Controller extends Controller {
 			'incident_photo' => array(),
 			'person_first' => '',
 			'person_last' => '',
-			'person_email' => ''
+			'person_email' => '',
+			'pit_length' => '',
+      'pit_width' => '',
+      'pit_depth' => ''
 		);
 		//copy the form as errors, so the errors will be stored with keys corresponding to the form field names
 		$this->messages = $form;
@@ -778,6 +787,11 @@ class Api_Controller extends Controller {
 			$post->add_rules('longitude','required','between[-180,180]');// Validate for maximum and minimum longitude values
 			$post->add_rules('location_name','required', 'length[3,200]');
 			$post->add_rules('incident_category','required','length[1,100]');
+
+			// Pit-specific :)
+      $post->add_rules('pit_length', 'required', 'length[1,10]');
+      $post->add_rules('pit_width', 'required', 'length[1,10]');
+      $post->add_rules('pit_depth', 'required', 'length[1,10]');
 
 			// Validate Personal Information
 			if (!empty($post->person_first)) {
@@ -820,6 +834,11 @@ class Api_Controller extends Controller {
 				$incident->incident_date = $incident_date . " " . $incident_time;
 				$incident->incident_dateadd = date("Y-m-d H:i:s",time());
 				$incident->save();
+				
+				// SAVE PITS
+				$incident->pit_length = $post->pit_length;
+				$incident->pit_width = $post->pit_width;
+				$incident->pit_depth = $post->pit_depth;
 
 				// SAVE CATEGORIES
 				//check if data is csv or a single value.
@@ -984,7 +1003,7 @@ class Api_Controller extends Controller {
 					}
 				}
 
-				$post->add_rules('photo', 'upload::valid', 'upload::type[gif,jpg,png]', 'upload::size[1M]');
+				$post->add_rules('photo', 'upload::valid', 'upload::type[gif,jpg,png]', 'upload::size[10M]');
 
 				if($post->validate()){
 					//assuming this is a photo

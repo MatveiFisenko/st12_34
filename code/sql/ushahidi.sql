@@ -389,6 +389,10 @@ CREATE TABLE IF NOT EXISTS `incident` (                                         
     `incident_dateadd_gmt` datetime default NULL,                                   -- field description
     `incident_datemodify` datetime default NULL,                                    -- field description
     `incident_alert_status` TINYINT NOT NULL DEFAULT '0' COMMENT '0 - Not Tagged for Sending, 1 - Tagged for Sending, 2 - Alerts Have Been Sent',    -- field description
+    `pit_length` VARCHAR(10) DEFAULT '0' NOT NULL,
+    `pit_width` VARCHAR(10) DEFAULT '0' NOT NULL,
+    `pit_depth` VARCHAR(10) DEFAULT '0' NOT NULL,
+    
   PRIMARY KEY  (`id`),
   UNIQUE KEY `location_id` (`location_id`),
   KEY `incident_active` (`incident_active`),

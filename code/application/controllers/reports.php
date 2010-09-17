@@ -659,8 +659,8 @@ class Reports_Controller extends Main_Controller {
 					  $scan_image->resize($scan_image->width, $scan_image->height, Image::AUTO)
 						  ->save(Kohana::config('upload.directory', TRUE).$new_scan_filename.".jpg");
 
-					  // Create thumbnail
-					  Image::factory($scan_filenames[0])->resize(70,41,Image::HEIGHT)
+					  // Create thumbnail, always make exactly 70x100 (roughly the ratio of an A4 sheet).
+					  Image::factory($scan_filenames[0])->resize(70, 100, Image::NONE)
 						  ->save(Kohana::config('upload.directory', TRUE).$new_scan_filename."_t.jpg");
 
 					  // Remove the temporary file
@@ -771,6 +771,7 @@ class Reports_Controller extends Main_Controller {
 																	->where('incident_id',$id)
 																	->where('comment_active','1')
 																	->where('comment_spam','0')
+																	->orderby('comment_type', 'desc')
 																	->orderby('comment_date', 'asc')
 																	->find_all();
 				}

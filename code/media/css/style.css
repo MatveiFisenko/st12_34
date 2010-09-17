@@ -1883,6 +1883,9 @@ ul.pager li a.active {background:#f2f7fa;}
 	cursor:pointer;
 	background:url(../img/green-btn-r.gif) no-repeat 100% 0;
 }
+.discussion-box-official {
+  border:orange 1px solid;
+}
 
 /*---blocks-holder---*/
 .blocks-holder {

@@ -85,7 +85,7 @@
       comments_div.style.display = 'none';
       official_div.style.display = 'block';
       OnDirectionChange();
-      $('#comment_scan')[0].value = '';
+      $('#comment_scan\\[\\]').value = '';
     }
   };
   

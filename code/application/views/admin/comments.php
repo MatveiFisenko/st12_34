@@ -15,16 +15,24 @@
 ?>
 			<div class="bg">
 				<h2>
-					<?php admin::reports_subtabs("comments"); ?>
+					<?php 
+					  if ($type == "c") 
+					  {
+					    admin::reports_subtabs("comments");
+					  } 
+					  else 
+					  {
+					    admin::reports_subtabs("officials"); 
+					  } ?>
 				</h2>
 				<!-- tabs -->
 				<div class="tabs">
 					<!-- tabset -->
 					<ul class="tabset">
-						<li><a href="?status=0" <?php if ($status != 'a' && $status !='p' && $status !='s') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.show_all');?></a></li>
-						<li><a href="?status=p" <?php if ($status == 'p') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.pending');?></a></li>
-						<li><a href="?status=a" <?php if ($status == 'a') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.approved');?></a></li>
-						<li><a href="?status=s" <?php if ($status == 's') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.spam');?></a></li>
+						<li><a href="?status=0&type=<?php echo $type ?>" <?php if ($status != 'a' && $status !='p' && $status !='s') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.show_all');?></a></li>
+						<li><a href="?status=p&type=<?php echo $type ?>" <?php if ($status == 'p') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.pending');?></a></li>
+						<li><a href="?status=a&type=<?php echo $type ?>" <?php if ($status == 'a') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.approved');?></a></li>
+						<li><a href="?status=s&type=<?php echo $type ?>" <?php if ($status == 's') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.spam');?></a></li>
 					</ul>
 					<!-- tab -->
 					<div class="tab">
@@ -108,6 +116,7 @@
 									$comment_email = $comment->comment_email;
 									$comment_ip = $comment->comment_ip;
 									$comment_active = $comment->comment_active;
+						        	$comment_scan = $comment->comment_scan;
 									$comment_spam = $comment->comment_spam;
 									$comment_rating = $comment->comment_rating;
 									$comment_date = date('Y-m-d', strtotime($comment->comment_date));
@@ -126,7 +135,15 @@
 													?><div class="comment_incident"><?php echo Kohana::lang('ui_main.in_response_to');?>: <strong><a href="<?php echo url::base() . 'admin/reports/edit/' . $incident_id; ?>"><?php echo $incident_title; ?></a></strong></div><?php
 												}
 												?>
-												<p><?php echo $comment_description; ?></p>
+												<p><?php echo $comment_description; ?></p><br>
+												<?php
+												if (!empty($comment_scan))
+												{
+											      	$prefix = url::base()."media/uploads";
+										  			echo("<a href=" . $prefix . "/" . $comment_scan . ".jpg><img src=" .
+										  			     $prefix . "/" . $comment_scan . "_t.jpg height=100 width=70 alt=Scan><br>Скан</a>");
+									     		}
+									     		?>
 											</div>
 											<ul class="info">
 												<li class="none-separator"><?php echo Kohana::lang('ui_main.email');?>: <strong><?php echo $comment_email; ?></strong></li>

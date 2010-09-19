@@ -228,6 +228,7 @@ $lang = array(
 	'not_approved_singular' => 'Не подтверждён',
 	'not_spam' => 'Не Спам',
 	'notices' => 'замечания',
+	'officials' => 'Официалы',
 	'official_news' => 'Официальные &amp;основные новости',
 	'option' => 'Опция',
 	'options' => 'Опции',

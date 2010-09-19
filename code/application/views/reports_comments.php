@@ -11,13 +11,13 @@
 			echo "<div class=\"discussion-box" . $class . "\">";
 			echo "<p><strong>" . $comment->comment_author . "</strong>&nbsp;(" . date('M j Y', strtotime($comment->comment_date)) . ")</p>";
 			echo "<p>" . $comment->comment_description . "</p>";
-    	$comment_scan = $comment->comment_scan;
+        	$comment_scan = $comment->comment_scan;
 			if ($comment_scan != '')
 			{
-      	$prefix = url::base()."media/uploads";
-  			echo("<a href=" . $prefix . "/" . $comment_scan . ".jpg><img src=" .
-  			     $prefix . "/" . $comment_scan . "_t.jpg height=100 width=70 alt=Scan><br>Скан</a>");
-  		}
+		      	$prefix = url::base()."media/uploads";
+		  		echo("<a href=" . $prefix . "/" . $comment_scan . ".jpg><img src=" .
+		  		     $prefix . "/" . $comment_scan . "_t.jpg height=100 width=70 alt=Scan><br>Скан</a>");
+     		}
 			echo "<div class=\"report_rating\">";
 			echo "	<div>";
 			echo "	Credibility:&nbsp;";

@@ -33,6 +33,28 @@ class Comments_Controller extends Admin_Controller
 		$this->template->content = new View('admin/comments');
 		$this->template->content->title = Kohana::lang('ui_admin.comments');
 		
+		if (!empty($_GET['type']))
+		{
+			$type = $_GET['type'];
+			if ($type == 'c')
+			{
+				$filter = 'comment_type = "comment" ';
+			}
+			elseif ($type == 'o')
+			{
+				$filter = 'comment_type = "official" ';
+			}
+			else
+			{
+         		$filter = "TRUE ";
+ 				$type = "c";
+			}
+		} 
+		else
+		{
+       		$filter = "TRUE ";
+			$type = "c";
+		}
 		
 		if (!empty($_GET['status']))
 		{
@@ -40,26 +62,26 @@ class Comments_Controller extends Admin_Controller
 			
 			if (strtolower($status) == 'a')
 			{
-				$filter = 'comment_active = 1 AND comment_spam = 0';
+				$filter = $filter . 'AND comment_active = 1 AND comment_spam = 0';
 			}
 			elseif (strtolower($status) == 'p')
 			{
-				$filter = 'comment_active = 0 AND comment_spam = 0';
+				$filter = $filter . 'AND comment_active = 0 AND comment_spam = 0';
 			}
 			elseif (strtolower($status) == 's')
 			{
-				$filter = 'comment_spam = 1';
+				$filter = $filter . 'AND comment_spam = 1';
 			}
 			else
 			{
 				$status = "0";
-				$filter = 'comment_spam = 0';
+				$filter = $filter . 'AND comment_spam = 0';
 			}
 		}
 		else
 		{
 			$status = "0";
-			$filter = 'comment_spam = 0';
+			$filter = $filter . 'AND comment_spam = 0';
 		}
 		
 		
@@ -178,6 +200,9 @@ class Comments_Controller extends Admin_Controller
 		
 		// Status Tab
 		$this->template->content->status = $status;
+
+		// Type
+		$this->template->content->type = $type;
 		
 		// Javascript Header
 		$this->template->js = new View('admin/comments_js');		

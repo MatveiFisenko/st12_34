@@ -65,6 +65,7 @@ $lang = array(
 	'cleanurl' => 'Чистые URL',
 	'close' => 'Закрыть',
 	'clusters' => 'Кластеры',
+	'cm' => 'см',
 	'color' => 'Цвет',
 	'comment_details' => 'Детали коммента',
 	'comment_rating' => 'Рейтинг коммента',

@@ -4,8 +4,7 @@
 		'form_title' => array
 		(
 			'required' => 'Please enter the name of the form.',
-			'length'   => 'The form name field must be at least 3 and no more 
-				100 characters long.'
+			'length'   => 'The form name field must be at least 3 and no more 100 characters long.'
 		),
 		
 		'form_description' => array

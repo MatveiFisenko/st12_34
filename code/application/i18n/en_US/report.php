@@ -154,4 +154,21 @@ $lang = array
 		'alpha'		=> 'Please enter a valid value for Information Probability',
 		'length'		=> 'Please enter a valid value for Information Probability'
 	)
+	'pit_width' => array
+	(
+		'alpha'  => 'Please enter pit width',
+		'length' => 'Field "Pit width" must contain 1-10 characters'
+	),
+	'pit_length' => array
+	(
+	  'alpha'  => 'Please enter pit length',
+		'length' => 'Field "Pit length" must contain 1-10 characters'
+	 ),
+	 
+	 'pit_depth' => array
+	 (
+		'alpha'  => 'Please enter pit depth',
+		'length' => 'Field "Pit depth" must contain 1-10 characters'
+	 )
+	
 );

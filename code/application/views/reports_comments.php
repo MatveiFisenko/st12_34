@@ -15,8 +15,9 @@
 			if ($comment_scan != '')
 			{
 		      	$prefix = url::base()."media/uploads";
-		  		echo("<a href=" . $prefix . "/" . $comment_scan . ".jpg><img src=" .
-		  		     $prefix . "/" . $comment_scan . "_t.jpg height=100 width=70 alt=Scan><br>Скан</a>");
+		      	$imgurl_base = $prefix . "/" . $comment_scan;
+		  		echo("<a href='" . $imgurl_base . ".jpg'><img src='" . $imgurl_base . "_t.jpg' height=100 width=70 alt='Скан'></a>");
+				echo("<br><a href='" . $imgurl_base . ".jpg'>Скан</a>");
      		}
 			echo "<div class=\"report_rating\">";
 			echo "	<div>";

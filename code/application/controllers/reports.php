@@ -42,17 +42,17 @@ class Reports_Controller extends Main_Controller {
 	{
 		$this->template->header->this_page = 'reports';
 		$this->template->content = new View('reports');
-		
+
 		$db = new Database;
-		
+
 		$filter = ( isset($_GET['c']) && !empty($_GET['c']) && $_GET['c']!=0 )
-			? " AND ( c.id='".$_GET['c']."' OR 
+			? " AND ( c.id='".$_GET['c']."' OR
 				c.parent_id='".$_GET['c']."' )  "
 			: " AND 1 = 1";
 
-		if ( isset($_GET['sw']) && !empty($_GET['sw']) && 
+		if ( isset($_GET['sw']) && !empty($_GET['sw']) &&
 				count($southwest = explode(",",$_GET['sw'])) > 1 &&
-			isset($_GET['ne']) && !empty($_GET['ne']) && 
+			isset($_GET['ne']) && !empty($_GET['ne']) &&
 				count($northeast = explode(",",$_GET['ne'])) > 1
 			)
  		{
@@ -64,7 +64,7 @@ class Reports_Controller extends Main_Controller {
 			$filter .= " AND l.longitude >=".$longitude_min.
 				" AND l.longitude <=".$longitude_max;
 		}
-		
+
 		// Pagination
 		$pagination = new Pagination(array(
 				'query_string' => 'page',
@@ -73,7 +73,7 @@ class Reports_Controller extends Main_Controller {
 				));
 
 		$incidents = $db->query("SELECT DISTINCT i.*, l.`location_name` FROM `".$this->table_prefix."incident` AS i JOIN `".$this->table_prefix."incident_category` AS ic ON (i.`id` = ic.`incident_id`) JOIN `".$this->table_prefix."category` AS c ON (c.`id` = ic.`category_id`) JOIN `".$this->table_prefix."location` AS l ON (i.`location_id` = l.`id`) WHERE `incident_active` = '1' $filter ORDER BY incident_date DESC LIMIT ". (int) Kohana::config('settings.items_per_page') . " OFFSET ".$pagination->sql_offset);
-			
+
 		$this->template->content->incidents = $incidents;
 
 		//Set default as not showing pagination. Will change below if necessary.
@@ -175,7 +175,7 @@ class Reports_Controller extends Main_Controller {
 		{
 			url::redirect(url::site().'main');
 		}
-		
+
 		$this->template->header->this_page = 'reports_submit';
 		$this->template->content = new View('reports_submit');
 
@@ -260,7 +260,7 @@ class Reports_Controller extends Main_Controller {
 			$post->add_rules('latitude', 'required', 'between[-90,90]');
 			$post->add_rules('longitude', 'required', 'between[-180,180]');
 			$post->add_rules('location_name', 'required', 'length[3,200]');
-			
+
 			// Pit-specific :)
 			$post->add_rules('pit_length', 'required', 'length[1,10]');
 			$post->add_rules('pit_width', 'required', 'length[1,10]');
@@ -304,7 +304,7 @@ class Reports_Controller extends Main_Controller {
 			}
 
 			// Validate photo uploads
-			$post->add_rules('incident_photo', 'upload::valid', 
+			$post->add_rules('incident_photo', 'upload::valid',
 											 'upload::type[gif,jpg,png]', 'upload::size[10M]');
 
 
@@ -342,7 +342,7 @@ class Reports_Controller extends Main_Controller {
 				$incident->user_id = 0;
 				$incident->incident_title = $post->incident_title;
 				$incident->incident_description = $post->incident_description;
-				
+
 				$incident->pit_length = $post->pit_length;
 				$incident->pit_width = $post->pit_width;
 				$incident->pit_depth = $post->pit_depth;
@@ -354,7 +354,7 @@ class Reports_Controller extends Main_Controller {
 				$incident_time = $post->incident_hour
 					.":".$post->incident_minute
 					.":00 ".$post->incident_ampm;
-				$incident->incident_date = date( "Y-m-d H:i:s", strtotime($incident_date . " " . $incident_time) );				
+				$incident->incident_date = date( "Y-m-d H:i:s", strtotime($incident_date . " " . $incident_time) );
 				$incident->incident_dateadd = date("Y-m-d H:i:s",time());
 				$incident->save();
 
@@ -577,7 +577,7 @@ class Reports_Controller extends Main_Controller {
 				$post->add_rules('comment_email', 'required','email', 'length[4,100]');
 				if ($post->comment_type == 'official')
 				{
-  				$post->add_rules('comment_scan', 'upload::valid', 'upload::required', 
+  				$post->add_rules('comment_scan', 'upload::valid', 'upload::required',
   				                 'upload::type[gif,jpg,png]', 'upload::size[10M]');
   			}
 				$post->add_rules('comment_type', 'required');
@@ -732,10 +732,10 @@ class Reports_Controller extends Main_Controller {
 			$this->template->content->incident_location = $incident->location->location_name;
 			$this->template->content->incident_latitude = $incident->location->latitude;
 			$this->template->content->incident_longitude = $incident->location->longitude;
-			$this->template->content->incident_date = date('M j Y', strtotime($incident->incident_date));
+			$this->template->content->incident_date = date('j F Y', strtotime($incident->incident_date));
 			$this->template->content->incident_time = date('H:i', strtotime($incident->incident_date));
 			$this->template->content->incident_category = $incident->incident_category;
-			
+
 			// Pit-specific
 			$this->template->content->pit_length = $incident->pit_length;
 			$this->template->content->pit_width = $incident->pit_width;
@@ -838,7 +838,7 @@ class Reports_Controller extends Main_Controller {
 
 		$disp_custom_fields = $this->_get_custom_form_fields($id,$incident->form_id,true);
 		$this->template->content->disp_custom_fields = $disp_custom_fields;
-		
+
 		// Are we allowed to submit comments?
 		$this->template->content->comments_form = "";
 		if (Kohana::config('settings.allow_comments'))

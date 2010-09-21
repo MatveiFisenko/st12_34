@@ -1,16 +1,16 @@
-<?php 
+<?php
 /**
  * Reports view page.
  *
  * PHP version 5
- * LICENSE: This source file is subject to LGPL license 
+ * LICENSE: This source file is subject to LGPL license
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/copyleft/lesser.html
- * @author     Ushahidi Team <team@ushahidi.com> 
+ * @author     Ushahidi Team <team@ushahidi.com>
  * @package    Ushahidi - http://source.ushahididev.com
  * @module     API Controller
  * @copyright  Ushahidi - http://www.ushahidi.com
- * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL) 
+ * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL)
  */
 ?>
 				<div id="main" class="clearingfix">
@@ -31,7 +31,7 @@
 								</div>
 								<h1><?php
 								echo $incident_title;
-								
+
 								// If Admin is Logged In - Allow For Edit Link
 								if ($logged_in)
 								{
@@ -40,25 +40,31 @@
 								?></h1>
 								<ul class="details">
 									<li>
-										<small>Location</small>
+										<small>Местоположение</small>
 										<?php echo $incident_location; ?>
 									</li>
 									<li>
-										<small>Date</small>
+										<small>Дата</small>
 										<?php echo $incident_date; ?>
 									</li>
 									<li>
-										<small>Time</small>
+										<small>Время</small>
 										<?php echo $incident_time; ?>
 									</li>
 									<li>
-										<small>Category</small>
+										<small>Категория</small>
 										<?php
-											foreach($incident_category as $category) 
-											{ 
+											foreach($incident_category as $category)
+											{
 												echo "<a href=\"".url::site()."reports/?c=".$category->category->id."\">" .
 												$category->category->category_title . "</a>&nbsp;&nbsp;&nbsp;";
 											}
+										?>
+									</li>
+									<li>
+										<small>Размер</small>
+										<?php
+												echo 'Длина: '.$pit_length.' Ширина: '.$pit_width.' Глубина: '.$pit_depth;
 										?>
 									</li>
 								</ul>
@@ -77,7 +83,7 @@
 						</div>
 					</div>
 				</div>
-		
+
 				<div class="report-description">
 					<h3>Incident Report Description</h3>
 						<div class="content">
@@ -90,11 +96,11 @@
 								<a href="" id="oloader_<?php echo $incident_id; ?>" class="rating_loading" ></a>
 							</div>
 						</div>
-						<?php echo $comments; ?>		
+						<?php echo $comments; ?>
 					</div>
-		
+
 					<?php
-					if( count($incident_photos) > 0 ) 
+					if( count($incident_photos) > 0 )
 					{
 					?>
 					<!-- start images -->
@@ -113,9 +119,9 @@
 					</div>
 
 					<!-- end images <> start side block -->
-					<?php 
+					<?php
 					} else {
-					?> 
+					?>
 
 					<div class="report-description">
 						<h3>Related Mainstream News of Incident</h3>
@@ -164,7 +170,7 @@
 								foreach($incident_neighbors as $neighbor)
 								{
 									echo "<tr>";
-									echo "<td class=\"w-01\"><a href=\"" . url::site(); 
+									echo "<td class=\"w-01\"><a href=\"" . url::site();
 									echo "reports/view/" . $neighbor->id . "\">" . $neighbor->incident_title . "</a></td>";
 									echo "<td class=\"w-02\">" . $neighbor->location->location_name . "</td>";
 									echo "<td class=\"w-03\">" . date('M j Y', strtotime($neighbor->incident_date)) . "</td>";
@@ -174,10 +180,10 @@
 						</table>
 					</div>
 
-					<?php 
-					if( $incident_photos <= 0) 
+					<?php
+					if( $incident_photos <= 0)
 					{
-					?> 
+					?>
 					<div class="small-block">
 						<h3>Related Mainstream News of Incident</h3>
 						<div class="block-bg">
@@ -211,11 +217,11 @@
 					</div>
 					<?php }	?>
 					<!-- end side block -->
-					
-					
+
+
 					<!-- start videos -->
 					<?php
-						if( count($incident_videos) > 0 ) 
+						if( count($incident_videos) > 0 )
 						{
 					?>
 					<div class="report-description">
@@ -233,9 +239,9 @@
 						<?php } ?>
 					</div>
 					<!-- end incident block <> start other report -->
-					
+
 					<?php echo $comments_form; ?>
-					
+
 				</div>
 			</div>
 		</div>

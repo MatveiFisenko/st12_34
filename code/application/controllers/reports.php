@@ -406,6 +406,10 @@ class Reports_Controller extends Main_Controller {
 				{
 					$new_filename = $incident->id."_".$i."_".time();
 
+					// Resize original file... make sure its max 408px wide
+					Image::factory($filename)
+						->save(Kohana::config('upload.directory', TRUE).$new_filename.".jpg");
+
 					// Create thumbnail
 					Image::factory($filename)->resize(70,41,Image::HEIGHT)
 						->save(Kohana::config('upload.directory', TRUE).$new_filename."_t.jpg");

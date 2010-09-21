@@ -62,7 +62,7 @@
 										?>
 									</li>
 									<li>
-										<small>Размер</small>
+										<small>Размер (см)</small>
 										<?php
 												echo 'Длина: '.$pit_length.' Ширина: '.$pit_width.' Глубина: '.$pit_depth;
 										?>

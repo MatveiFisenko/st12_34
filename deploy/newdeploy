@@ -24,7 +24,7 @@ while getopts "hvr:t:d:p:" opt; do
 
 	case $opt in
 
-		h) echo -e "Usage: $0 [-h] [-v] [-r http://autodoc.opensa.ru] [-t code]\n\n"\
+		h) echo -e "Usage: $0 [-h] [-v] [-r http://212.158.164.130/svn/1234/] [-t code]\n\n"\
 			"Example: $0 -v -v -t code -t sql -t sql_mig\n\n" \
 			"-h this help.\n" \
 			"-v Verbose output. Use twice for even more verbosity.\n" \
@@ -105,7 +105,11 @@ if ((depltype & FLG_CODE)) ; then
 
 	findCommand="find /var/www/1234/ -mindepth 1 -maxdepth 1 -print0"
 
-	ssh $verbose -p $server_port $USER@${destination} "$findCommand | xargs -0 rm -rf"
+	rmFilesCommand="find /var/www/1234/ -type f ! -path media/uploads -print0"
+	rmFoldersCommand="find /var/www/1234/ -mindepth 1 -type d -print0"
+
+	ssh $verbose -p $server_port $USER@${destination} "$rmFilesCommand | xargs -0 rm "
+	ssh $verbose -p $server_port $USER@${destination} "$rmFoldersCommand | xargs -0 rmdir --ignore-fail-on-non-empty"
 
 	scp -C $verbose -P $server_port -r /tmp/src.$$/* $USER@${destination}:/var/www/1234/
 

@@ -22,9 +22,9 @@
 							<div id="report_stats">
 								<table>
 									<tr>
-										<th>Total Reports</th>
-										<th>Avg Reports Per Day</th>
-										<th>% Verified</th>
+										<th>Всего сообщений</th>
+										<th>В среднем в день</th>
+										<th>% подтверждённых</th>
 									</tr>
 									<tr>
 										<td><?php echo $total_reports; ?></td>
@@ -72,9 +72,9 @@
 								$incident_verified = $incident->incident_verified;
 								if ($incident_verified)
 								{
-									$incident_verified = '<span class="report_yes">YES</span>';
+									$incident_verified = '<span class="report_yes">ДА</span>';
 								}else{
-									$incident_verified = '<span class="report_no">NO</span>';
+									$incident_verified = '<span class="report_no">НЕТ</span>';
 								}
 							?>
 

@@ -1,6 +1,6 @@
 <div class="orig-report">
 	<div class="discussion">
-		<h5>ADDITIONAL REPORTS AND DISCUSSION&nbsp;&nbsp;&nbsp;(<a href="#comments">Add</a>)</h5>
+		<h5>Дополнительные сообщения и обсуждение&nbsp;&nbsp;&nbsp;(<a href="#comments">Добавить</a>)</h5>
 		<?php
 		foreach($incident_comments as $comment)
 		{
@@ -21,7 +21,7 @@
      		}
 			echo "<div class=\"report_rating\">";
 			echo "	<div>";
-			echo "	Credibility:&nbsp;";
+			echo "	Достоверность:&nbsp;";
 			echo "	<a href=\"javascript:rating('" . $comment->id . "','add','comment','cloader_" . $comment->id . "')\"><img id=\"cup_" . $comment->id . "\" src=\"" . url::base() . 'media/img/' . "up.png\" alt=\"UP\" title=\"UP\" border=\"0\" /></a>&nbsp;";
 			echo "	<a href=\"javascript:rating('" . $comment->id . "','subtract','comment','cloader_" . $comment->id . "')\"><img id=\"cdown_" . $comment->id . "\" src=\"" . url::base() . 'media/img/' . "down.png\" alt=\"DOWN\" title=\"DOWN\" border=\"0\" /></a>&nbsp;";
 			echo "	</div>";

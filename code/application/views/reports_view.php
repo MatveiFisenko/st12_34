@@ -25,8 +25,8 @@
 								}
 								?>"><?php
 									echo ($incident_verified == 1) ?
-										"<span>Verified</span>" :
-										"<span>Unverified</span>";
+										"<span>Проверен</span>" :
+										"<span>Не проверен</span>";
 									?>
 								</div>
 								<h1><?php
@@ -35,7 +35,7 @@
 								// If Admin is Logged In - Allow For Edit Link
 								if ($logged_in)
 								{
-									echo " [&nbsp;<a href=\"".url::site()."admin/reports/edit/".$incident_id."\">Edit</a>&nbsp;]";
+									echo " [&nbsp;<a href=\"".url::site()."admin/reports/edit/".$incident_id."\">Редактировать</a>&nbsp;]";
 								}
 								?></h1>
 								<ul class="details">
@@ -72,8 +72,8 @@
 							<div class="location">
 								<div class="incident-notation clearingfix">
 									<ul>
-										<li><img align="absmiddle" alt="Incident" src="<?php echo url::base(); ?>media/img/incident-pointer.jpg"/> Incident</li>
-										<li><img align="absmiddle" alt="Nearby Incident" src="<?php echo url::base(); ?>media/img/nearby-incident-pointer.jpg"/> Nearby Incident</li>
+										<li><img align="absmiddle" alt="Incident" src="<?php echo url::base(); ?>media/img/incident-pointer.jpg"/> Инцедент</li>
+										<li><img align="absmiddle" alt="Nearby Incident" src="<?php echo url::base(); ?>media/img/nearby-incident-pointer.jpg"/> Ближайший Инцедент</li>
 									</ul>
 								</div>
 								<div class="report-map">
@@ -85,11 +85,11 @@
 				</div>
 
 				<div class="report-description">
-					<h3>Incident Report Description</h3>
+					<h3>Описание инцидента</h3>
 						<div class="content">
 							<?php echo $incident_description; ?>
 							<div class="credibility">
-								Credibility:
+								Достоверность:
 								<a href="javascript:rating('<?php echo $incident_id; ?>','add','original','oloader_<?php echo $incident_id; ?>')"><img id="oup_<?php echo $incident_id; ?>" src="<?php echo url::base() . 'media/img/'; ?>thumb-up.jpg" alt="UP" title="UP" border="0" /></a>&nbsp;
 								<a href="javascript:rating('<?php echo $incident_id; ?>','subtract','original')"><img id="odown_<?php echo $incident_id; ?>" src="<?php echo url::base() . 'media/img/'; ?>thumb-down.jpg" alt="DOWN" title="DOWN" border="0" /></a>&nbsp;
 								<a href="" class="rating_value" id="orating_<?php echo $incident_id; ?>"><?php echo $incident_rating; ?></a>
@@ -105,7 +105,7 @@
 					?>
 					<!-- start images -->
 					<div class="report-description">
-						<h3>Images</h3>
+						<h3>Фотографии</h3>
 						<div class="photos">
 							<?php
 							foreach ($incident_photos as $photo)
@@ -124,12 +124,12 @@
 					?>
 
 					<div class="report-description">
-						<h3>Related Mainstream News of Incident</h3>
+						<h3>Связанные новости об инциденте</h3>
 						<table cellpadding="0" cellspacing="0">
 							<tr class="title">
-								<th class="w-01">TITLE</th>
-								<th class="w-02">SOURCE</th>
-								<th class="w-03">DATE</th>
+								<th class="w-01">Название</th>
+								<th class="w-02">Источник</th>
+								<th class="w-03">Дата</th>
 							</tr>
 							<?php
 								foreach ($feeds as $feed)
@@ -159,12 +159,12 @@
 
 
 					<div class="report-description">
-						<h3>Incident Report(s)</h3>
+						<h3>Отчёт(ы) об инциденте</h3>
 						<table cellpadding="0" cellspacing="0">
 							<tr class="title">
-								<th class="w-01">TITLE</th>
-								<th class="w-02">LOCATION</th>
-								<th class="w-03">DATE</th>
+								<th class="w-01">Название</th>
+								<th class="w-02">Место</th>
+								<th class="w-03">Дата</th>
 							</tr>
 							<?php
 								foreach($incident_neighbors as $neighbor)
@@ -185,13 +185,13 @@
 					{
 					?>
 					<div class="small-block">
-						<h3>Related Mainstream News of Incident</h3>
+						<h3>Связанные новости об инциденте</h3>
 						<div class="block-bg">
 							<table>
 								<tr class="title">
-									<th class="w-01">TITLE</th>
-									<th class="w-02">SOURCE</th>
-									<th class="w-03">DATE</th>
+									<th class="w-01">Название</th>
+									<th class="w-02">Источник</th>
+									<th class="w-03">Дата</th>
 								</tr>
 								<?php
 									foreach ($feeds as $feed)
@@ -225,7 +225,7 @@
 						{
 					?>
 					<div class="report-description">
-						<h3>Videos</h3>
+						<h3>Видео</h3>
 						<div class="block-bg">
 							<div style="overflow:auto; white-space: nowrap; padding: 10px">
 								<?php

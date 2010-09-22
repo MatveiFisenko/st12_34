@@ -5,20 +5,20 @@
  * Handles javascript stuff related to report submit function.
  *
  * PHP version 5
- * LICENSE: This source file is subject to LGPL license 
+ * LICENSE: This source file is subject to LGPL license
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/copyleft/lesser.html
- * @author     Ushahidi Team <team@ushahidi.com> 
+ * @author     Ushahidi Team <team@ushahidi.com>
  * @package    Ushahidi - http://source.ushahididev.com
  * @module     API Controller
  * @copyright  Ushahidi - http://www.ushahidi.com
- * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL) 
+ * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL)
  */
-?>		
+?>
 		// jQuery Textbox Hints Plugin
 		// Will move to separate file later or attach to forms plugin
 		jQuery.fn.hint = function (blurClass) {
-		  if (!blurClass) { 
+		  if (!blurClass) {
 		    blurClass = 'texthint';
 		  }
 
@@ -38,7 +38,7 @@
 		    }
 
 		    // only apply logic if the element has the attribute
-		    if (title) { 
+		    if (title) {
 		      // on blur, set value to title attr if text is blank
 		      $input.blur(function () {
 		        if (this.value === '') {
@@ -104,19 +104,19 @@
 					},
 					pit_length: {
 					  required: true,
-					  range: [1, 1000]
-          },
-          pit_width: {
-            required: true,
-            range: [1, 1000]
-          },
+					  range: [15, 1000]
+					},
+					pit_width: {
+					  required: true,
+					  range: [60, 1000]
+					},
 					pit_depth: {
-            required: true,
-            range: [1, 100]
-          },
+					  required: true,
+					  range: [5, 1000]
+					},
 				  "incident_photo[]": {
-				    required: true
-          }
+				      required: true
+          			}
 				},
 				messages: {
 					incident_title: {
@@ -165,15 +165,15 @@
 					},
 					pit_length: {
 					  required: "Пожалуйста, укажите длину ямы",
-					  range: "Длина ямы должна находится в пределах от 1 до 1000 см"
+					  range: "Длина ямы по ГОСТ Р 50597-93 п. 3.1.2 допустима до 15см"
           },
 					pit_width: {
 					  required: "Пожалуйста, укажите ширину ямы",
-					  range: "Ширина ямы должна находится в пределах от 1 до 1000 см"
+					  range: "Ширина ямы по ГОСТ Р 50597-93 п. 3.1.2 допустима до 60см"
           },
 					pit_depth: {
 					  required: "Пожалуйста, укажите глубину ямы",
-					  range: "Глубина ямы должна находится в пределах от 1 до 100 см"
+					  range: "Глубина ямы по ГОСТ Р 50597-93 п. 3.1.2 допустима до 5см"
           },
           "incident_photo[]": {
             required: "<div style=\"clear:both\">Обязательно должна быть приложена фотография</div>"
@@ -197,7 +197,7 @@
 				}
 			});
 		});
-		
+
 		function addFormField(div, field, hidden_id, field_type) {
 			var id = document.getElementById(hidden_id).value;
 			$("#" + div).append("<div class=\"report_row\" id=\"" + field + "_" + id + "\"><input type=\"" + field_type + "\" name=\"" + field + "[]\" class=\"" + field_type + " long2\" /><a href=\"#\" class=\"add\" onClick=\"addFormField('" + div + "','" + field + "','" + hidden_id + "','" + field_type + "'); return false;\">add</a><a href=\"#\" class=\"rem\"  onClick='removeFormField(\"#" + field + "_" + id + "\"); return false;'>remove</a></div>");
@@ -217,14 +217,14 @@
 				return false;
 		    }
 		}
-		
-		
+
+
 		$(document).ready(function() {
 			var map;
 			var thisLayer;
 			var proj_4326 = new OpenLayers.Projection('EPSG:4326');
 			var proj_900913 = new OpenLayers.Projection('EPSG:900913');
-			
+
 			// Now initialise the map
 			var options = {
 			units: "m"
@@ -264,34 +264,34 @@
 					maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34)
 					});
 			}
-				
+
 			// Add the layer to the map object
 			map.addLayer(map_layer);
-			
+
 			map.addControl(new OpenLayers.Control.Navigation());
 			map.addControl(new OpenLayers.Control.PanZoom());
 			map.addControl(new OpenLayers.Control.MousePosition(
-					{ div: 	document.getElementById('mapMousePosition'), numdigits: 5 
-				}));    
+					{ div: 	document.getElementById('mapMousePosition'), numdigits: 5
+				}));
 			map.addControl(new OpenLayers.Control.Scale('mapScale'));
             map.addControl(new OpenLayers.Control.ScaleLine());
 			map.addControl(new OpenLayers.Control.LayerSwitcher());
-			
+
 			// Create the markers layer
 			var markers = new OpenLayers.Layer.Markers("Markers");
 			map.addLayer(markers);
-			
+
 			// create a lat/lon object
 			var myPoint = new OpenLayers.LonLat(<?php echo $longitude; ?>, <?php echo $latitude; ?>);
 			myPoint.transform(proj_4326, map.getProjectionObject());
-			
+
 			// create a marker positioned at a lon/lat
 			var marker = new OpenLayers.Marker(myPoint);
 			markers.addMarker(marker);
-			
+
 			// display the map centered on a latitude and longitude (Google zoom levels)
 			map.setCenter(myPoint, <?php echo $default_zoom; ?>);
-			
+
 			// Detect Map Clicks
 			map.events.register("click", map, function(e){
 				var lonlat = map.getLonLatFromViewPortPx(e.xy);
@@ -299,13 +299,13 @@
 			    m = new OpenLayers.Marker(lonlat);
 				markers.clearMarkers();
 		    	markers.addMarker(m);
-				
-				lonlat2.transform(proj_900913,proj_4326);	
+
+				lonlat2.transform(proj_900913,proj_4326);
 				// Update form values (jQuery)
 				$("#latitude").attr("value", lonlat2.lat);
 				$("#longitude").attr("value", lonlat2.lon);
 			});
-			
+
 			// Detect Dropdown Select
 			$("#select_city").change(function() {
 				var lonlat = $(this).val().split(",");
@@ -317,16 +317,16 @@
 					markers.clearMarkers();
 			    	markers.addMarker(m);
 					map.setCenter(l, <?php echo $default_zoom; ?>);
-					
+
 					// Update form values (jQuery)
 					$("#location_name").attr("value", $('#select_city :selected').text());
-										
+
 					$("#latitude").attr("value", lonlat[1]);
 					$("#longitude").attr("value", lonlat[0]);
 				}
 			});
-			
-			/* 
+
+			/*
 			Google GeoCoder
 			TODO - Add Yahoo and Bing Geocoding Services
 			 */
@@ -347,12 +347,12 @@
 								} else {
 									var lonlat = new OpenLayers.LonLat(point.lng(), point.lat());
 									lonlat.transform(proj_4326,proj_900913);
-								
+
 									m = new OpenLayers.Marker(lonlat);
 									markers.clearMarkers();
 							    	markers.addMarker(m);
 									map.setCenter(lonlat, <?php echo $default_zoom; ?>);
-								
+
 									// Update form values (jQuery)
 									$("#latitude").attr("value", point.lat());
 									$("#longitude").attr("value", point.lng());
@@ -365,22 +365,22 @@
 				}
 				return false;
 			});
-			
+
 			// Textbox Hints
 			$("#location_find").hint();
-			
+
 			// Toggle Date Editor
 			$('a#date_toggle').click(function() {
 		    	$('#datetime_edit').show(400);
 				$('#datetime_default').hide();
 		    	return false;
 			});
-			
+
 			// Category treeview
 	      $("#category-column-1,#category-column-2").treeview({
 	        persist: "location",
 	        collapsed: true,
 	        unique: false
 	      });
-	
+
 		});

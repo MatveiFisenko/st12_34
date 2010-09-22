@@ -141,6 +141,9 @@ if (( depltype & FLG_SQL )); then
 	echo "CREATE DATABASE IF NOT EXISTS $db_name DEFAULT CHARACTER SET = utf8; use $db_name; SET FOREIGN_KEY_CHECKS = 0;" | ssh $verbose -p $server_port $USER@${destination} mysql -uroot -p$root_pass --default-character-set=utf8
 	cat /tmp/depsql.$$/main.sql | ssh $verbose -p $server_port $USER@${destination} mysql -uroot -p$root_pass $db_name --default-character-set=utf8
 
+	#remove files from uploads dir
+	ssh $verbose -p $server_port $USER@${destination} "rm /var/www/1234/media/uploads/*"
+
 	rm -rf /tmp/depsql.$$
 fi
 #End sql deployment.

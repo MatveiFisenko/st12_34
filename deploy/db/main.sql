@@ -568,16 +568,6 @@ CREATE TABLE `incident` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `incident`
---
-
-LOCK TABLES `incident` WRITE;
-/*!40000 ALTER TABLE `incident` DISABLE KEYS */;
-INSERT INTO `incident` VALUES (1,1,1,'en_US',1,'Тестовая яма','Я тестовая яма','2010-09-09 18:09:48',1,1,1,'0','2010-','0',NULL,NULL,NULL,0);
-/*!40000 ALTER TABLE `incident` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `incident_category`
 --
 

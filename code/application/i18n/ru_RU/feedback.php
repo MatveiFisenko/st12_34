@@ -31,7 +31,7 @@ $lang = array
 	
 	'feedback_captcha' => array
 	(
-		'required' => 'Введите защитный код',
+		'required' => 'Введите защитный код ',
 		'valid' => 'Введите правильный защитный код'
 	)
 	

@@ -21,7 +21,7 @@ while(<TR>) {
     $csv->parse($_) or die "Can't parse line '$_' ".Text::CSV->error_diag()."\n";
     my @f = $csv->fields;
     $f[0] =~ s/(?<!\\)'//g;
-    $f[1] =~ s/(^\s*"*|\s*"*$)//g;
+    $f[1] =~ s/^\s*"*|\s{2,}$|"*$//g;
     $trans{$f[0]} = $f[1];
 }
 close TR;

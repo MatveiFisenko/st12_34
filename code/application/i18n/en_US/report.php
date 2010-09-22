@@ -153,7 +153,7 @@ $lang = array
 	(
 		'alpha'		=> 'Please enter a valid value for Information Probability',
 		'length'		=> 'Please enter a valid value for Information Probability'
-	)
+	),
 	'pit_width' => array
 	(
 		'alpha'  => 'Please enter pit width',

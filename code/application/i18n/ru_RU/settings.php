@@ -28,7 +28,7 @@ $lang = array
     'site' => array
 	(
 		'display_contact_page' => 'Отобразить страницу контактов',
-        'display_howtohelp_page' => 'Отобразить страницу "Как помочь"',
+        'display_howtohelp_page' => 'Отобразить страницу "Как помочь" ',
         'email_alerts' => 'Адрес электронной почты для оповещения',
         'email_notice' => '<span>In order to receive reports by email, please <a href="'.url::base().'admin/settings/email">configure your email account settings</a>.</span>',
         'email_site' => 'Электронный адрес сайта',
@@ -45,9 +45,9 @@ $lang = array
         'google_analytics' => 'Google Analytics',
         'google_analytics_example' => 'ID Вашего аккаунта в формате UA-XXXXX-XX',
         'twitter_configuration' => 'Twitter аккаунт',
-        'twitter_hashtags' => 'Хэштеги - Отделите запятыми',
+        'twitter_hashtags' => 'Хэштеги - Отделите запятыми ',
         'laconica_configuration' => 'Laconica аккаунт',
-        'laconica_site' => 'Laconica Сайт',
+        'laconica_site' => 'Laconica Сайт ',
         'language' => 'Язык Сайта',
         'api_akismet' => 'ключ Akismet',
         'kismet_notice' => 'Защититесь от СПАМА используя <a href="http://akismet.com/" target="_blank">Akismet</a> от Automattic. <BR /> Вы можете получить бесплатный API ключ по адресу <a href="http://en.wordpress.com/api-keys/" target="_blank">http://en.wordpress.com/api-keys/</a>',
@@ -90,7 +90,7 @@ $lang = array
     
 	'site_name' => array
 	(
-		'required'		=> 'Введите название сайта.',
+		'required'		=> 'Введите название сайта. ',
 		'length'		=> 'Длинна названия сайта должен быть не менее 3х символов и более 50ти символов.',
 	),
 	

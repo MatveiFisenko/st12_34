@@ -229,6 +229,7 @@ $lang = array(
 	'not_spam' => 'not spam',
 	'notices' => 'Notices',
 	'official_news' => 'Official &amp; mainstream news',
+	'officials' => 'Officials',
 	'option' => 'Option',
 	'options' => 'Options',
 	'optional' => 'Optional',

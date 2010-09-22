@@ -104,7 +104,7 @@
 		}
 
 		//Custom stylesheet
-		if ( $site_style ) 
+		if ( $site_style )
 			echo html::stylesheet(url::site().'themes/'.$site_style."/style.css");
 	?>
 
@@ -159,7 +159,7 @@
 				<span><?php echo $site_tagline; ?></span>
 			</div>
 			<!-- / logo -->
-			
+
 			<?php
 			if (Kohana::config('settings.allow_reports'))
 			{
@@ -206,6 +206,9 @@
 							<?php
 						}
 
+						?>
+						<li><a href="http://navalny.livejournal.com/"><?php echo Kohana::lang('ui_main.blog'); ?></a></li>
+						<?php
 						// Custom Pages
 						foreach ($pages as $page)
 						{

@@ -8,40 +8,40 @@
 
 $lang = array
 (
-    'default_location' => 'Местоположение по умолчанию',
-    'select_default_location' => 'Выберите местоположение по умолчанию',
+    'default_location' => 'Координаты по умолчанию',
+    'select_default_location' => 'Выберите страну',
     'download_city_list' => 'Получить названия из ГЕОназваний',
     'multiple_countries' => 'Содержит ли Ushahidi несколько стран одновременно', 
     'map_settings' => 'Настройка карты',
     'configure_map' => 'Настроить карту',
-    'default_map_view' => 'Видеть карту по умолчанию',
-    'default_zoom_level' => 'уровень Zoom по умолчанию',
-    'set_location' => 'Кликните на карту чтобы указать на точное местоположение',
+    'default_map_view' => 'Вид карты по умолчанию',
+    'default_zoom_level' => 'Масштаб по умолчанию',
+    'set_location' => 'Кликните на карту, чтобы указать на точные координаты',
     'map_provider' => array
 	(
 		'name'		=> 'Провайдер карты',
-		'info'		=> 'Выбор провайдера карты происходит напрямую с провайдером. Выберите провайдера получите API ключ введите ключ на сайте',
+		'info'		=> 'Выбор провайдера карты очень прост: выберите провайдера, получите API ключ и введите ключ на сайте',
         'choose'    => 'Выберите провайдера карты',
         'get_api'   => 'Получить API ключ',
         'enter_api' => 'Выберите новый API ключ'
 	),
     'site' => array
 	(
-		'display_contact_page' => 'Отобразить страницу контактов',
-        'display_howtohelp_page' => 'Отобразить страницу "Как помочь" ',
+		'display_contact_page' => 'Показать страницу контактов',
+        'display_howtohelp_page' => 'Показать страницу "Как помочь" ',
         'email_alerts' => 'Адрес электронной почты для оповещения',
         'email_notice' => '<span>In order to receive reports by email, please <a href="'.url::base().'admin/settings/email">configure your email account settings</a>.</span>',
-        'email_site' => 'Электронный адрес сайта',
+        'email_site' => 'Электронная почта сайта',
         'title'		=> 'Параметры сайта',
 		'name'		=> 'Названия сайта',
         'tagline'    => 'Заголовок сайта',
-        'items_per_page'   => 'Количество элементов на страницу - Главный',
-        'items_per_page_admin' => 'Количество элементов на страницу - Admin',
-        'allow_reports' => 'Позволить пользователям отправлять отчёты о событиях',
-        'allow_comments' => 'Позволить пользователям отправлять комментарии к отчётам',
+        'items_per_page'   => 'Количество элементов на странице - Главная',
+        'items_per_page_admin' => 'Количество элементов на странице - Admin',
+        'allow_reports' => 'Разрешить пользователям присылать отчёты о событиях',
+        'allow_comments' => 'Разрешить пользователям комментировать отчёты',
         'allow_feed' => 'Включить новостную ленту RSS в Веб сайте',
         'allow_clustering' => 'Кластерировать Отчёты по Карте',
-        'default_category_colors' => 'Цвет по умолчанию для всей категорий',
+        'default_category_colors' => 'Цвет по умолчанию для категорий',
         'google_analytics' => 'Google Analytics',
         'google_analytics_example' => 'ID Вашего аккаунта в формате UA-XXXXX-XX',
         'twitter_configuration' => 'Twitter аккаунт',
@@ -56,54 +56,54 @@ $lang = array
 	'cleanurl' => array 
 	(
 		'title' => 'Чистые URL',
-		'enable_clean_url' => 'Позволить чистые URL',
-		'clean_url_enabled' => 'Это позволит Ushahidi заходить на "чистые" сайты без вхождения на "index.php".',
-		'clean_url_disabled' => 'Ваш сервер не настроен для чистых URL. Настойте ваш сервер до того, как включить данную услугу. Для более подробной информацмм зайдите <a href="http://forums.ushahidi.com/topic/server-configuration-for-apache-mod-rewrite" target="_blank">post</a>',
+		'enable_clean_url' => 'Использовать короткие URL',
+		'clean_url_enabled' => 'Включение этого параметра убирает "index.php" из адресной строки броузера при доступе к любой странице Ushahidi.',
+		'clean_url_disabled' => 'Ваш сервер не настроен для использования коротких URL. Настойте ваш сервер до того, как включить данную услугу. Для более подробной информации ознакомьтесь с <a href="http://forums.ushahidi.com/topic/server-configuration-for-apache-mod-rewrite" target="_blank">обсуждением</a>',
 	),
     'sms' => array
 	(
         'title' => 'Настройка SMS',
         'option_1'		=> 'Опция1: Use Frontline SMS', 
-		'option_2'		=> 'Option 2: Используйте Global SMS Gateway',
-        'flsms_description' => 'FrontlineSMS бесплатная программа которая позволяет превратить ноутбук или мобильный телефон в центр управления. Установив программа позволяет пользователям отправлять и получать СМС для большой группы через мобильные телефоны. Нажмите на кнопу для установки от FrontlineSMS.com',
-        'flsms_download'    => 'Скачайте Frontline SMS и установите на Ваш компьютер',
+		'option_2'		=> 'Option 2: Использовать Global SMS Gateway',
+        'flsms_description' => 'FrontlineSMS - бесплатная программа которая позволяет превратить ноутбук или мобильный телефон в центр управления. Программа позволяет пользователям отправлять и получать СМС для большой группы людей через мобильные телефоны. Нажмите на кнопу для установки от FrontlineSMS.com',
+        'flsms_download'    => 'Скачайте Frontline SMS и установите на свой компьютер',
         'flsms_synchronize'   => 'Синхронизировать с Ushahidi',
-        'flsms_instructions' => 'Сообщения полученные в FrontlineSMS может быть синхронизировать с Ushahidi. Информацию о том как синхронизировать с Ushahidi можно найти в <strong><a href="http://wiki.ushahididev.com/doku.php?id=how_to_use_ushahidi_alpha#how_to_setup_frontlinesms_to_sync_with_ushahidi" target="_blank">here</a></strong>. Вы должны получить ключ по ссылке чтобы синхронизировать с FrontlineSMS',
-        'flsms_key' => 'Это ключ синхронизации Ushahidi',
+        'flsms_instructions' => 'Сообщения, полученные FrontlineSMS, могут быть синхронизированы с Ushahidi. Информацию о том как синхронизировать с Ushahidi можно найти <strong><a href="http://wiki.ushahididev.com/doku.php?id=how_to_use_ushahidi_alpha#how_to_setup_frontlinesms_to_sync_with_ushahidi" target="_blank">здесь</a></strong>. Вы должны получить ключ по ссылке, чтобы синхронизировать с FrontlineSMS.',
+        'flsms_key' => 'Ключ синхронизации Ushahidi',
         'flsms_link' => 'FrontlineSMS HTTP Post LINK', 
-        'flsms_text_1' => 'Введите номер телефона подключенный к Frontline SMS в поле внизу',
-        'flsms_text_2' => 'Введите номер без символов + или скобок',
+        'flsms_text_1' => 'Введите номер телефона подключенный к Frontline SMS в поле ниже',
+        'flsms_text_2' => 'Введите номер без символов + или -',
         'clickatell_text_1' => 'Подключитесь к услуге Clickatell в <a href="https://www.clickatell.com/central/user/client/step1.php?prod_id=2" target="_blank">clicking here</a>',
-        'clickatell_text_2' => 'Введите Вашу информацию Clickatell внизу',
-        'clickatell_api' => 'Введите ваш Clickatell API Номер',
-        'clickatell_username' => 'Your Clickatell User Name', 
-        'clickatell_password' => 'Your Clickatell Password', 
-        'clickatell_check_balance' => 'Check Your Clickatell Credit Balance', 
+        'clickatell_text_2' => 'Введите Вашу информацию Clickatell ниже',
+        'clickatell_api' => 'Введите Clickatell API Number',
+        'clickatell_username' => 'Введите имя пользователя Clickatell ', 
+        'clickatell_password' => 'Введите пароль Clickatell ', 
+        'clickatell_check_balance' => 'Проверьте баланс на Clickatell ', 
         'clickatell_load_balance' => 'Загрузите баланс на Clickatell'
 	),      
     
     'map' => array
 	(
-		'zoom'		=> 'Zoom уровень',
-		'default_location'	=> 'Выбор провайдера карты происходит напрямую с провайдером. Выберите провайдера получите API ключ введите ключ на сайте'
+		'zoom'		=> 'Масштаб',
+		'default_location'	=> 'Выбор провайдера карты очень прост: выберите провайдера, получите API ключ и введите ключ на сайте'
 	),   
     
 	'site_name' => array
 	(
 		'required'		=> 'Введите название сайта. ',
-		'length'		=> 'Длинна названия сайта должен быть не менее 3х символов и более 50ти символов.',
+		'length'		=> 'Название сайта должно содержать не менее 3 и не более 50 символов.',
 	),
 	
 	'site_tagline' => array
 	(
-		'required'		=> 'Введите поле Заголовки.',
-		'length'		=> 'Длинна поля Заголовки должна быть не менее 3х и  более 100 символов.',
+		'required'		=> 'Введите подзаголовок.',
+		'length'		=> 'Подзаголовок должен содержать не менее 3 и не более 100 символов.',
 	),
 	
 	'site_email' => array
 	(
-		'email'		  => 'Электронный адрес сайта введен неправильно',
-		'length'	  => 'Длина электронного адреса сайта не должна содержать менее 4х или более 100 символов.'
+		'email'		  => 'Электронная почта сайта введена неправильно.',
+		'length'	  => 'Адрес электронной почты должен содержать не менее 4 и не более 100 символов.'
 	),
 	
 	'items_per_page' => array

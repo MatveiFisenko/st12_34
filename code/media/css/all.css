@@ -1125,7 +1125,8 @@ a.show-more:hover{ text-decoration:none;}
 .report_col2,
 .report_col3,
 .report_col4,
-.report_col5{
+.report_col5,
+.report_col6,{
 	float:left;
 	padding-right:15px;
 }
@@ -1133,7 +1134,7 @@ a.show-more:hover{ text-decoration:none;}
 	width:85px;
 }
 .report_col2{
-	width:425px;
+	width:320px;
 }
 .report_col3{
 	width:85px;
@@ -1144,6 +1145,10 @@ a.show-more:hover{ text-decoration:none;}
 	text-align:center;
 }
 .report_col5{
+	width:105px;
+	text-align:center;
+}
+.report_col6{
 	width:105px;
 	text-align:center;
 }

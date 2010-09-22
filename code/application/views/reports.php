@@ -14,12 +14,28 @@
  */
 ?>
 
+				<script type="text/javascript">
+					function switchSort() {
+						switch($('#sort_direction').val()) {
+							case "a":
+								$('#sort_direction').val("d");
+								break;
+							case "d":
+								$('#sort_direction').val("a");
+						}
+					}
+				</script>
 				<div id="content">
 					<div class="content-bg">
 						<!-- start reports block -->
 						<div class="big-block">
 
 							<div id="report_stats">
+								<?php print form::open(NULL, array('id' => 'locationFilterForm', 'name' => 'locationFilterForm', 'class' => 'gen_forms')); ?> 
+								<input type="hidden" id="sort_direction" name="sort_direction" value="<?php echo $form['sort_direction']?>">
+								<span>Фильтр по местоположению ямы:</span>
+								<?php print form::input('pit_location', $form['pit_location'], ' class="text"'); ?>
+								<?php print form::close(); ?>
 								<table>
 									<tr>
 										<th>Всего сообщений</th>
@@ -55,6 +71,19 @@
 								<div class="report_col5">
 									<strong><?php echo strtoupper(Kohana::lang('ui_main.verified'));?>?</strong>
 								</div>
+								<div class="report_col6">
+									<a href="#" onclick="switchSort();$('#locationFilterForm').submit()">
+										<strong><?php echo strtoupper(Kohana::lang('ui_main.pit_dimension'));?></strong>
+										<?php switch($form['sort_direction']) {
+														case 'a':
+															echo ">";
+															break;
+														case 'd':
+															echo "<";
+													}
+										?>
+									</a>
+								</div>
 							</div>
 							<?php
 							foreach ($incidents as $incident)
@@ -76,6 +105,7 @@
 								}else{
 									$incident_verified = '<span class="report_no">НЕТ</span>';
 								}
+								$incident_dimension = $incident->pit_length."x".$incident->pit_width."x".$incident->pit_depth;
 							?>
 
 							<div class="report_row1">
@@ -99,6 +129,10 @@
 
 								<div class="report_status report_col5">
 									<?php echo $incident_verified; ?>
+								</div>
+								
+								<div class="report_status report_col6">
+									<?php echo $incident_dimension; ?>
 								</div>
 
 							</div>

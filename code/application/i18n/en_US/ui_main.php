@@ -271,6 +271,7 @@ $lang = array(
 	'pit_length' => 'Pit length',
 	'pit_width' => 'Pit width',
 	'pit_depth' => 'Pit depth',
+	'pit_dimension' => 'Pit Dimension',
 	'pinpoint_location' => '* Search for your location, or click on the map to pinpoint the correct location',
 	'play' => 'Play',
 	'please_note' => 'Please Note',

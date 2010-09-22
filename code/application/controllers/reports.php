@@ -43,6 +43,20 @@ class Reports_Controller extends Main_Controller {
 		$this->template->header->this_page = 'reports';
 		$this->template->content = new View('reports');
 
+		// Initialize form
+		$form = array(
+			'pit_location' => '',
+			'sort_direction' => 'd'
+		);
+		if ( isset($_POST['pit_location']) ) $form['pit_location'] = $_POST['pit_location'];
+		if ( isset($_POST['sort_direction']) && $_POST['sort_direction'] == "a") {
+			$sort_direction = 'ASC';
+			$form['sort_direction'] = 'a';
+		} else {
+			$sort_direction = 'DESC';
+		}
+		$this->template->content->form = $form;
+		
 		$db = new Database;
 
 		$filter = ( isset($_GET['c']) && !empty($_GET['c']) && $_GET['c']!=0 )
@@ -64,7 +78,11 @@ class Reports_Controller extends Main_Controller {
 			$filter .= " AND l.longitude >=".$longitude_min.
 				" AND l.longitude <=".$longitude_max;
 		}
-
+		
+		if ( strlen($form['pit_location']) > 0 ) {
+			$filter .= " AND location_name LIKE '%".mysql_real_escape_string($form['pit_location'])."%'";
+		}
+			
 		// Pagination
 		$pagination = new Pagination(array(
 				'query_string' => 'page',
@@ -72,7 +90,7 @@ class Reports_Controller extends Main_Controller {
 				'total_items' => $db->query("SELECT DISTINCT i.* FROM `".$this->table_prefix."incident` AS i JOIN `".$this->table_prefix."incident_category` AS ic ON (i.`id` = ic.`incident_id`) JOIN `".$this->table_prefix."category` AS c ON (c.`id` = ic.`category_id`) JOIN `".$this->table_prefix."location` AS l ON (i.`location_id` = l.`id`) WHERE `incident_active` = '1' $filter")->count()
 				));
 
-		$incidents = $db->query("SELECT DISTINCT i.*, l.`location_name` FROM `".$this->table_prefix."incident` AS i JOIN `".$this->table_prefix."incident_category` AS ic ON (i.`id` = ic.`incident_id`) JOIN `".$this->table_prefix."category` AS c ON (c.`id` = ic.`category_id`) JOIN `".$this->table_prefix."location` AS l ON (i.`location_id` = l.`id`) WHERE `incident_active` = '1' $filter ORDER BY incident_date DESC LIMIT ". (int) Kohana::config('settings.items_per_page') . " OFFSET ".$pagination->sql_offset);
+		$incidents = $db->query("SELECT DISTINCT i.*, l.`location_name` FROM `".$this->table_prefix."incident` AS i JOIN `".$this->table_prefix."incident_category` AS ic ON (i.`id` = ic.`incident_id`) JOIN `".$this->table_prefix."category` AS c ON (c.`id` = ic.`category_id`) JOIN `".$this->table_prefix."location` AS l ON (i.`location_id` = l.`id`) WHERE `incident_active` = '1' $filter ORDER BY incident_date DESC, pit_length $sort_direction, pit_width $sort_direction, pit_depth $sort_direction LIMIT ". (int) Kohana::config('settings.items_per_page') . " OFFSET ".$pagination->sql_offset);
 
 		$this->template->content->incidents = $incidents;
 

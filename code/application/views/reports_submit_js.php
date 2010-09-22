@@ -120,48 +120,48 @@
 				},
 				messages: {
 					incident_title: {
-						required: "Please enter a Title",
-						minlength: "Your Title must consist of at least 3 characters"
+						required: "Пожалуйста, введите заголовок",
+						minlength: "Заголовок должен состоять не менее чем из 3х символов"
 					},
 					incident_description: {
-						required: "Please enter a Description",
-						minlength: "Your Description must be at least 3 characters long"
+						required: "Пожалуйста, введите описание",
+						minlength: "Описание должно состоять не менее чем из 3х символов"
 					},
 					incident_date: {
-						required: "Please enter a Date",
-						date: "Please enter a valid Date"
+						required: "Пожалуйста, укажите дату",
+						date: "Пожалуйста, укажите правильную дату"
 					},
 					incident_hour: {
-						required: "Please enter an Hour",
-						range: "Please enter a valid Hour"
+						required: "Пожалуйста, укажите час",
+						range: "Пожалуйста, укажите правильный час"
 					},
 					incident_minute: {
-						required: "Please enter a Minute",
-						range: "Please enter a valid Minute"
+						required: "Пожалуйста, укажите минуты",
+						range: "Пожалуйста, укажите правильные минуты"
 					},
 					incident_ampm: {
 						required: "Please enter either AM or PM"
 					},
 					"incident_category[]": {
-						required: "Please select at least one Category",
-						minlength: "Please select at least one Category"
+						required: "Пожалуйста, выберите по меньшей мере одну категорию",
+						minlength: "Пожалуйста, выберите по меньшей мере одну категорию"
 					},
 					latitude: {
-						required: "Please select a valid point on the map",
-						range: "Please select a valid point on the map"
+						required: "Пожалуйста, укажите расположение ямы на карте",
+						range: "Пожалуйста, укажите расположение ямы на карте"
 					},
 					longitude: {
-						required: "Please select a valid point on the map",
-						range: "Please select a valid point on the map"
+						required: "Пожалуйста, укажите расположение ямы на карте",
+						range: "Пожалуйста, укажите расположение ямы на карте"
 					},
 					location_name: {
-						required: "Please enter a Location Name"
+						required: "Пожалуйста, введите название местоположения"
 					},
 					"incident_news[]": {
-						url: "Please enter a valid News link"
+						url: "Пожалуйста, введите правильную ссылку на новости"
 					},
 					"incident_news[]": {
-						url: "Please enter a valid Video link"
+						url: "Пожалуйста, введите правильную ссылку на видео"
 					},
 					pit_length: {
 					  required: "Пожалуйста, укажите длину ямы",

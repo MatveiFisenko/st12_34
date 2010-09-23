@@ -1,16 +1,16 @@
-<?php 
+<?php
 /**
  * Alerts view page.
  *
  * PHP version 5
- * LICENSE: This source file is subject to LGPL license 
+ * LICENSE: This source file is subject to LGPL license
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/copyleft/lesser.html
- * @author     Ushahidi Team <team@ushahidi.com> 
+ * @author     Ushahidi Team <team@ushahidi.com>
  * @package    Ushahidi - http://source.ushahididev.com
  * @module     API Controller
  * @copyright  Ushahidi - http://www.ushahidi.com
- * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL) 
+ * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL)
  */
 ?>
 
@@ -26,7 +26,7 @@
 									?>
 									<!-- red-box -->
 									<div class="red-box">
-										<h3>Error!</h3>
+										<h3>Ошибка!</h3>
 										<ul>
 											<?php
 											foreach ($errors as $error_item => $error_description)
@@ -44,34 +44,34 @@
 									?>
 									<!-- green-box -->
 									<div class="green-box">
-										<h3>Your Message Has Been Sent!</h3>
+										<h3>Ваше сообщение было отправлено!</h3>
 									</div>
 									<?php
-								}								
+								}
 								?>
 								<?php print form::open(NULL, array('id' => 'contactForm', 'name' => 'contactForm')); ?>
 								<div class="report_row">
-									<strong>Your Name:</strong><br />
+									<strong>Ваше имя:</strong><br />
 									<?php print form::input('contact_name', $form['contact_name'], ' class="text"'); ?>
 								</div>
 								<div class="report_row">
-									<strong>Your E-Mail Address:</strong><br />
+									<strong>Ваш E-Mail:</strong><br />
 									<?php print form::input('contact_email', $form['contact_email'], ' class="text"'); ?>
 								</div>
 								<div class="report_row">
-									Your Phone Number:<br />
+									Ваш телефон:<br />
 									<?php print form::input('contact_phone', $form['contact_phone'], ' class="text"'); ?>
 								</div>
 								<div class="report_row">
-									<strong>Message Subject:</strong><br />
+									<strong>Тема сообщения:</strong><br />
 									<?php print form::input('contact_subject', $form['contact_subject'], ' class="text"'); ?>
-								</div>								
+								</div>
 								<div class="report_row">
-									<strong>Message:</strong><br />
+									<strong>Текст сообщения:</strong><br />
 									<?php print form::textarea('contact_message', $form['contact_message'], ' rows="4" cols="40" class="textarea long" ') ?>
-								</div>		
+								</div>
 								<div class="report_row">
-									<strong>Security Code:</strong><br />
+									<strong>Введите код с картинки:</strong><br />
 									<?php print $captcha->render(); ?><br />
 									<?php print form::input('captcha', $form['captcha'], ' class="text"'); ?>
 								</div>
@@ -80,7 +80,7 @@
 								</div>
 								<?php print form::close(); ?>
 							</div>
-							
+
 						</div>
 						<!-- end contacts block -->
 					</div>

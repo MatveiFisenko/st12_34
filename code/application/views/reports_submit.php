@@ -201,6 +201,10 @@ $("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 								?>
 								<div class="report_row">
 									<div id="divMap" class="report_map"></div>
+									<div id="mapStatus">
+									<div id="mapScale" style="border-right: solid 1px #999"></div>
+									<div id="mapMousePosition" style="min-width: 135px;border-right: solid 1px #999;text-align: center"></div>
+								</div>
 									<div class="report-find-location">
 										<?php print form::input('location_find', '', 'title="'.Kohana::lang('ui_main.location_example').'" class="findtext"'); ?>
 										<div style="float:left;margin:9px 0 0 5px;"><input type="button" name="button" id="button" value="<?php echo Kohana::lang('ui_main.find_location'); ?>" class="btn_find" /></div>

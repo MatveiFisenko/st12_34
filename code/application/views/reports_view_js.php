@@ -5,14 +5,14 @@
  * Handles javascript stuff related to reports view function.
  *
  * PHP version 5
- * LICENSE: This source file is subject to LGPL license 
+ * LICENSE: This source file is subject to LGPL license
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/copyleft/lesser.html
- * @author     Ushahidi Team <team@ushahidi.com> 
+ * @author     Ushahidi Team <team@ushahidi.com>
  * @package    Ushahidi - http://source.ushahididev.com
  * @module     API Controller
  * @copyright  Ushahidi - http://www.ushahidi.com
- * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL) 
+ * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL)
  */
 ?>
 		var map;
@@ -21,7 +21,7 @@
 
 			/*
 			- Initialize Map
-			- Uses Spherical Mercator Projection			
+			- Uses Spherical Mercator Projection
 			*/
 			var proj_4326 = new OpenLayers.Projection('EPSG:4326');
 			var proj_900913 = new OpenLayers.Projection('EPSG:900913');
@@ -34,7 +34,7 @@
 				};
 			map = new OpenLayers.Map('map', options);
 			map.addControl( new OpenLayers.Control.LoadingPanel({minSize: new OpenLayers.Size(573, 366)}) );
-			
+
 			var default_map = <?php echo $default_map; ?>;
 			if (default_map == 2)
 			{
@@ -64,19 +64,19 @@
 					maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34)
 					});
 			}
-	
+
 			map.addLayer(map_layer);
-	
+
 			map.addControl(new OpenLayers.Control.Navigation());
 			map.addControl(new OpenLayers.Control.PanZoomBar());
 			map.addControl(new OpenLayers.Control.MousePosition(
-					{ div: 	document.getElementById('mapMousePosition'), numdigits: 5 
-				}));    
+					{ div: 	document.getElementById('mapMousePosition'), numdigits: 5
+				}));
 			map.addControl(new OpenLayers.Control.Scale('mapScale'));
 			map.addControl(new OpenLayers.Control.ScaleLine());
 			map.addControl(new OpenLayers.Control.LayerSwitcher());
-			
-			
+
+
 			// Set Feature Styles
 			style = new OpenLayers.Style({
 				pointRadius: "8",
@@ -87,11 +87,11 @@
 				strokeOpacity: 0.8
 			},
 			{
-				context: 
+				context:
 				{
 					color: function(feature)
 					{
-						if ( typeof(feature) != 'undefined' && 
+						if ( typeof(feature) != 'undefined' &&
 							feature.data.id == <?php echo $incident_id; ?>)
 						{
 							return "#CC0000";
@@ -103,19 +103,19 @@
 					}
 				}
 			});
-			
+
 			// Create the single marker layer
-			var markers = new OpenLayers.Layer.GML("single report", "<?php echo url::site() . 'json/single/' . $incident_id; ?>", 
+			var markers = new OpenLayers.Layer.GML("single report", "<?php echo url::site() . 'json/single/' . $incident_id; ?>",
 			{
 				format: OpenLayers.Format.GeoJSON,
 				projection: map.displayProjection,
 				styleMap: new OpenLayers.StyleMap({"default":style, "select": style})
 			});
-			
+
 			map.addLayer(markers);
-			
+
 			selectControl = new OpenLayers.Control.SelectFeature(markers,
-															{onSelect: onFeatureSelect, onUnselect: onFeatureUnselect});			
+															{onSelect: onFeatureSelect, onUnselect: onFeatureUnselect});
 
 			map.addControl(selectControl);
 			selectControl.activate();
@@ -123,11 +123,11 @@
 			// create a lat/lon object
 			var myPoint = new OpenLayers.LonLat(<?php echo $longitude; ?>, <?php echo $latitude; ?>);
 			myPoint.transform(proj_4326, map.getProjectionObject());
-			
+
 			// display the map centered on a latitude and longitude (Google zoom levels)
 
-			map.setCenter(myPoint, 10);			
-			
+			map.setCenter(myPoint, 10);
+
 			function onPopupClose(evt) {
 	            selectControl.unselect(selectedFeature);
 	        }
@@ -145,7 +145,7 @@
 	            if (content.search("<script") != -1) {
 	                content = "Content contained Javascript! Escaped content below.<br />" + content.replace(/</g, "&lt;");
 	            }
-	            popup = new OpenLayers.Popup.FramedCloud("chicken", 
+	            popup = new OpenLayers.Popup.FramedCloud("chicken",
 	                                     feature.geometry.getBounds().getCenterLonLat(),
 	                                     new OpenLayers.Size(100,100),
 	                                     content,
@@ -158,11 +158,11 @@
 	            feature.popup.destroy();
 	            feature.popup = null;
 	        }
-			
-			
+
+
 			/*
 			Add Comments JS
-			*/			
+			*/
 			// Ajax Validation
 			$("#commentForm").validate({
 				rules: {
@@ -201,7 +201,7 @@
 				}
 			});
 		});
-		
+
 		function zoomToSelectedFeature(lon, lat, zoomfactor){
 			var lonlat = new OpenLayers.LonLat(lon,lat);
 			map.panTo(lonlat);
@@ -211,13 +211,13 @@
 			newZoom = currZoom + zoomfactor;
 			map.zoomTo(newZoom);
 		}
-		
+
 		jQuery(window).bind("load", function() {
 			jQuery("div#slider1").codaSlider()
 			// jQuery("div#slider2").codaSlider()
 			// etc, etc. Beware of cross-linking difficulties if using multiple sliders on one page.
 		});
-		
+
 		function rating(id,action,type,loader)
 		{
 			$('#' + loader).html('<img src="<?php echo url::base() . "media/img/loading_g.gif"; ?>">');

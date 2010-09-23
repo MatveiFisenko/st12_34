@@ -157,18 +157,16 @@ $lang = array
 	'pit_width' => array
 	(
 		'alpha'  => 'Please enter pit width',
-		'length' => 'Field "Pit width" must contain 1-10 characters'
+		'between' => 'Pit width must be between 60 and 1000 cm'
 	),
 	'pit_length' => array
 	(
-	  'alpha'  => 'Please enter pit length',
-		'length' => 'Field "Pit length" must contain 1-10 characters'
-	 ),
-	 
-	 'pit_depth' => array
-	 (
+		'alpha'  => 'Please enter pit length',
+		'between' => 'Pit length must be between 15 and 1000 cm'
+	),
+	'pit_depth' => array
+	(
 		'alpha'  => 'Please enter pit depth',
-		'length' => 'Field "Pit depth" must contain 1-10 characters'
-	 )
-	
+		'between' => 'Pit depth must be between 5 and 1000 cm'
+	)
 );

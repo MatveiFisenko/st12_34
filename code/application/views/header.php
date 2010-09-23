@@ -167,7 +167,6 @@
 					<ul id="top-menu">
 						<li><a href="<?php echo url::site() . "main" ?>" <?php if ($this_page == 'home') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.home'); ?></a></li>
 						<li><a href="<?php echo url::site() . "reports" ?>" <?php if ($this_page == 'reports') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.reports'); ?></a></li>
-						<li><a href="<?php echo url::site() . "alerts" ?>" <?php if ($this_page == 'alerts') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.alerts'); ?></a></li>
 						<?php
 						// Contact Page
 						if ($site_contact_page)
@@ -186,6 +185,7 @@
 						}
 
 						?>
+						<li><a href="<?php echo url::site() . "alerts" ?>" <?php if ($this_page == 'alerts') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.alerts'); ?></a></li>
 						<?php
 						// Custom Pages
 						foreach ($pages as $page)

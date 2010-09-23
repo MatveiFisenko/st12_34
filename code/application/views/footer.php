@@ -37,7 +37,6 @@
 					<li><a href="<?php echo url::site() . "alerts" ?>"><?php echo Kohana::lang('ui_main.alerts'); ?></a></li>
 					<li><a href="<?php echo url::site() . "contact" ?>"><?php echo Kohana::lang('ui_main.contact'); ?></a></li>
 					<li><a href="<?php echo url::site() . "help" ?>"><?php echo Kohana::lang('ui_main.help'); ?></a></li>
-					<li><a href="http://navalny.livejournal.com/"><?php echo Kohana::lang('ui_main.blog'); ?></a></li>
 					<li><a href="<?php echo url::site() . "page/index/1" ?>"><?php echo Kohana::lang('ui_main.about'); ?></a></li>
 
 				</ul>

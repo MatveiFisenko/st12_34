@@ -1388,7 +1388,7 @@ CREATE TABLE `settings` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` VALUES (1,'Статья 12.34','12.34','2matvei@gmail.com',NULL,'ru_RU','',NULL,1,1,1,1,1,1,1,1,'CC0000','ABQIAAAAJeXYm06B0AvY6broIqjSLBQn5xc-Pro06ig4uZQ43k9LSSM1PRRE9iLKzceWBpX_ea-jlCC3B_5eKA','5CYeWbfV34E21JOW1a4.54Mf6e9jLNkD0HVzaKoQmJZi2qzmSZd5mD8X49x7',NULL,'',191,0,'nairobi','61.52401','105.318756',2,20,20,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','','','','','','2010-09-15 12:22:20',6348,'885d9efb80f0630207014113ae2081','localhost','localhost',25,'localhost','imap',0,'2matvei@gmail.com','25','1.1.0');
+INSERT INTO `settings` VALUES (1,'Статья 12.34','12.34','2matvei@gmail.com',NULL,'ru_RU','',NULL,1,0,1,1,1,1,1,1,'CC0000','ABQIAAAAJeXYm06B0AvY6broIqjSLBQn5xc-Pro06ig4uZQ43k9LSSM1PRRE9iLKzceWBpX_ea-jlCC3B_5eKA','5CYeWbfV34E21JOW1a4.54Mf6e9jLNkD0HVzaKoQmJZi2qzmSZd5mD8X49x7',NULL,'',191,0,'nairobi','61.52401','105.318756',2,20,20,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','','','','','','2010-09-15 12:22:20',6348,'885d9efb80f0630207014113ae2081','localhost','localhost',25,'localhost','imap',0,'2matvei@gmail.com','25','1.1.0');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
 

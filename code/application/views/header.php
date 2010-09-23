@@ -186,7 +186,6 @@
 						}
 
 						?>
-						<li><a href="http://navalny.livejournal.com/"><?php echo Kohana::lang('ui_main.blog'); ?></a></li>
 						<?php
 						// Custom Pages
 						foreach ($pages as $page)

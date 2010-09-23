@@ -204,7 +204,6 @@ $("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 									<div id="mapStatus">
 										<div id="mapScale" style="border-right: solid 1px #999"></div>
 										<div id="mapMousePosition" style="min-width: 135px;border-right: solid 1px #999;text-align: center"></div>
-									</div>
 								</div>
 									<div class="report-find-location">
 										<?php print form::input('location_find', '', 'title="'.Kohana::lang('ui_main.location_example').'" class="findtext"'); ?>

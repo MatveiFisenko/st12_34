@@ -18,15 +18,15 @@
 				<!-- main body -->
 				<div id="main" class="clearingfix">
 					<div id="mainmiddle" class="floatbox withright">
-				
+
 						<!-- right column -->
 						<div id="right" class="clearingfix">
-					
+
 							<!-- category filters -->
 							<div class="cat-filters clearingfix">
 								<strong><?php echo Kohana::lang('ui_main.category_filter');?></strong>
 							</div>
-						
+
 							<ul class="category-filters">
 								<li><a class="active" id="cat_0" href="#"><div class="swatch" style="background-color:#<?php echo $default_map_all;?>"></div><div class="category-title"><?php echo Kohana::lang('ui_main.all_categories');?></div></a></li>
 								<?php
@@ -66,7 +66,7 @@
 								?>
 							</ul>
 							<!-- / category filters -->
-							
+
 							<?php
 							if ($layers)
 							{
@@ -96,10 +96,10 @@
 								<?php
 							}
 							?>
-							
-							
+
+
 							<br />
-						
+
 							<!-- additional content -->
 							<?php
 							if (Kohana::config('settings.allow_reports'))
@@ -108,16 +108,16 @@
 								<div class="additional-content">
 									<h5><?php echo Kohana::lang('ui_main.how_to_report'); ?></h5>
 									<ol>
-										<?php if (!empty($phone_array)) 
+										<?php if (!empty($phone_array))
 										{ ?><li><?php echo Kohana::lang('ui_main.report_option_1')." "; ?> <?php foreach ($phone_array as $phone) {
 											echo "<strong>". $phone ."</strong>";
 											if ($phone != end($phone_array)) {
 												echo " or ";
 											}
 										} ?></li><?php } ?>
-										<?php if (!empty($report_email)) 
+										<?php if (!empty($report_email))
 										{ ?><li><?php echo Kohana::lang('ui_main.report_option_2')." "; ?> <a href="mailto:<?php echo $report_email?>"><?php echo $report_email?></a></li><?php } ?>
-										<?php if (!empty($twitter_hashtag_array)) 
+										<?php if (!empty($twitter_hashtag_array))
 													{ ?><li><?php echo Kohana::lang('ui_main.report_option_3')." "; ?> <?php foreach ($twitter_hashtag_array as $twitter_hashtag) {
 										echo "<strong>". $twitter_hashtag ."</strong>";
 										if ($twitter_hashtag != end($twitter_hashtag_array)) {
@@ -126,33 +126,33 @@
 										} ?></li><?php
 										} ?><li><a href="<?php echo url::site() . 'reports/submit/'; ?>"><?php echo Kohana::lang('ui_main.report_option_4'); ?></a></li>
 									</ol>
-		
+
 								</div>
 							<?php } ?>
 							<!-- / additional content -->
-					
+
 						</div>
 						<!-- / right column -->
-					
+
 						<!-- content column -->
 						<div id="content" class="clearingfix">
 							<div class="floatbox">
-							
+
 								<!-- filters -->
 								<div class="filters clearingfix">
 								<div style="float:left; width: 65%">
-									<strong><?php echo Kohana::lang('ui_main.filters'); ?></strong>
+		<!--							<strong><?php echo Kohana::lang('ui_main.filters'); ?></strong>
 									<ul>
 										<li><a id="media_0" class="active" href="#"><span><?php echo Kohana::lang('ui_main.reports'); ?></span></a></li>
 										<li><a id="media_4" href="#"><span><?php echo Kohana::lang('ui_main.news'); ?></span></a></li>
 										<li><a id="media_1" href="#"><span><?php echo Kohana::lang('ui_main.pictures'); ?></span></a></li>
 										<li><a id="media_2" href="#"><span><?php echo Kohana::lang('ui_main.video'); ?></span></a></li>
 										<li><a id="media_0" href="#"><span><?php echo Kohana::lang('ui_main.all'); ?></span></a></li>
-									</ul>
+									</ul>-->
 </div>
 								</div>
 								<!-- / filters -->
-						
+
 								<!-- map -->
 								<div class="map" id="map"></div>
 								<div style="clear:both;"></div>
@@ -180,17 +180,17 @@
 							</div>
 						</div>
 						<!-- / content column -->
-				
+
 					</div>
 				</div>
 				<!-- / main body -->
-			
+
 				<!-- content -->
 				<div class="content-container">
-			
+
 					<!-- content blocks -->
 					<div class="content-blocks clearingfix">
-				
+
 						<!-- left content block -->
 						<div class="content-block-left">
 							<h5><?php echo Kohana::lang('ui_main.incidents_listed'); ?></h5>
@@ -233,7 +233,7 @@
 							<a class="more" href="<?php echo url::site() . 'reports/' ?>">View More...</a>
 						</div>
 						<!-- / left content block -->
-				
+
 						<!-- right content block -->
 						<div class="content-block-right">
 							<h5><?php echo Kohana::lang('ui_main.official_news'); ?></h5>
@@ -268,7 +268,7 @@
 							<a class="more" href="<?php echo url::site() . 'feeds' ?>">View More...</a>
 						</div>
 						<!-- / right content block -->
-				
+
 					</div>
 					<!-- /content blocks -->
 <?php
@@ -283,10 +283,10 @@
  *					<!-- / site footer -->
 */
 ?>
-			
+
 				</div>
 				<!-- content -->
-		
+
 			</div>
 		</div>
 		<!-- / main body -->

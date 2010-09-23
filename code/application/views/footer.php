@@ -25,7 +25,7 @@
 
 			<!-- footer credits -->
 			<div class="footer-credits">
-				Powered by <a href="http://www.ushahidi.com/"><img src="<?php echo url::base(); ?>/media/img/footer-logo.png" alt="Ushahidi" align="absmiddle" /></a>
+				Работает на <a href="http://www.ushahidi.com/"><img src="<?php echo url::base(); ?>/media/img/footer-logo.png" alt="Ushahidi" align="absmiddle" /></a>
 			</div>
 			<!-- / footer credits -->
 
@@ -41,14 +41,9 @@
 					<li><a href="<?php echo url::site() . "page/index/1" ?>"><?php echo Kohana::lang('ui_main.about'); ?></a></li>
 
 				</ul>
-				<p><?php echo Kohana::lang('ui_main.copyright'); ?></p>
+				<p>&copy; 2010 st1234.ru</p>
 			</div>
 			<!-- / footer menu -->
-
-
-			<h2 class="feedback_title" style="clear:both">
-				<a href="http://feedback.ushahidi.com/fillsurvey.php?sid=5"><?php echo Kohana::lang('ui_main.feedback'); ?></a>
-			</h2>
 
 
 		</div>
@@ -57,8 +52,6 @@
 	</div>
 	<!-- / footer -->
 
-	<img src="<?php echo $tracker_url; ?>" />
-	<?php echo $ushahidi_stats; ?>
 	<?php echo $google_analytics; ?>
 
 	<!-- Task Scheduler -->

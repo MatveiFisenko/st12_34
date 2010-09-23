@@ -78,7 +78,7 @@ body{
 }
 
 body#page{
-    background: #585858 url(../img/page-bg.jpg) 50% 0 repeat-x;
+    background: #e1e1e1;
 }
 
 /* wrapper setup */
@@ -90,14 +90,15 @@ div.rapidxwpr{
 /* header */
 div#header{
     position: relative;
-    height: 144px;
+    height: 104px;
     margin: 0px 0px 0px 0px;
 }
 
 /* logo */
 div#logo{
     border: 0;
-    background: #E2E2E2;
+    background: url(../img/logo2.png) no-repeat center;
+	width: 276px;
     padding: 35px 24px;
     float: left;
     margin: 14px 0 0 0;
@@ -393,6 +394,39 @@ div#mainmenu a.active{
     background: #2E8AB8;
 }
 
+
+#top-menu {
+ 	background:#394248 url(../img/menu-bg.jpg) repeat-x;
+ 	float:left;
+ 	margin:0;
+ 	padding:0;
+ 	height:50px;
+ 	width:100%;
+ }
+ #top-menu li {
+ 	list-style:none;
+ 	float:left;
+ 	background:url(../img/bord.gif) no-repeat right;
+ 	margin: 0;
+ 	padding:18px 20px;
+ }
+ #top-menu li.last {
+ 	float:right;
+ 	position:relative;
+ 	margin-right:70px;
+ 	background:none;
+ }
+ #top-menu li.last img {
+ 	position:absolute;
+ 	top:0;
+ 	margin-left:10px;
+ }
+ #top-menu a {
+ 	color:#FFF;
+ 	text-transform:uppercase;
+	}
+
+
 /* filters */
 div.filters{
     font-size: 85%;
@@ -507,9 +541,7 @@ div.cat-filters strong{
 }
 
 ul.category-filters{
-    background: #E7E3DA;
-    border-top: #C7C2BC 7px solid;
-    border-bottom: #C7C2BC 7px solid;
+    background: #f1f1f1;
     list-style: none;
     padding: 12px 15px;
 }
@@ -517,7 +549,7 @@ ul.category-filters{
 ul.category-filters li{
     padding: 0;
     margin-bottom: 2px;
-	list-style-type:none; 
+	list-style-type:none;
 }
 
 ul.category-filters li a{
@@ -557,14 +589,13 @@ div.additional-content ol {
 
 /* content blocks */
 div.content-container{
-    padding: 15px;
-    background: #E2E2E2;
+    background: #cadaba;
 }
 
 div.content-block-left{
     padding: 15px;
-    background: #FFFFFF;
-    width: 427px;
+    background: #e6e6fa;
+    width: 100%;
     float: left;
     margin-right: 15px;
 }
@@ -931,15 +962,15 @@ div.content-media ul li a.media-type-video{
 	margin-left: -3.7em;
 }
 .ui-slider .ui-slider-tooltip .ui-tooltip-pointer-down, .ui-slider .ui-slider-tooltip .ui-tooltip-pointer-down-inner {
-	position: absolute; 
+	position: absolute;
 	display: block;
-	width:0; 
-	height:0; 
+	width:0;
+	height:0;
 	border-bottom-width: 0;
 	background: none;
 }
-.ui-slider .ui-slider-tooltip .ui-tooltip-pointer-down {	
-	border-left: 7px dashed transparent; 
+.ui-slider .ui-slider-tooltip .ui-tooltip-pointer-down {
+	border-left: 7px dashed transparent;
 	border-right: 7px dashed transparent;
 	border-top-width: 8px;
 	bottom:	-8px;
@@ -948,7 +979,7 @@ div.content-media ul li a.media-type-video{
 	margin-left: -7px;
 }
 .ui-slider .ui-slider-tooltip .ui-tooltip-pointer-down-inner {
-	border-left: 6px dashed transparent; 
+	border-left: 6px dashed transparent;
 	border-right: 6px dashed transparent;
 	border-top: 7px solid #fff;
 	bottom:	auto;
@@ -1160,7 +1191,7 @@ label.error {
 	color: white;
 	background-color:#368c00;
 	font-size:14px;
-	cursor:pointer;	
+	cursor:pointer;
 	border: 0;
 }
 .btn_find {
@@ -1169,8 +1200,8 @@ label.error {
 	color: white;
 	background-color:#999;
 	font-size:14px;
-	cursor:pointer;	
-	border: 0;	
+	cursor:pointer;
+	border: 0;
 }
 
 .hide {display:none;}
@@ -1234,14 +1265,14 @@ label.error {
 
 	.report-description table tr th { text-align: left; padding:5px; background:#E8E4DB; border-collapse:collapse; }
 		th.w-01, th.w-02 { border-right:1px dotted #fff; }
-	
+
 	.report-description table tr td { padding:0 5px; }
 		.report-description table tr td a { display:block; padding:5px 0; }
-		
+
 	.report-description table tr:hover { background:#f8f6f2; }
 		td.w-01, td.w-02 { border-right:1px dotted #E8E4DB; border-bottom:1px dotted #E8E4DB;  }
 		td.w-03 { border-bottom:1px dotted #E8E4DB; }
-	
+
 	.w-01 {
 		width:50%;
 		padding:0 10px 0 0;
@@ -1341,7 +1372,7 @@ ul.treeview li.lastExpandable { width:155px; }
 .report_rating div{
 	float:left;
 	margin-right:3px;
-	
+
 }
 .rating_value{
 	height:14px;
@@ -1698,7 +1729,7 @@ ul.pager li a.active {background:#f2f7fa;}
 	height : 50px;
 	border : 1px solid #000;
 	background : #ccc;
-	
+
 }
 
 .detailed_feedback a {
@@ -1918,7 +1949,7 @@ div.red-box {
 }
 div.green-box h3, div.red-box h3{
 	margin:0;
-	padding:0 0 0 15px; 
+	padding:0 0 0 15px;
 	font-size:14px;
 	color:#555;
 }

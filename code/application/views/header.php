@@ -131,14 +131,6 @@
 			<div id="searchbox">
 				<a class="share addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;pub=xa-4aee423643f8276e">Share</a>
 
-				<!-- languages -->
-				<div class="language-box">
-					<form>
-						<?php print form::dropdown('l', $locales_array, $l, ' onChange="this.form.submit()" '); ?>
-					</form>
-				</div>
-				<!-- / languages -->
-
 				<!-- searchform -->
 				<div class="search-form">
 					<form method="get" id="search" action="<?php echo url::site() . 'search/'; ?>">
@@ -155,21 +147,14 @@
 
 			<!-- logo -->
 			<div id="logo">
-				<h1><?php echo $site_name; ?></h1>
-				<span><?php echo $site_tagline; ?></span>
+				<div style="display: none;">
+					<h1><?php echo $site_name; ?></h1>
+	                <span><?php echo $site_tagline; ?></span>
+	            </div>
 			</div>
 			<!-- / logo -->
 
-			<?php
-			if (Kohana::config('settings.allow_reports'))
-			{
-				?><!-- submit incident -->
-			<div class="submit-incident clearingfix">
-				<a href="<?php echo url::site() . "reports/submit" ?>"><?php echo Kohana::lang('ui_main.submit'); ?></a>
-			</div>
-			<!-- / submit incident --><?php
-			}
-			?>
+
 		</div>
 		<!-- / header -->
 
@@ -178,16 +163,10 @@
 			<div class="background layoutleft">
 
 				<!-- mainmenu -->
-				<div id="mainmenu" class="clearingfix">
-					<ul>
+				<div class="clearingfix">
+					<ul id="top-menu">
 						<li><a href="<?php echo url::site() . "main" ?>" <?php if ($this_page == 'home') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.home'); ?></a></li>
 						<li><a href="<?php echo url::site() . "reports" ?>" <?php if ($this_page == 'reports') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.reports'); ?></a></li>
-						<?php
-						if (Kohana::config('settings.allow_reports'))
-						{
-							?><li><a href="<?php echo url::site() . "reports/submit" ?>" <?php if ($this_page == 'reports_submit') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.submit'); ?></a></li><?php
-						}
-						?>
 						<li><a href="<?php echo url::site() . "alerts" ?>" <?php if ($this_page == 'alerts') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.alerts'); ?></a></li>
 						<?php
 						// Contact Page
@@ -214,6 +193,12 @@
 						{
 							$this_active = ($this_page == 'page_'.$page->id) ? 'class="active"' : '';
 							echo "<li><a href=\"".url::site()."page/index/".$page->id."\" ".$this_active.">".$page->page_tab."</a></li>";
+						}
+						?>
+						<?php
+						if (Kohana::config('settings.allow_reports'))
+						{
+							?><li align="right" class="last"><a href="<?php echo url::site() . "reports/submit" ?>" <?php if ($this_page == 'reports_submit') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.submit'); ?><img width="50" height="50" alt="Добавить яму" src="/media/img/add.gif"></a></li><?php
 						}
 						?>
 					</ul>

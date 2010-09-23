@@ -1,16 +1,16 @@
-<?php 
+<?php
 /**
  * Reports submit view page.
  *
  * PHP version 5
- * LICENSE: This source file is subject to LGPL license 
+ * LICENSE: This source file is subject to LGPL license
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/copyleft/lesser.html
- * @author     Ushahidi Team <team@ushahidi.com> 
+ * @author     Ushahidi Team <team@ushahidi.com>
  * @package    Ushahidi - http://source.ushahididev.com
  * @module     API Controller
  * @copyright  Ushahidi - http://www.ushahidi.com
- * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL) 
+ * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL)
  */
 ?>
 				<div id="content">
@@ -53,20 +53,20 @@
 									<?php print form::textarea('incident_description', $form['incident_description'], ' rows="10" class="textarea long" ') ?>
 								</div>
 								<div class="report_row" id="datetime_default">
-									<h4><a href="#" id="date_toggle" class="show-more"><?php echo Kohana::lang('ui_main.modify_date'); ?></a><?php echo Kohana::lang('ui_main.date_time'); ?>: 
+									<h4><a href="#" id="date_toggle" class="show-more"><?php echo Kohana::lang('ui_main.modify_date'); ?></a><?php echo Kohana::lang('ui_main.date_time'); ?>:
 										<?php echo Kohana::lang('ui_main.today_at')." "."<span id='current_time'>".$form['incident_hour']
 											.":".$form['incident_minute']." ".$form['incident_ampm']."</span>"; ?></h4>
 								</div>
 								<div class="report_row hide" id="datetime_edit">
 									<div class="date-box">
 										<h4><?php echo Kohana::lang('ui_main.reports_date'); ?></h4>
-										<?php print form::input('incident_date', $form['incident_date'], ' class="text short"'); ?>								
+										<?php print form::input('incident_date', $form['incident_date'], ' class="text short"'); ?>
 										<script type="text/javascript">
 											$().ready(function() {
-												$("#incident_date").datepicker({ 
-													showOn: "both", 
-													buttonImage: "<?php echo url::base() ?>media/img/icon-calendar.gif", 
-													buttonImageOnly: true 
+												$("#incident_date").datepicker({
+													showOn: "both",
+													buttonImage: "<?php echo url::base() ?>media/img/icon-calendar.gif",
+													buttonImageOnly: true
 												});
 											});
 										</script>
@@ -74,10 +74,10 @@
 									<div class="time">
 										<h4><?php echo Kohana::lang('ui_main.reports_time'); ?></h4>
 										<?php
-											for ($i=1; $i <= 12 ; $i++) { 
+											for ($i=1; $i <= 12 ; $i++) {
 												$hour_array[sprintf("%02d", $i)] = sprintf("%02d", $i);	 // Add Leading Zero
 											}
-											for ($j=0; $j <= 59 ; $j++) { 
+											for ($j=0; $j <= 59 ; $j++) {
 												$minute_array[sprintf("%02d", $j)] = sprintf("%02d", $j);	// Add Leading Zero
 											}
 											$ampm_array = array('pm'=>'pm','am'=>'am');
@@ -95,7 +95,7 @@ var now = new Date();
 var h=now.getHours();
 var m=now.getMinutes();
 var ampm="am";
-if (h>=12) ampm="pm"; 
+if (h>=12) ampm="pm";
 if (h>12) h-=12;
 var hs=(h<10)?("0"+h):h;
 var ms=(m<10)?("0"+m):m;
@@ -121,7 +121,7 @@ $("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 								</div>
 								<div class="report_row">
 									<h4><?php echo Kohana::lang('ui_main.pit_length'); ?>, <?php print Kohana::lang('ui_main.cm'); ?></h4>
-                  <?php print form::input('pit_length', $form['pit_length'], ' class="text short"'); ?> 
+                  <?php print form::input('pit_length', $form['pit_length'], ' class="text short"'); ?>
                 </div>
 								<div class="report_row">
 									<h4><?php echo Kohana::lang('ui_main.pit_width'); ?>, <?php print Kohana::lang('ui_main.cm'); ?></h4>
@@ -131,11 +131,11 @@ $("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 									<h4><?php echo Kohana::lang('ui_main.pit_depth'); ?>, <?php print Kohana::lang('ui_main.cm'); ?></h4>
                   <?php print form::input('pit_depth', $form['pit_depth'], ' class="text short"'); ?>
                 </div>
-								
+
 								<div id="custom_forms">
-									
+
                                     <?php
-                                    
+
 									foreach ($disp_custom_fields as $field_id => $field_property)
 									{
 										echo "<div class=\"report_row\">";
@@ -149,10 +149,10 @@ $("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 												' id="custom_field_'.$field_id.'" class="text"');
 												echo "<script type=\"text/javascript\">
 													$(document).ready(function() {
-													$(\"#custom_field_".$field_id."\").datepicker({ 
-													showOn: \"both\", 
-													buttonImage: \"" . url::base() . "media/img/icon-calendar.gif\", 
-													buttonImageOnly: true 
+													$(\"#custom_field_".$field_id."\").datepicker({
+													showOn: \"both\",
+													buttonImage: \"" . url::base() . "media/img/icon-calendar.gif\",
+													buttonImageOnly: true
 													});
 													});
 												</script>";
@@ -202,18 +202,18 @@ $("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 								<div class="report_row">
 									<div id="divMap" class="report_map"></div>
 									<div class="report-find-location">
-										<?php print form::input('location_find', '', 'title='.Kohana::lang('ui_main.location_example').' class="findtext"'); ?>
+										<?php print form::input('location_find', '', 'title="'.Kohana::lang('ui_main.location_example').'" class="findtext"'); ?>
 										<div style="float:left;margin:9px 0 0 5px;"><input type="button" name="button" id="button" value="<?php echo Kohana::lang('ui_main.find_location'); ?>" class="btn_find" /></div>
 										<div id="find_loading" class="report-find-loading"></div>
 										<div style="clear:both;" id="find_text"><?php echo Kohana::lang('ui_main.pinpoint_location'); ?>.</div>
 									</div>
 								</div>
-								
+
 								<div class="report_row">
 									<h4><?php echo Kohana::lang('ui_main.reports_location_name'); ?><br /><span class="example"><?php echo Kohana::lang('ui_main.detailed_location_example'); ?></span></h4>
 									<?php print form::input('location_name', $form['location_name'], ' class="text long"'); ?>
 								</div>
-			
+
 								<!-- News Fields -->
 								<div id="divNews" class="report_row">
 									<h4><?php echo Kohana::lang('ui_main.reports_news'); ?></h4>
@@ -235,7 +235,7 @@ $("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 											$i = 0;
 											foreach ($form[$this_field] as $value) {
 											print "<div class=\"report_row\" id=\"$i\">\n";
-	
+
 											print form::input($this_field . '[]', $value, ' class="text long2"');
 											print "<a href=\"#\" class=\"add\" onClick=\"addFormField('$this_div','$this_field','$this_startid','$this_field_type'); return false;\">add</a>";
 											if ($i != 0)
@@ -249,8 +249,8 @@ $("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 									print "<input type=\"hidden\" name=\"$this_startid\" value=\"$i\" id=\"$this_startid\">";
 								?>
 								</div>
-			
-			
+
+
 								<!-- Video Fields -->
 								<div id="divVideo" class="report_row">
 									<h4><?php echo Kohana::lang('ui_main.reports_video'); ?></h4>
@@ -259,7 +259,7 @@ $("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 										$this_field = "incident_video";
 										$this_startid = "video_id";
 										$this_field_type = "text";
-	
+
 										if (empty($form[$this_field]))
 										{
 											$i = 1;
@@ -273,7 +273,7 @@ $("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 											$i = 0;
 											foreach ($form[$this_field] as $value) {
 												print "<div class=\"report_row\" id=\"$i\">\n";
-	
+
 												print form::input($this_field . '[]', $value, ' class="text long2"');
 												print "<a href=\"#\" class=\"add\" onClick=\"addFormField('$this_div','$this_field','$this_startid','$this_field_type'); return false;\">add</a>";
 												if ($i != 0)
@@ -287,7 +287,7 @@ $("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 										print "<input type=\"hidden\" name=\"$this_startid\" value=\"$i\" id=\"$this_startid\">";
 									?>
 								</div>
-	
+
 								<!-- Photo Fields -->
 								<div id="divPhoto" class="report_row">
 									<h4><?php echo Kohana::lang('ui_main.reports_photos'); ?></h4>
@@ -296,7 +296,7 @@ $("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 										$this_field = "incident_photo";
 										$this_startid = "photo_id";
 										$this_field_type = "file";
-	
+
 										if (empty($form[$this_field]['name'][0]))
 										{
 											$i = 1;
@@ -308,10 +308,10 @@ $("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 										else
 										{
 											$i = 0;
-											foreach ($form[$this_field]['name'] as $value) 
+											foreach ($form[$this_field]['name'] as $value)
 											{
 												print "<div class=\"report_row\" id=\"$i\">\n";
-	
+
 												// print "\"<strong>" . $value . "</strong>\"" . "<BR />";
 												print form::upload($this_field . '[]', $value, ' class="file long2"');
 												print "<a href=\"#\" class=\"add\" onClick=\"addFormField('$this_div','$this_field','$this_startid','$this_field_type'); return false;\">add</a>";
@@ -325,11 +325,11 @@ $("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 										}
 										print "<input type=\"hidden\" name=\"$this_startid\" value=\"$i\" id=\"$this_startid\">";
 									?>
-	
+
 								</div>
-													
+
 								<div class="report_row">
-									<input name="submit" type="submit" value="<?php echo Kohana::lang('ui_main.reports_btn_submit'); ?>" class="btn_submit" /> 
+									<input name="submit" type="submit" value="<?php echo Kohana::lang('ui_main.reports_btn_submit'); ?>" class="btn_submit" />
 								</div>
 							</div>
 						</div>

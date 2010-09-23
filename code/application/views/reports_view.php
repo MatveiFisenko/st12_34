@@ -25,8 +25,8 @@
 								}
 								?>"><?php
 									echo ($incident_verified == 1) ?
-										"<span>Проверен</span>" :
-										"<span>Не проверен</span>";
+										"<span>Проверена</span>" :
+										"<span>Не проверена</span>";
 									?>
 								</div>
 								<h1><?php
@@ -72,8 +72,8 @@
 							<div class="location">
 								<div class="incident-notation clearingfix">
 									<ul>
-										<li><img align="absmiddle" alt="Incident" src="<?php echo url::base(); ?>media/img/incident-pointer.jpg"/> Инцедент</li>
-										<li><img align="absmiddle" alt="Nearby Incident" src="<?php echo url::base(); ?>media/img/nearby-incident-pointer.jpg"/> Ближайший Инцедент</li>
+										<li><img align="absmiddle" alt="Incident" src="<?php echo url::base(); ?>media/img/incident-pointer.jpg"/> Яма</li>
+										<li><img align="absmiddle" alt="Nearby Incident" src="<?php echo url::base(); ?>media/img/nearby-incident-pointer.jpg"/> Ближайшие Ямы</li>
 									</ul>
 								</div>
 								<div class="report-map">
@@ -85,7 +85,7 @@
 				</div>
 
 				<div class="report-description">
-					<h3>Описание инцидента</h3>
+					<h3>Описание ямы</h3>
 						<div class="content">
 							<?php echo $incident_description; ?>
 							<div class="credibility">
@@ -124,7 +124,7 @@
 					?>
 
 					<div class="report-description">
-						<h3>Связанные новости об инциденте</h3>
+						<h3>Связанные c ямой новости</h3>
 						<table cellpadding="0" cellspacing="0">
 							<tr class="title">
 								<th class="w-01">Название</th>
@@ -159,7 +159,7 @@
 
 
 					<div class="report-description">
-						<h3>Отчёт(ы) об инциденте</h3>
+						<h3>Другие ямы рядом</h3>
 						<table cellpadding="0" cellspacing="0">
 							<tr class="title">
 								<th class="w-01">Название</th>
@@ -185,7 +185,7 @@
 					{
 					?>
 					<div class="small-block">
-						<h3>Связанные новости об инциденте</h3>
+						<h3>Связанные с ямой новости</h3>
 						<div class="block-bg">
 							<table>
 								<tr class="title">

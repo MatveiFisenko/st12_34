@@ -31,14 +31,14 @@
 						<div class="big-block">
 
 							<div id="report_stats">
-								<?php print form::open(NULL, array('id' => 'locationFilterForm', 'name' => 'locationFilterForm', 'class' => 'gen_forms')); ?> 
+								<?php print form::open(NULL, array('id' => 'locationFilterForm', 'name' => 'locationFilterForm', 'class' => 'gen_forms')); ?>
 								<input type="hidden" id="sort_direction" name="sort_direction" value="<?php echo $form['sort_direction']?>">
 								<span>Фильтр по местоположению ямы:</span>
 								<?php print form::input('pit_location', $form['pit_location'], ' class="text"'); ?>
 								<?php print form::close(); ?>
 								<table>
 									<tr>
-										<th>Всего сообщений</th>
+										<th>Всего ям</th>
 										<th>В среднем в день</th>
 										<th>% подтверждённых</th>
 									</tr>
@@ -130,7 +130,7 @@
 								<div class="report_status report_col5">
 									<?php echo $incident_verified; ?>
 								</div>
-								
+
 								<div class="report_status report_col6">
 									<?php echo $incident_dimension; ?>
 								</div>

@@ -116,6 +116,9 @@
 					},
 				  "incident_photo[]": {
 				      required: true
+          			},
+          			captcha: {
+				      required: true
           			}
 				},
 				messages: {
@@ -174,6 +177,9 @@
 					pit_depth: {
 					  required: "Пожалуйста, укажите глубину ямы",
 					  range: "Глубина ямы по ГОСТ Р 50597-93 п. 3.1.2 допустима до 5см"
+          },
+          			captcha: {
+					  required: "Пожалуйста, введите текст с картинки"
           },
           "incident_photo[]": {
             required: "<div style=\"clear:both\">Обязательно должна быть приложена фотография</div>"

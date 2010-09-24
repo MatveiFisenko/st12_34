@@ -63,7 +63,7 @@
 			</div>
 		</div>
 		<div class="report_row">
-			<strong>Введите текст на картинке:</strong><br />
+			<strong>Введите текст с картинки:</strong><br />
 			<?php print $captcha->render(); ?><br />
 			<?php print form::input('captcha', $form['captcha'], ' class="text"'); ?>
 		</div>

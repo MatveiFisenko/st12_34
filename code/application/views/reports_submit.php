@@ -333,7 +333,7 @@ $("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 								</div>
 
 								<div class="report_row">
-									<strong>Введите текст на картинке:</strong><br />
+									<strong>Введите текст c картинки:</strong><br />
 									<?php print $captcha->render(); ?><br />
 									<?php print form::input('captcha', $form['captcha'], ' class="text"'); ?>
 								</div>

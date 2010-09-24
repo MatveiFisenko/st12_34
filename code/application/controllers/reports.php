@@ -221,8 +221,12 @@ class Reports_Controller extends Main_Controller {
 			'custom_field' => array(),
 			'pit_length' => '',
 			'pit_width' => '',
-			'pit_depth' => ''
+			'pit_depth' => '',
+			'captcha' => ''
 		);
+
+		$captcha = Captcha::factory();
+
 		//	copy the form as errors, so the errors will be stored with keys corresponding to the form field names
 		$errors = $form;
 		$form_error = FALSE;
@@ -341,6 +345,8 @@ class Reports_Controller extends Main_Controller {
 			{
 				$post->add_rules('person_email', 'email', 'length[3,100]');
 			}
+
+			$post->add_rules('captcha', 'required', 'Captcha::valid');
 
 			// Test to see if things passed the rule checks
 			if ($post->validate())
@@ -510,6 +516,7 @@ class Reports_Controller extends Main_Controller {
 		$this->template->content->errors = $errors;
 		$this->template->content->form_error = $form_error;
 		$this->template->content->categories = $this->_get_categories($form['incident_category']);
+		$this->template->content->captcha = $captcha;
 
 		// Retrieve Custom Form Fields Structure
 		$disp_custom_fields = $this->_get_custom_form_fields($id,$form['form_id'],false);

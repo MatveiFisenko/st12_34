@@ -26,7 +26,7 @@
 							?>
 							<!-- red-box -->
 							<div class="red-box">
-								<h3>Error!</h3>
+								<h3>Ошибка!</h3>
 								<ul>
 									<?php
 										foreach ($errors as $error_item => $error_description)
@@ -332,6 +332,11 @@ $("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 
 								</div>
 
+								<div class="report_row">
+									<strong>Введите текст на картинке:</strong><br />
+									<?php print $captcha->render(); ?><br />
+									<?php print form::input('captcha', $form['captcha'], ' class="text"'); ?>
+								</div>
 								<div class="report_row">
 									<input name="submit" type="submit" value="<?php echo Kohana::lang('ui_main.reports_btn_submit'); ?>" class="btn_submit" />
 								</div>

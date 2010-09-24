@@ -200,10 +200,10 @@ class Main_Controller extends Template_Controller {
         // Get Reports
         // XXX: Might need to replace magic no. 8 with a constant
 		$this->template->content->total_items = ORM::factory('incident')
-			->where('incident_active', '1')
+//			->where('incident_active', '1')
 			->limit('8')->count_all();
 		$this->template->content->incidents = ORM::factory('incident')
-			->where('incident_active', '1')
+//			->where('incident_active', '1')
 			->limit('10')
 			->orderby('incident_date', 'desc')
 			->with('location')
@@ -253,7 +253,7 @@ class Main_Controller extends Template_Controller {
 
 		$db = new Database();
 		// First Get The Most Active Month
-		$query = $db->query('SELECT incident_date, count(*) AS incident_count FROM '.$this->table_prefix.'incident WHERE incident_active = 1 GROUP BY DATE_FORMAT(incident_date, \'%Y-%m\') ORDER BY incident_count DESC LIMIT 1');
+		$query = $db->query('SELECT incident_date, count(*) AS incident_count FROM '.$this->table_prefix.'incident /* WHERE incident_active = 1*/ GROUP BY DATE_FORMAT(incident_date, \'%Y-%m\') ORDER BY incident_count DESC LIMIT 1');
 		foreach ($query as $query_active)
 		{
 			$active_month = date('n', strtotime($query_active->incident_date));
@@ -264,7 +264,7 @@ class Main_Controller extends Template_Controller {
 		}
 
         // Next, Get the Range of Years
-		$query = $db->query('SELECT DATE_FORMAT(incident_date, \'%Y\') AS incident_date FROM '.$this->table_prefix.'incident WHERE incident_active = 1 GROUP BY DATE_FORMAT(incident_date, \'%Y\') ORDER BY incident_date');
+		$query = $db->query('SELECT DATE_FORMAT(incident_date, \'%Y\') AS incident_date FROM '.$this->table_prefix.'incident /*WHERE incident_active = 1*/ GROUP BY DATE_FORMAT(incident_date, \'%Y\') ORDER BY incident_date');
 		foreach ($query as $slider_date)
 		{
 			$years = $slider_date->incident_date;

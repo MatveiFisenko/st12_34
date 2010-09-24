@@ -115,7 +115,7 @@ class Json_Controller extends Template_Controller
 				->with('location')
 				->join('incident_category', 'incident.id', 'incident_category.incident_id','LEFT')
 				->join('media', 'incident.id', 'media.incident_id','LEFT')
-				->where('incident.incident_active = 1 AND ('.$this->table_prefix.'incident_category.category_id = ' . $category_id . ' ' . $where_child . ')' . $where_text)
+				->where('/*incident.incident_active = 1 AND */('.$this->table_prefix.'incident_category.category_id = ' . $category_id . ' ' . $where_child . ')' . $where_text)
 				->find_all();
 
 
@@ -127,7 +127,7 @@ class Json_Controller extends Template_Controller
 				->select('DISTINCT incident.*')
 				->with('location')
 				->join('media', 'incident.id', 'media.incident_id','LEFT')
-				->where('incident.incident_active = 1 '.$where_text)
+				->where('/*incident.incident_active = 1*/ 1 = 1 '.$where_text)
 				->find_all();
         }
 
@@ -248,7 +248,7 @@ class Json_Controller extends Template_Controller
 			}
 		}
 
-		$query = $db->query("SELECT DISTINCT i.id, i.incident_title, l.`latitude`, l.`longitude` FROM `".$this->table_prefix."incident` AS i INNER JOIN `".$this->table_prefix."location` AS l ON (l.`id` = i.`location_id`) INNER JOIN `".$this->table_prefix."incident_category` AS ic ON (i.`id` = ic.`incident_id`) INNER JOIN `".$this->table_prefix."category` AS c ON (ic.`category_id` = c.`id`) WHERE i.incident_active=1 $filter ORDER BY i.`id` ASC ");
+		$query = $db->query("SELECT DISTINCT i.id, i.incident_title, l.`latitude`, l.`longitude` FROM `".$this->table_prefix."incident` AS i INNER JOIN `".$this->table_prefix."location` AS l ON (l.`id` = i.`location_id`) INNER JOIN `".$this->table_prefix."incident_category` AS ic ON (i.`id` = ic.`incident_id`) INNER JOIN `".$this->table_prefix."category` AS c ON (ic.`category_id` = c.`id`) WHERE /*i.incident_active=1*/ 1 = 1 $filter ORDER BY i.`id` ASC ");
 
 		$query->result(FALSE, MYSQL_ASSOC);
 
@@ -391,7 +391,7 @@ class Json_Controller extends Template_Controller
 			// Get Neighboring Markers Within 50 Kms (31 Miles)
 			$query = $db->query("SELECT DISTINCT i.*, l.`latitude`, l.`longitude`,
 			((ACOS(SIN($latitude * PI() / 180) * SIN(l.`latitude` * PI() / 180) + COS($latitude * PI() / 180) * COS(l.`latitude` * PI() / 180) * COS(($longitude - l.`longitude`) * PI() / 180)) * 180 / PI()) * 60 * 1.1515) AS distance
-			 FROM `".$this->table_prefix."incident` AS i INNER JOIN `".$this->table_prefix."location` AS l ON (l.`id` = i.`location_id`) INNER JOIN `".$this->table_prefix."incident_category` AS ic ON (i.`id` = ic.`incident_id`) INNER JOIN `".$this->table_prefix."category` AS c ON (ic.`category_id` = c.`id`) WHERE i.incident_active=1 $filter
+			 FROM `".$this->table_prefix."incident` AS i INNER JOIN `".$this->table_prefix."location` AS l ON (l.`id` = i.`location_id`) INNER JOIN `".$this->table_prefix."incident_category` AS ic ON (i.`id` = ic.`incident_id`) INNER JOIN `".$this->table_prefix."category` AS c ON (ic.`category_id` = c.`id`) WHERE /*i.incident_active=1*/ 1 = 1 $filter
 			HAVING distance<='62'
 			 ORDER BY i.`id` ASC ");
 

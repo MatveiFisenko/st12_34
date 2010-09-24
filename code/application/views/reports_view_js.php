@@ -184,19 +184,19 @@
 				},
 				messages: {
 					comment_author: {
-						required: "Please enter your Name",
-						minlength: "Your Name must consist of at least 3 characters"
+						required: "Пожалуйста, введите имя.",
+						minlength: "Имя должно содержать не менее 3 символов."
 					},
 					comment_email: {
-						required: "Please enter an Email Address",
-						email: "Please enter a valid Email Address"
+						required: "Пожалуйста, введите e-mail.",
+						email: "E-mail должен быть верно введён."
 					},
 					comment_description: {
-						required: "Please enter a Comment",
-						minlength: "Your Comment must be at least 3 characters long"
+						required: "Пожалуйста, введите комментарий".,
+						minlength: "Комментарий должен содержать не менее 3 символов."
 					},
 					captcha: {
-						required: "Please enter the Security Code"
+						required: "Пожалуйста, введите текст с картинки."
 					}
 				}
 			});

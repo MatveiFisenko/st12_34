@@ -56,7 +56,7 @@ class Reports_Controller extends Main_Controller {
 			$sort_direction = 'DESC';
 		}
 		$this->template->content->form = $form;
-		
+
 		$db = new Database;
 
 		$filter = ( isset($_GET['c']) && !empty($_GET['c']) && $_GET['c']!=0 )
@@ -78,11 +78,11 @@ class Reports_Controller extends Main_Controller {
 			$filter .= " AND l.longitude >=".$longitude_min.
 				" AND l.longitude <=".$longitude_max;
 		}
-		
+
 		if ( strlen($form['pit_location']) > 0 ) {
 			$filter .= " AND location_name LIKE '%".mysql_real_escape_string($form['pit_location'])."%'";
 		}
-			
+
 		// Pagination
 		$pagination = new Pagination(array(
 				'query_string' => 'page',

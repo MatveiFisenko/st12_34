@@ -46,18 +46,22 @@ class Reports_Controller extends Main_Controller {
 		// Initialize form
 		$form = array(
 			'pit_location' => '',
-			'sort_direction' => 'd'
+			'sort_key' => 'incident_date_desc'
 		);
 		if ( isset($_POST['pit_location']) ) $form['pit_location'] = $_POST['pit_location'];
-		if ( isset($_POST['sort_direction']) && $_POST['sort_direction'] == "a") {
-			$sort_direction = 'ASC';
-			$form['sort_direction'] = 'a';
-		} else {
-			$sort_direction = 'DESC';
-		}
+		if ( isset($_POST['sort_key']) && 
+				preg_match("/^(incident_(?:verified|date)|location_name|pit_dimension)_(asc|desc)$/",$_POST['sort_key'],$sort) ) {
+			if($sort[1] == "pit_dimension")
+				$orderby = "pit_length ".$sort[2].", pit_width ".$sort[2].", pit_depth ".$sort[2];
+			else
+				$orderby = $sort[1]." ".$sort[2];
+			$form['sort_key'] = $_POST['sort_key'];
+		}			
 		$this->template->content->form = $form;
 
 		$db = new Database;
+		if ( isset($orderby) ) $orderby = "ORDER BY $orderby";
+		else $orderby = "";
 
 		$filter = ( isset($_GET['c']) && !empty($_GET['c']) && $_GET['c']!=0 )
 			? " AND ( c.id='".$_GET['c']."' OR
@@ -90,7 +94,11 @@ class Reports_Controller extends Main_Controller {
 				'total_items' => $db->query("SELECT DISTINCT i.* FROM `".$this->table_prefix."incident` AS i JOIN `".$this->table_prefix."incident_category` AS ic ON (i.`id` = ic.`incident_id`) JOIN `".$this->table_prefix."category` AS c ON (c.`id` = ic.`category_id`) JOIN `".$this->table_prefix."location` AS l ON (i.`location_id` = l.`id`) WHERE /*`incident_active` = '1'*/ 1 = 1 $filter")->count()
 				));
 
-		$incidents = $db->query("SELECT DISTINCT i.*, l.`location_name` FROM `".$this->table_prefix."incident` AS i JOIN `".$this->table_prefix."incident_category` AS ic ON (i.`id` = ic.`incident_id`) JOIN `".$this->table_prefix."category` AS c ON (c.`id` = ic.`category_id`) JOIN `".$this->table_prefix."location` AS l ON (i.`location_id` = l.`id`) WHERE /*`incident_active` = '1'*/ 1 = 1 $filter ORDER BY incident_date DESC, pit_length $sort_direction, pit_width $sort_direction, pit_depth $sort_direction LIMIT ". (int) Kohana::config('settings.items_per_page') . " OFFSET ".$pagination->sql_offset);
+		$incidents = $db->query("SELECT DISTINCT i.*, l.`location_name` FROM `".$this->table_prefix."incident` AS i JOIN `".
+			$this->table_prefix."incident_category` AS ic ON (i.`id` = ic.`incident_id`) JOIN `".
+			$this->table_prefix."category` AS c ON (c.`id` = ic.`category_id`) JOIN `".
+			$this->table_prefix."location` AS l ON (i.`location_id` = l.`id`) WHERE /*`incident_active` = '1'*/ 1 = 1 $filter 
+			$orderby LIMIT ". (int) Kohana::config('settings.items_per_page') . " OFFSET ".$pagination->sql_offset);
 
 		$this->template->content->incidents = $incidents;
 

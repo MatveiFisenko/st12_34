@@ -15,14 +15,14 @@
 ?>
 
 				<script type="text/javascript">
-					function switchSort() {
-						switch($('#sort_direction').val()) {
-							case "a":
-								$('#sort_direction').val("d");
-								break;
-							case "d":
-								$('#sort_direction').val("a");
-						}
+					function switchSort(new_key) {
+						if ( !$('#sort_key').val().match(new RegExp("^"+new_key)) )
+							$('#sort_key').val(new_key+"_desc");
+						else if ( $('#sort_key').val().match(/_desc$/) )
+							$('#sort_key').val($('#sort_key').val().replace(/_desc$/,"_asc") );
+						else if ( $('#sort_key').val().match(/_asc$/) )
+							$('#sort_key').val($('#sort_key').val().replace(/_asc$/,"_desc") );
+						$('#locationFilterForm').submit();
 					}
 				</script>
 				<div id="content">
@@ -32,7 +32,7 @@
 
 							<div id="report_stats">
 								<?php print form::open(NULL, array('id' => 'locationFilterForm', 'name' => 'locationFilterForm', 'class' => 'gen_forms')); ?>
-								<input type="hidden" id="sort_direction" name="sort_direction" value="<?php echo $form['sort_direction']?>">
+								<input type="hidden" id="sort_key" name="sort_key" value="<?php echo $form['sort_key']?>">
 								<span>Фильтр по местоположению ямы:</span>
 								<?php print form::input('pit_location', $form['pit_location'], ' class="text"'); ?>
 								<?php print form::close(); ?>
@@ -55,6 +55,13 @@
 
 							<div style="clear:both;"></div>
 
+							<?php if ( preg_match("/^(.*)_(asc|desc)/",$form['sort_key'],$matches) ) {
+									if ( $matches[2] == "desc")
+										$dir[$matches[1]] = ">";
+									else 	
+								  		$dir[$matches[1]] = "<";
+								  }
+							?>
 							<div class="report_rowtitle">
 								<div class="report_col1">
 									<strong><?php echo strtoupper(Kohana::lang('ui_main.media'));?></strong>
@@ -63,25 +70,27 @@
 									<strong><?php echo strtoupper(Kohana::lang('ui_main.report_title'));?></strong>
 								</div>
 								<div class="report_col3">
-									<strong><?php echo strtoupper(Kohana::lang('ui_main.date'));?></strong>
+									<a href="#" onclick="switchSort('incident_date'); return(-1)">
+										<strong><?php echo strtoupper(Kohana::lang('ui_main.date'));?></strong>
+										<?php if ( isset($dir['incident_date']) ) echo $dir['incident_date']; ?>
+									</a>
 								</div>
 								<div class="report_col4">
-									<strong><?php echo strtoupper(Kohana::lang('ui_main.location'));?></strong>
+									<a href="#" onclick="switchSort('location_name'); return(-1)">
+										<strong><?php echo strtoupper(Kohana::lang('ui_main.location'));?></strong>
+										<?php if ( isset($dir['location_name']) ) echo $dir['location_name']; ?>
+									</a>
 								</div>
 								<div class="report_col5">
-									<strong><?php echo strtoupper(Kohana::lang('ui_main.verified'));?>?</strong>
+									<a href="#" onclick="switchSort('incident_verified'); return(-1)">
+										<strong><?php echo strtoupper(Kohana::lang('ui_main.verified'));?>?</strong>
+										<?php if ( isset($dir['incident_verified']) ) echo $dir['incident_verified']; ?>
+									</a>
 								</div>
 								<div class="report_col6">
-									<a href="#" onclick="switchSort();$('#locationFilterForm').submit()">
+									<a href="#" onclick="switchSort('pit_dimension'); return(-1)">
 										<strong><?php echo strtoupper(Kohana::lang('ui_main.pit_dimension'));?></strong>
-										<?php switch($form['sort_direction']) {
-														case 'a':
-															echo ">";
-															break;
-														case 'd':
-															echo "<";
-													}
-										?>
+										<?php if ( isset($dir['pit_dimension']) ) echo $dir['pit_dimension']; ?>
 									</a>
 								</div>
 							</div>

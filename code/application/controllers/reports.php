@@ -49,14 +49,14 @@ class Reports_Controller extends Main_Controller {
 			'sort_key' => 'incident_date_desc'
 		);
 		if ( isset($_POST['pit_location']) ) $form['pit_location'] = $_POST['pit_location'];
-		if ( isset($_POST['sort_key']) && 
+		if ( isset($_POST['sort_key']) &&
 				preg_match("/^(incident_(?:verified|date)|location_name|pit_dimension)_(asc|desc)$/",$_POST['sort_key'],$sort) ) {
 			if($sort[1] == "pit_dimension")
-				$orderby = "pit_length ".$sort[2].", pit_width ".$sort[2].", pit_depth ".$sort[2];
+				$orderby = "pit_depth ".$sort[2].", pit_width ".$sort[2].", pit_length ".$sort[2];
 			else
 				$orderby = $sort[1]." ".$sort[2];
 			$form['sort_key'] = $_POST['sort_key'];
-		}			
+		}
 		$this->template->content->form = $form;
 
 		$db = new Database;
@@ -97,7 +97,7 @@ class Reports_Controller extends Main_Controller {
 		$incidents = $db->query("SELECT DISTINCT i.*, l.`location_name` FROM `".$this->table_prefix."incident` AS i JOIN `".
 			$this->table_prefix."incident_category` AS ic ON (i.`id` = ic.`incident_id`) JOIN `".
 			$this->table_prefix."category` AS c ON (c.`id` = ic.`category_id`) JOIN `".
-			$this->table_prefix."location` AS l ON (i.`location_id` = l.`id`) WHERE /*`incident_active` = '1'*/ 1 = 1 $filter 
+			$this->table_prefix."location` AS l ON (i.`location_id` = l.`id`) WHERE /*`incident_active` = '1'*/ 1 = 1 $filter
 			$orderby LIMIT ". (int) Kohana::config('settings.items_per_page') . " OFFSET ".$pagination->sql_offset);
 
 		$this->template->content->incidents = $incidents;

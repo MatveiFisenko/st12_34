@@ -8,11 +8,11 @@
 
 $lang = array
 (
-    'upgrade_failed' => 'Обновление оборвалось',
+    'upgrade_failed' => 'Ошибка при обновлении',
     'upgrade_text_1' => 'Как обновить Ushahidi вручную',
-    'upgrade_text_2' => 'Шаг 1:  Скачайте последнюю версию ushahidi с  <a href="http://download.ushahidi.com/">http://download.ushahidi.com</a>',
-    'upgrade_text_3' => 'Шаг 2:  В зависимости от ОС в вебсервере выберите нужный канал передачи (i.e: telnet ftp ssh) для входа в веб сервер и переместите все содержимое последней версией Ushahidi. Кроме:',
-    'upgrade_text_4' => 'Шаг 3: Используйте Mysql client ( eg. phpMyAdmin ) и запучтите <code>upgrade.sql</code>. Скрипт должна обновить все таблицы',
-    'upgrade_text_5' => 'Для автоматического обновления нажмите ниже',
+    'upgrade_text_2' => 'Шаг 1:  Скачайте последнюю версию Ushahidi с  <a href="http://download.ushahidi.com/">http://download.ushahidi.com</a>',
+    'upgrade_text_3' => 'Шаг 2: Используя telnet, ftp, ssh или любые другие удобные для вас средства (в зависимости от ОС, где установлен ваш веб-сервер), замените новыми версиями всё содержимое сайта, КРОМЕ:',
+    'upgrade_text_4' => 'Шаг 3: Используя любой MySQL-клиент, выполните скрипт <code>upgrade.sql</code>, который обновит необходимые таблицы базы данных',
+    'upgrade_text_5' => 'Для автоматического обновления нажмите кнопку ниже',
     'upgrading' => 'Обновляется'
 );

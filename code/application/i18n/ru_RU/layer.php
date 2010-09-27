@@ -18,7 +18,7 @@ $lang = array
 	'layer_color' => array
 	(
 		'required'		=> 'Введите цвет.',
-		'length'		=> 'Длина цвета должна содержать 6 знаков.',
+		'length'		=> 'Цвет должен содержать не более 6 символов.',
 	),
 	
 	'layer_file' => array

@@ -24,7 +24,7 @@ $lang = array
 	'category_color' => array
 	(
 		'required'		=> 'Введите цвет.',
-		'length'		=> 'Длина цвета должна содержать 6 знаков.',
+		'length'		=> 'Цвет должен содержать не более 6 символов.',
 	),
 	
 	'category_image' => array

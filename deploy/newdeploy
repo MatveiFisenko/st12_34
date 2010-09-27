@@ -115,11 +115,14 @@ if ((depltype & FLG_CODE)) ; then
 
 	scp -C $verbose -P $server_port -r /tmp/src.$$/.htaccess $USER@${destination}:/var/www/1234/
 
+	#because /media/uploads/files are under apache user
+	set +e
 	ssh $verbose -p $server_port $USER@${destination} "$findCommand | xargs -0 chown $silent -R $USER:users"
 
 	ssh $verbose -p $server_port $USER@${destination} "$findCommand | xargs -0 chmod $silent -R u=rwX,g=rwX,o=rwX"
 
 	ssh $verbose -p $server_port $USER@${destination} chmod $silent -R u=rwX,g=rwX,o=rwX /var/www/1234/*
+	set -e
 
 	rm -rf /tmp/src.$$
 

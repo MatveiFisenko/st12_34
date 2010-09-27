@@ -18,7 +18,7 @@
 					<div class="content-bg">
 						<!-- start reports block -->
 						<div class="big-block">
-							<h1>Как помочь <?php echo $pagination_stats; ?></h1>
+							<h1>Дружественные сайты <?php echo $pagination_stats; ?></h1>
 							<div class="org_rowtitle">
 								<div class="org_col1">
 									<strong>Организация</strong>

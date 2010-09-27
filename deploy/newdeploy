@@ -18,6 +18,7 @@ depltype=0
 FLG_CODE=1
 FLG_SQL=4
 FLG_SQL_MIG=8
+FLG_SQL_MIG_S=16
 
 #Parsing command line options
 while getopts "hvr:t:d:p:" opt; do
@@ -33,6 +34,7 @@ while getopts "hvr:t:d:p:" opt; do
 				"	\E[32mcode\E[30m		Deploy main code.\n" \
 				"	\E[32msql\E[30m		Warning! Drop database and recreate it from scratch.\n" \
 				"	\E[32msql_mig\E[30m		Apply SQL migrations. Warning! Current state is unknown.\n" \
+				"	\E[32msql_mig_s\E[30m		Apply one SQL migration. Warning! Current state is unknown.\n" \
 			"-d \E[31mServer name\E[30m		Deploy to server name.\n" \
 			"-p \E[31mServer port\E[30m		Remote server ssh port\n"
 		exit 0
@@ -66,6 +68,7 @@ while getopts "hvr:t:d:p:" opt; do
 				code)	 	((depltype|=FLG_CODE)) ;;
 				sql)		((depltype|=FLG_SQL)) ;;
 				sql_mig)	((depltype|=FLG_SQL_MIG)) ;;
+				sql_mig_s)	((depltype|=FLG_SQL_MIG_S)) ;;
 
 			esac
 		;;
@@ -169,5 +172,26 @@ if (( depltype & FLG_SQL_MIG )); then
 	rm -rf /tmp/deppatchsql.$$
 fi
 #End sql_mig deployment.
+
+#Begin sql_mig_s deployment.
+if (( depltype & FLG_SQL_MIG_S )); then
+
+	mkdir /tmp/deppatchsql.$$
+
+	cd /tmp/deppatchsql.$$
+
+	svn export ${repo_path}trunk/deploy/db/migrations . --force $quiet
+
+	read -e -s -p "Enter sql root password (server side): " root_pass;
+
+	read -e -s -p "Enter migration number to deploy: " migration_number;
+
+	db_name=ushahidi
+
+	cat /tmp/deppatchsql.$$/$migration_number*.sql | ssh $verbose $USER@${destination} mysql -uroot -p$root_pass $db_name --default-character-set=utf8
+
+	rm -rf /tmp/deppatchsql.$$
+fi
+#End sql_mig_s deployment.
 
 echo "Success!"

@@ -280,7 +280,6 @@ class Reports_Controller extends Admin_Controller
 	        'incident_date'  => '',
 	        'incident_hour'      => '',
 			'incident_minute'      => '',
-			'incident_ampm' => '',
 			'latitude' => '',
 			'longitude' => '',
 			'location_name' => '',
@@ -322,7 +321,6 @@ class Reports_Controller extends Admin_Controller
 		$form['incident_date'] = date("m/d/Y",time());
 		$form['incident_hour'] = date('g');
 		$form['incident_minute'] = date('i');
-		$form['incident_ampm'] = date('a');
 		// initialize custom field array
 		$form['custom_field'] = $this->_get_custom_form_fields($id,'',true);
 
@@ -337,7 +335,6 @@ class Reports_Controller extends Admin_Controller
 		// Time formatting
 	    $this->template->content->hour_array = $this->_hour_array();
 	    $this->template->content->minute_array = $this->_minute_array();
-        $this->template->content->ampm_array = $this->_ampm_array();
 
         // Get Countries
 		$countries = array();
@@ -392,9 +389,8 @@ class Reports_Controller extends Admin_Controller
 				}
 				$form['incident_description'] = $incident_description;
 				$form['incident_date'] = date('m/d/Y', strtotime($message->message_date));
-				$form['incident_hour'] = date('h', strtotime($message->message_date));
+				$form['incident_hour'] = date('H', strtotime($message->message_date));
 				$form['incident_minute'] = date('i', strtotime($message->message_date));
-				$form['incident_ampm'] = date('a', strtotime($message->message_date));
 				$form['person_first'] = $message->reporter->reporter_first;
 				$form['person_last'] = $message->reporter->reporter_last;
 
@@ -430,9 +426,8 @@ class Reports_Controller extends Admin_Controller
 				$form['incident_title'] = $feed_item->item_title;
 				$form['incident_description'] = $feed_item->item_description;
 				$form['incident_date'] = date('m/d/Y', strtotime($feed_item->item_date));
-				$form['incident_hour'] = date('h', strtotime($feed_item->item_date));
+				$form['incident_hour'] = date('H', strtotime($feed_item->item_date));
 				$form['incident_minute'] = date('i', strtotime($feed_item->item_date));
-				$form['incident_ampm'] = date('a', strtotime($feed_item->item_date));
 
 				// News Link
 				$form['incident_news'][0] = $feed_item->item_link;
@@ -468,12 +463,8 @@ class Reports_Controller extends Admin_Controller
 			$post->add_rules('incident_title','required', 'length[3,200]');
 			$post->add_rules('incident_description','required');
 			$post->add_rules('incident_date','required','date_mmddyyyy');
-			$post->add_rules('incident_hour','required','between[1,12]');
+			$post->add_rules('incident_hour','required','between[0,23]');
 			$post->add_rules('incident_minute','required','between[0,59]');
-			if ($_POST['incident_ampm'] != "am" && $_POST['incident_ampm'] != "pm")
-			{
-				$post->add_error('incident_ampm','values');
-	        }
 			$post->add_rules('latitude','required','between[-90,90]');		// Validate for maximum and minimum latitude values
 			$post->add_rules('longitude','required','between[-180,180]');	// Validate for maximum and minimum longitude values
 			$post->add_rules('location_name','required', 'length[3,200]');
@@ -577,7 +568,7 @@ class Reports_Controller extends Admin_Controller
 				// where the $_POST['date'] is a value posted by form in mm/dd/yyyy format
 					$incident_date=$incident_date[2]."-".$incident_date[0]."-".$incident_date[1];
 
-				$incident_time = $post->incident_hour . ":" . $post->incident_minute . ":00 " . $post->incident_ampm;
+				$incident_time = $post->incident_hour . ":" . $post->incident_minute . ":00";
 				$incident->incident_date = date( "Y-m-d H:i:s", strtotime($incident_date . " " . $incident_time) );
 				// Is this new or edit?
 				if ($id)	// edit
@@ -845,9 +836,8 @@ class Reports_Controller extends Admin_Controller
 						'incident_title' => $incident->incident_title,
 						'incident_description' => $incident->incident_description,
 						'incident_date' => date('m/d/Y', strtotime($incident->incident_date)),
-						'incident_hour' => date('h', strtotime($incident->incident_date)),
+						'incident_hour' => date('H', strtotime($incident->incident_date)),
 						'incident_minute' => date('i', strtotime($incident->incident_date)),
-						'incident_ampm' => date('A', strtotime($incident->incident_date)),
 						'latitude' => $incident->location->latitude,
 						'longitude' => $incident->location->longitude,
 						'location_name' => $incident->location->location_name,
@@ -1421,7 +1411,7 @@ class Reports_Controller extends Admin_Controller
     // Time functions
     private function _hour_array()
     {
-        for ($i=1; $i <= 12 ; $i++)
+        for ($i=0; $i <= 23 ; $i++)
         {
 		    $hour_array[sprintf("%02d", $i)] = sprintf("%02d", $i); 	// Add Leading Zero
 		}

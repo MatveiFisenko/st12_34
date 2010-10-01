@@ -105,7 +105,7 @@
 								<div class="row" id="datetime_default">
 									<h4><a href="#" id="date_toggle" class="new-cat"><?php echo Kohana::lang('ui_main.modify_date');?></a><?php echo Kohana::lang('ui_main.modify_date');?>: 
 									<?php echo Kohana::lang('ui_main.today_at').' '.$form['incident_hour']
-										.":".$form['incident_minute']." ".$form['incident_ampm']; ?></h4>
+										.":".$form['incident_minute']; ?></h4>
 								</div>
 								<?php
 							}
@@ -133,11 +133,7 @@
 									form::dropdown('incident_minute',
 									$minute_array, $form['incident_minute']) .
 									'</span>';
-									print '<span class="dots">:</span>';
 									
-									print '<span class="sel-holder">' .
-									form::dropdown('incident_ampm', $ampm_array,
-									$form['incident_ampm']) . '</span>';
 									?>
 								</div>
 							</div>

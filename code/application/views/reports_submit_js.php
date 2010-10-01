@@ -78,9 +78,6 @@
 						required: true,
 						range: [0,60]
 					},
-					incident_ampm: {
-						required: true
-					},
 					"incident_category[]": {
 						required: true,
 						minlength: 1
@@ -141,9 +138,6 @@
 					incident_minute: {
 						required: "Пожалуйста, укажите минуты",
 						range: "Пожалуйста, укажите правильные минуты"
-					},
-					incident_ampm: {
-						required: "Please enter either AM or PM"
 					},
 					"incident_category[]": {
 						required: "Пожалуйста, выберите по меньшей мере одну категорию",

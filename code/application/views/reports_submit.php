@@ -55,7 +55,7 @@
 								<div class="report_row" id="datetime_default">
 									<h4><a href="#" id="date_toggle" class="show-more"><?php echo Kohana::lang('ui_main.modify_date'); ?></a><?php echo Kohana::lang('ui_main.date_time'); ?>:
 										<?php echo Kohana::lang('ui_main.today_at')." "."<span id='current_time'>".$form['incident_hour']
-											.":".$form['incident_minute']." ".$form['incident_ampm']."</span>"; ?></h4>
+											.":".$form['incident_minute']."</span>"; ?></h4>
 								</div>
 								<div class="report_row hide" id="datetime_edit">
 									<div class="date-box">
@@ -74,18 +74,15 @@
 									<div class="time">
 										<h4><?php echo Kohana::lang('ui_main.reports_time'); ?></h4>
 										<?php
-											for ($i=1; $i <= 12 ; $i++) {
+											for ($i=0; $i <= 23 ; $i++) {
 												$hour_array[sprintf("%02d", $i)] = sprintf("%02d", $i);	 // Add Leading Zero
 											}
 											for ($j=0; $j <= 59 ; $j++) {
 												$minute_array[sprintf("%02d", $j)] = sprintf("%02d", $j);	// Add Leading Zero
 											}
-											$ampm_array = array('pm'=>'pm','am'=>'am');
 											print form::dropdown('incident_hour',$hour_array,$form['incident_hour']);
 											print '<span class="dots">:</span>';
 											print form::dropdown('incident_minute',$minute_array,$form['incident_minute']);
-											print '<span class="dots">:</span>';
-											print form::dropdown('incident_ampm',$ampm_array,$form['incident_ampm']);
 										?>
 									</div>
 									<div style="clear:both; display:block;" id="incident_date_time"></div>
@@ -94,15 +91,11 @@
 var now = new Date();
 var h=now.getHours();
 var m=now.getMinutes();
-var ampm="am";
-if (h>=12) ampm="pm";
-if (h>12) h-=12;
 var hs=(h<10)?("0"+h):h;
 var ms=(m<10)?("0"+m):m;
-$("#current_time").text(hs+":"+ms+" "+ampm);
+$("#current_time").text(hs+":"+ms);
 $("#incident_hour option[value='"+hs+"']").attr("selected","true");
 $("#incident_minute option[value='"+ms+"']").attr("selected","true");
-$("#incident_ampm option[value='"+ampm+"']").attr("selected","true");
 
 										</script>
 

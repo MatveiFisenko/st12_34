@@ -72,7 +72,7 @@
 					},
 					incident_hour: {
 						required: true,
-						range: [1,12]
+						range: [0,23]
 					},
 					incident_minute: {
 						required: true,

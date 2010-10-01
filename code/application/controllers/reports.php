@@ -213,7 +213,6 @@ class Reports_Controller extends Main_Controller {
 			'incident_date' => '',
 			'incident_hour' => '',
 			'incident_minute' => '',
-			'incident_ampm' => '',
 			'latitude' => '',
 			'longitude' => '',
 			'location_name' => '',
@@ -253,7 +252,6 @@ class Reports_Controller extends Main_Controller {
 		$form['incident_date'] = date("m/d/Y",time());
 		$form['incident_hour'] = "12";
 		$form['incident_minute'] = "00";
-		$form['incident_ampm'] = "pm";
 		// initialize custom field array
 		$form['custom_field'] = $this->_get_custom_form_fields($id,'',true);
 		//GET custom forms
@@ -278,13 +276,8 @@ class Reports_Controller extends Main_Controller {
 			$post->add_rules('incident_title', 'required', 'length[3,200]');
 			$post->add_rules('incident_description', 'required');
 			$post->add_rules('incident_date', 'required', 'date_mmddyyyy');
-			$post->add_rules('incident_hour', 'required', 'between[1,12]');
+			$post->add_rules('incident_hour', 'required', 'between[0,23]');
 			$post->add_rules('incident_minute', 'required', 'between[0,59]');
-
-			if ($_POST['incident_ampm'] != "am" && $_POST['incident_ampm'] != "pm")
-			{
-				$post->add_error('incident_ampm','values');
-			}
 
 			// Validate for maximum and minimum latitude values
 			$post->add_rules('latitude', 'required', 'between[-90,90]');
@@ -385,7 +378,7 @@ class Reports_Controller extends Main_Controller {
 				$incident_date=$incident_date[2]."-".$incident_date[0]."-".$incident_date[1];
 				$incident_time = $post->incident_hour
 					.":".$post->incident_minute
-					.":00 ".$post->incident_ampm;
+					.":00 ";
 				$incident->incident_date = date( "Y-m-d H:i:s", strtotime($incident_date . " " . $incident_time) );
 				$incident->incident_dateadd = date("Y-m-d H:i:s",time());
 				$incident->save();

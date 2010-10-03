@@ -134,6 +134,7 @@ $lang = array(
 	'filters' => 'Filters',
 	'find' => 'Find',
 	'find_location' => 'Find Location',
+	'find_location_description' => '* If you can\'t find your location, please click on the map to pinpoint the correct location.',
 	'first_name' => 'First Name',
 	'forgot_password' => 'Forgot your password?',
 	'form' => 'Form',

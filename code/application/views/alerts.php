@@ -46,6 +46,9 @@
 									<div class="map-holder" id="divMap"></div>
 								</div>
 								<div class="report-find-location">
+								    <div class="alert_radius_title">
+								      <?php echo Kohana::lang('ui_main.alert_radius_title') ?>
+								    </div>
 									<div class="alert_slider">
 										<select name="alert_radius" id="alert_radius">
 											<option value="1">1 KM</option>
@@ -56,11 +59,16 @@
 											<option value="100">100 KM</option>
 										</select>
 									</div>
-									<?php print form::input('location_find', '', ' title="City, State and/or Country" class="findtext"'); ?>
-									<div style="float:left;margin:9px 0 0 5px;"><input type="button" name="button" id="button" 
-									     value="<?php echo Kohana::lang('ui_main.find_location') ?>" class="btn_find" /></div>
-									<div id="find_loading" class="report-find-loading"></div>
-									<div style="clear:both;" id="find_text"><?php echo Kohana::lang('ui_main.find_location_description') ?></div>
+									<div class="find_location_section">
+									   <div><?php echo Kohana::lang('ui_main.find_location_title') ?></div>
+										<?php print form::input('location_find', '', ' title="' . Kohana::lang('ui_main.find_location_hint') . '" class="findtext"'); ?>
+										<div style="float:left;margin:5px 0 0 5px;"><input type="button" name="button" id="button" 
+											 value="<?php echo Kohana::lang('ui_main.find_location') ?>" class="btn_find" /></div>
+										<div id="find_loading" class="report-find-loading"></div>
+										<div style="clear:both;" id="find_text">
+											<?php echo Kohana::lang('ui_main.find_location_description') ?>
+										</div>
+									 </div>
 								</div>
 							</div>
 							<input type="hidden" id="alert_lat" name="alert_lat" value="<?php echo $form['alert_lat']; ?>">

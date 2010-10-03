@@ -1419,8 +1419,11 @@ a.rem { background:url(../img/icon-minus.gif) no-repeat;}
 	font-size:90%;
 	color:#666;
 }
-.report-find-location input.findtext {
+.report-find-location .find_location_section {
 	margin-top:9px;
+}
+.report-find-location input.findtext {
+	margin-top: 5px;
 	padding:5px 3px 0 3px;
 	height:24px;
 	float:left;
@@ -1430,10 +1433,13 @@ a.rem { background:url(../img/icon-minus.gif) no-repeat;}
 	width:250px;
 	border:1px #ccc solid;
 }
+#find_text {
+	padding-top:10px;
+}
 .report-find-loading{
 	float:left;
 	height:31px;
-	margin:9px 0 0 3px;
+	margin:5px 0 0 3px;
 }
 a.show-more {
 	text-decoration:underline;
@@ -1587,6 +1593,7 @@ a.show-more {
 	height:325px;
 }
 .step-1 .alert_slider{
+  margin-top: 5px;
 	padding:15px 15px 35px 15px;
 	border:1px solid #ccc;
 	background-color:#fff;

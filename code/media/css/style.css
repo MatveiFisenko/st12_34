@@ -238,6 +238,11 @@ div#searchbox{
 /*    width: 290px;*/
 }
 
+div#searchbox .addthis_custom_style {
+  float: left;
+  padding-top: 10px;
+}
+
 /* languages */
 div.language-box{
     padding: 0px;
@@ -281,7 +286,7 @@ div.language-box select{
 div.search-form{
     padding: 0px;
     margin: 10px 15px 10px 5px;
-    float: left;
+    float: right;
 }
 
 div.search-form ul{

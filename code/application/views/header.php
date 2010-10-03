@@ -129,7 +129,15 @@
 
 			<!-- searchbox -->
 			<div id="searchbox">
-				<a class="share addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;pub=xa-4aee423643f8276e">Share</a>
+				<div class="addthis_toolbox addthis_default_style addthis_custom_style">
+				    <a class="addthis_button_vk" title="Опубликовать ВКонтакте"></a>
+				    <a class="addthis_button_twitter" title="Опубликовать в Tweeter"></a>
+				    <a class="addthis_button_facebook" title="Опубликовать в Facebook"></a>
+				    <a class="addthis_button_livejournal" title="Опубликовать в LiveJournal"></a>
+				    <span class="addthis_separator">|</span>
+				    <a class="addthis_button_expanded" 
+						title="<?php echo Kohana::lang('ui_main.more_addthis_hint'); ?>"><?php echo Kohana::lang('ui_main.more_addthis'); ?></a>
+				</div>
 
 				<!-- searchform -->
 				<div class="search-form">
@@ -142,6 +150,7 @@
 				</div>
 				<!-- / searchform -->
 
+				<div style="clear:both"></div>
 			</div>
 			<!-- / searchbox -->
 

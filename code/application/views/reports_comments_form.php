@@ -52,10 +52,22 @@
 		    <?php if($form['comment_type'] != 'official') print 'style="display:none"' ?> >
 		  <div class="report_row">
 			  <strong>Направление:</strong><br />
-			  <?php print form::dropdown('comment_direction',
-			                             array('outbound' => 'Отправлен запрос', 'inbound' => 'Получен ответ'),
-			                             $form['comment_direction'],
-			                             'style="width:15em" onchange="OnDirectionChange()"'); ?>
+			  <?php 
+                $types = array('to_gibdd' => 'Заявление в ГИБДД');
+                if($gibdd_sent == 1)
+                {
+					$types['from_gibdd'] = 'Ответ из ГИБДД';
+					$types['to_prokuratura'] = 'Заявление в прокуратуру';
+                } 
+				if($prokuratura_sent == 1)
+				{
+					$types['from_prokuratura'] = 'Ответ из прокуратуры';
+				}
+		  		print form::dropdown('comment_official_type',
+									$types,	
+									$form['comment_official_type'],
+									'style="width:15em" onchange="OnDirectionChange()"'); 
+			   ?>
 			</div>
 		  <div class="report_row">
 			  <strong>Скан (gif, png, jpg):</strong><br />
@@ -90,11 +102,22 @@
   };
 
   var OnDirectionChange = function() {
-    if ($('#comment_direction')[0].selectedIndex == 0) {
-      $('#comment_description')[0].value = 'Официальная переписка - отправлен запрос.';
-    } else {
-      $('#comment_description')[0].value = 'Официальная переписка - получен ответ.';
+  	var d = '';
+    switch($('#comment_official_type')[0].value) {
+    	case 'from_gibdd':
+    	  d = 'Ответ из ГИБДД';
+    	  break;
+    	case 'to_gibdd':
+    	  d = 'Заявление в ГИБДД';
+    	  break;
+    	case 'from_prokuratura':
+    	  d = 'Ответ из прокуратуры';
+    	  break;
+    	case 'to_prokuratura':
+    	  d = 'Заявление в прокуратуру';
+    	  break;
     }
+    $('#comment_description')[0].value = d;
   };
 
 </script>

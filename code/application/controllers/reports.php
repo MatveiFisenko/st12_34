@@ -575,7 +575,7 @@ class Reports_Controller extends Main_Controller {
 			(
 				'comment_author' => '',
 				'comment_description' => '',
-				'comment_direction' => '',
+				'comment_official_type' => '',
 				'comment_email' => '',
 				'comment_ip' => '',
 				'comment_scan' => '',
@@ -603,13 +603,13 @@ class Reports_Controller extends Main_Controller {
 
 				$post->add_rules('comment_author', 'required', 'length[3,100]');
 				$post->add_rules('comment_description', 'required');
-				$post->add_rules('comment_direction', 'required');
+				$post->add_rules('comment_official_type', 'required');
 				$post->add_rules('comment_email', 'required','email', 'length[4,100]');
 				if ($post->comment_type == 'official')
 				{
-  				$post->add_rules('comment_scan', 'upload::valid', 'upload::required',
-  				                 'upload::type[gif,jpg,png]', 'upload::size[10M]');
-  			}
+  					$post->add_rules('comment_scan', 'upload::valid', 'upload::required',
+  				    	             'upload::type[gif,jpg,png]', 'upload::size[10M]');
+  				}
 				$post->add_rules('comment_type', 'required');
 				$post->add_rules('captcha', 'required', 'Captcha::valid');
 
@@ -634,7 +634,7 @@ class Reports_Controller extends Main_Controller {
 							'body' => $post->comment_description,
 							'user_ip' => $_SERVER['REMOTE_ADDR'],
 							'type' => $post->comment_type,
-							'direction' => $post->comment_direction,
+							'official_type' => $post->comment_official_type,
 							'scan' => $post->comment_scan
 						);
 
@@ -685,7 +685,7 @@ class Reports_Controller extends Main_Controller {
 
 					$comment = new Comment_Model();
 
-          // Process scan image.
+				 // Process scan image.
   				$scan_filenames = upload::save('comment_scan');
   				$new_scan_filename = '';
 					if (count($scan_filenames) > 0) {
@@ -712,8 +712,21 @@ class Reports_Controller extends Main_Controller {
 					$comment->comment_ip = $_SERVER['REMOTE_ADDR'];
 					$comment->comment_date = date("Y-m-d H:i:s",time());
 					$comment->comment_type = $post->comment_type;
-  			  $comment->comment_scan = $new_scan_filename;
-					$comment->comment_direction = $post->comment_direction;
+					$comment->comment_scan = $new_scan_filename;
+					$comment->comment_official_type = $post->comment_official_type;
+					if($comment->comment_type == 'official')
+					{					
+						switch ($comment->comment_official_type) 
+						{
+							case 'to_gibdd':
+								$incident->gibdd_sent = 1;
+								$incident->save();
+								break;
+							case 'to_prokuratura':
+								$incident->prokuratura_sent = 1;
+								$incident->save();
+						}
+					}
 
 					// Activate comment for now
 
@@ -879,6 +892,8 @@ class Reports_Controller extends Main_Controller {
 			$this->template->content->comments_form->captcha = $captcha;
 			$this->template->content->comments_form->errors = $errors;
 			$this->template->content->comments_form->form_error = $form_error;
+			$this->template->content->comments_form->gibdd_sent = $incident->gibdd_sent;
+			$this->template->content->comments_form->prokuratura_sent = $incident->prokuratura_sent;
 		}
 
 		// If the Admin is Logged in - Allow for an edit link

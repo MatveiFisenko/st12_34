@@ -715,17 +715,34 @@ class Reports_Controller extends Main_Controller {
 					$comment->comment_scan = $new_scan_filename;
 					$comment->comment_official_type = $post->comment_official_type;
 					if($comment->comment_type == 'official')
-					{					
+					{
+						$changed = False;					
 						switch ($comment->comment_official_type) 
 						{
 							case 'to_gibdd':
-								$incident->gibdd_sent = 1;
-								$incident->save();
+							    if ($incident->gibdd_state == 'not_sent')
+							    {
+							    	$incident->gibdd_state = 'sent';
+							    	$changed = True;	
+							    }
 								break;
 							case 'to_prokuratura':
-								$incident->prokuratura_sent = 1;
-								$incident->save();
+							    if ($incident->prokuratura_state == 'not_sent')
+							    {
+							    	$incident->prokuratura_state = 'sent';
+							    	$changed = True;	
+							    }
+								break;
+							case 'from_gibdd':
+								$incident->gibdd_state = 'received';
+								$changed = True;	
+								break;
+							case 'from_prokuratura':
+								$incident->prokuratura_state = 'received';
+							    $changed = True;	
+								break;
 						}
+						if ($changed) $incident->save();
 					}
 
 					// Activate comment for now
@@ -892,8 +909,8 @@ class Reports_Controller extends Main_Controller {
 			$this->template->content->comments_form->captcha = $captcha;
 			$this->template->content->comments_form->errors = $errors;
 			$this->template->content->comments_form->form_error = $form_error;
-			$this->template->content->comments_form->gibdd_sent = $incident->gibdd_sent;
-			$this->template->content->comments_form->prokuratura_sent = $incident->prokuratura_sent;
+			$this->template->content->comments_form->gibdd_sent = ($incident->gibdd_state != 'not_sent');
+			$this->template->content->comments_form->prokuratura_sent = ($incident->prokuratura_state != 'not_sent');
 		}
 
 		// If the Admin is Logged in - Allow for an edit link

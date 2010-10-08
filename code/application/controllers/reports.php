@@ -716,33 +716,32 @@ class Reports_Controller extends Main_Controller {
 					$comment->comment_official_type = $post->comment_official_type;
 					if($comment->comment_type == 'official')
 					{
-						$changed = False;					
 						switch ($comment->comment_official_type) 
 						{
 							case 'to_gibdd':
 							    if ($incident->gibdd_state == 'not_sent')
 							    {
 							    	$incident->gibdd_state = 'sent';
-							    	$changed = True;	
+							    	$incident->save();	
 							    }
+								$comment->comment_gibdd_reminder_date = strftime( "%Y-%m-%d", strtotime("+45 days")); 
 								break;
 							case 'to_prokuratura':
 							    if ($incident->prokuratura_state == 'not_sent')
 							    {
 							    	$incident->prokuratura_state = 'sent';
-							    	$changed = True;	
+							    	$incident->save();	
 							    }
 								break;
 							case 'from_gibdd':
 								$incident->gibdd_state = 'received';
-								$changed = True;	
+								$incident->save();
 								break;
 							case 'from_prokuratura':
 								$incident->prokuratura_state = 'received';
-							    $changed = True;	
+							    $incident->save();	
 								break;
 						}
-						if ($changed) $incident->save();
 					}
 
 					// Activate comment for now

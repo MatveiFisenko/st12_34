@@ -1,0 +1,1 @@
+ALTER TABLE incident ADD COLUMN pit_resolved BOOLEAN DEFAULT 0;

@@ -84,7 +84,7 @@ body#page{
 /* wrapper setup */
 div.rapidxwpr{
     margin: auto;
-    width: 960px;
+    width: 1024px;
 }
 
 /* header */
@@ -833,6 +833,7 @@ div.incident-notation{
 
 div.incident-notation ul{
     list-style: none;
+    float: right;
 }
 
 div.incident-notation ul li{
@@ -1480,15 +1481,17 @@ a.show-more {
 .report_col3,
 .report_col4,
 .report_col5,
-.report_col6{
+.report_col6,
+.report_col7,
+.report_col8{
 	float:left;
-	padding-right:15px;
+	padding-right:8px;
 }
 .report_col1{
 	width:85px;
 }
 .report_col2{
-	width:320px;
+	width:240px;
 }
 .report_col3{
 	width:85px;
@@ -1499,12 +1502,20 @@ a.show-more {
 	text-align:center;
 }
 .report_col5{
-	width:105px;
+	width:85px;
 	text-align:center;
 }
 .report_col6{
-	width:105px;
+	width:95px;
 	text-align:center;
+}
+.report_col7{
+	width:85px;
+	text-align:center;
+}
+.report_col8{
+	width:105px;
+	text-align:left;
 }
 .report_row1, .report_row2, .org_row1, .org_row2{
 	clear:both;

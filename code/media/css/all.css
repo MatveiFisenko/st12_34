@@ -6,7 +6,7 @@ body {
 }
 #main {
 	margin:0 auto;
-	width:960px;
+	width:1024px;
 	clear:both;
 	overflow:hidden;
 }
@@ -19,7 +19,7 @@ a:visited{
 /*-----header-----*/
 #header {
 	clear:both;
-	width:960px;
+	width:1024px;
 	height:100px;
 	overflow:hidden;
 	position:relative;
@@ -118,7 +118,7 @@ a:visited{
 /*-----content-----*/
 #content {
 	clear:both;
-	width:960px;
+	width:1024px;
 	overflow:hidden;
 	background:#cc9 url(../img/content-top.gif) no-repeat;
 }
@@ -889,7 +889,7 @@ a:visited{
 #footer {
   background:#A8A8A8 url(../images/footer-bg2.jpg) no-repeat scroll 50% -5px;
 	clear:both;
-	width:960px;
+	width:1024px;
 	padding:20px 0 0;
 	margin:0 0 30px;
 	overflow:hidden;
@@ -1126,15 +1126,17 @@ a.show-more:hover{ text-decoration:none;}
 .report_col3,
 .report_col4,
 .report_col5,
-.report_col6,{
+.report_col6,
+.report_col7,
+.report_col8{
 	float:left;
-	padding-right:15px;
+	padding-right:8px;
 }
 .report_col1{
 	width:85px;
 }
 .report_col2{
-	width:320px;
+	width:240px;
 }
 .report_col3{
 	width:85px;
@@ -1145,12 +1147,20 @@ a.show-more:hover{ text-decoration:none;}
 	text-align:center;
 }
 .report_col5{
-	width:105px;
+	width:85px;
 	text-align:center;
 }
 .report_col6{
 	width:105px;
 	text-align:center;
+}
+.report_col7{
+	width:85px;
+	text-align:center;
+}
+.report_col8{
+  width:105px;
+  text-align:left;
 }
 .report_row1, .report_row2, .org_row1, .org_row2{
 	clear:both;

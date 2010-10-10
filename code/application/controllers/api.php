@@ -504,6 +504,9 @@ class Api_Controller extends Controller {
 				."i.pit_length AS pitlength "
 				."i.pit_width AS pitwidth "
 				."i.pit_depth AS pitdepth "
+				."i.pit_resolved AS pit_resolved "
+				."i.gibdd_state AS gibdd_state "
+				."i.prokuratura_state AS prokuratura_state "
 				."FROM ".$this->table_prefix."incident AS i "
                 ."INNER JOIN ".$this->table_prefix."location as l on l.id = i.location_id "
                 ."$where $limit";

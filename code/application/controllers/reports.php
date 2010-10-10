@@ -50,9 +50,12 @@ class Reports_Controller extends Main_Controller {
 		);
 		if ( isset($_POST['pit_location']) ) $form['pit_location'] = $_POST['pit_location'];
 		if ( isset($_POST['sort_key']) &&
-				preg_match("/^(incident_(?:verified|date)|location_name|pit_dimension)_(asc|desc)$/",$_POST['sort_key'],$sort) ) {
+				preg_match("/^(incident_(?:verified|date|correspondence)|location_name|pit_(?:resolved|dimension))_(asc|desc)$/",
+						$_POST['sort_key'],$sort) ) {
 			if($sort[1] == "pit_dimension")
 				$orderby = "pit_depth ".$sort[2].", pit_width ".$sort[2].", pit_length ".$sort[2];
+			elseif($sort[1] == "incident_correspondence")
+				$orderby = "gibdd_state ".$sort[2].", prokuratura_state ".$sort[2];
 			else
 				$orderby = $sort[1]." ".$sort[2];
 			$form['sort_key'] = $_POST['sort_key'];

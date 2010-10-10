@@ -93,6 +93,18 @@
 										<?php if ( isset($dir['pit_dimension']) ) echo $dir['pit_dimension']; ?>
 									</a>
 								</div>
+								<div class="report_col7">
+									<a href="#" onclick="switchSort('pit_resolved'); return(-1)">
+										<strong><?php echo strtoupper(Kohana::lang('ui_main.pit_resolved'));?></strong>
+										<?php if ( isset($dir['pit_resolved']) ) echo $dir['pit_resolved']; ?>
+									</a>
+								</div>
+								<div class="report_col8">
+									<a href="#" onclick="switchSort('incident_correspondence'); return(-1)">
+										<strong><?php echo strtoupper(Kohana::lang('ui_main.incident_correspondence'));?></strong>
+										<?php if ( isset($dir['incident_correspondence']) ) echo $dir['incident_correspondence']; ?>
+									</a>
+								</div>
 							</div>
 							<?php
 							foreach ($incidents as $incident)
@@ -107,14 +119,22 @@
 								$incident_description = text::limit_chars($incident_description, 150, "...", true);
 								$incident_date = date('Y-m-d', strtotime($incident->incident_date));
 								$incident_location = $incident->location_name;
-								$incident_verified = $incident->incident_verified;
-								if ($incident_verified)
-								{
-									$incident_verified = '<span class="report_yes">ДА</span>';
-								}else{
-									$incident_verified = '<span class="report_no">НЕТ</span>';
-								}
+								$incident_verified = $incident->incident_verified ? 
+												'<span class="report_yes">'.strtoupper(Kohana::lang('ui_main.yes')).'</span>' : 
+												'<span class="report_no">'.strtoupper(Kohana::lang('ui_main.no')).'</span>';
 								$incident_dimension = $incident->pit_length."x".$incident->pit_width."x".$incident->pit_depth;
+								$incident_resolved = $incident->pit_resolved ? 
+												'<span class="report_yes">'.strtoupper(Kohana::lang('ui_main.yes')).'</span>' : 
+												'<span class="report_no">'.strtoupper(Kohana::lang('ui_main.no')).'</span>';
+								$incident_correspondence = $incident->gibdd_state == 'not_sent' ? strtoupper(Kohana::lang('ui_main.gibdd_not_sent')) :
+																					 ($incident->gibdd_state == 'sent'     ? strtoupper(Kohana::lang('ui_main.gibdd_sent')) :
+																					 ($incident->gibdd_state == 'received' ? strtoupper(Kohana::lang('ui_main.gibdd_received')) :
+																					 strtoupper(Kohana::lang('ui_main.unknown')))) ;
+								$incident_correspondence .= '<br>';
+								$incident_correspondence .= $incident->prokuratura_state == 'not_sent' ? strtoupper(Kohana::lang('ui_main.prokuratura_not_sent')) :
+																					  ($incident->prokuratura_state == 'sent'     ? strtoupper(Kohana::lang('ui_main.prokuratura_sent')) :
+																					  ($incident->prokuratura_state == 'received' ? strtoupper(Kohana::lang('ui_main.prokuratura_received')) :
+																					  strtoupper(Kohana::lang('ui_main.unknown')))) ;
 							?>
 
 							<div class="report_row1">
@@ -142,6 +162,14 @@
 
 								<div class="report_status report_col6">
 									<?php echo $incident_dimension; ?>
+								</div>
+
+								<div class="report_status report_col7">
+									<?php echo $incident_resolved; ?>
+								</div>
+								
+								<div class="report_status report_col8">
+									<?php echo $incident_correspondence; ?>
 								</div>
 
 							</div>

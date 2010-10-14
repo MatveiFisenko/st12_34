@@ -48,7 +48,8 @@ class Alerts_Controller extends Main_Controller {
 			'alert_email_yes' => '',
 			'alert_lat' => '',
 			'alert_lon' => '',
-			'alert_radius' => ''
+			'alert_radius' => '',
+			'alert_incident_id' => ''
 		);
 
 		// Copy the form as errors, so the errors will be stored with keys
@@ -62,23 +63,42 @@ class Alerts_Controller extends Main_Controller {
 		{
 			// Create a new alert
 			$alert = ORM::factory('alert');			
-			
 			// Test to see if things passed the rule checks
 			if ($alert->validate($post))
 			{
 				// Yes! everything is valid
 				// Save alert and send out confirmation code
 
+                $alert_incident_id = NULL;
+                if ( ! empty($post->alert_incident_id))
+                {
+                	$alert_incident_id = $post->alert_incident_id; 
+                }
+                $alert_lon = NULL;
+                if ( ! empty($post->alert_lon))
+                {
+                	$alert_lon = $post->alert_lon; 
+                }
+                $alert_lat = NULL;
+                if ( ! empty($post->alert_lat))
+                {
+                	$alert_lat = $post->alert_lat; 
+                }
+                $alert_radius = 20;
+                if ( ! empty($post->alert_radius))
+                {
+                	$alert_radius = $post->alert_radius; 
+                }
 				if ( ! empty($post->alert_mobile))
 				{
-					$this->_send_mobile_alert($post->alert_mobile, $post->alert_lon,
-						$post->alert_lat, $post->alert_radius);
+					$this->_set_mobile_alert($post->alert_mobile, $alert_lon,
+						$alert_lat, $alert_radius, $alert_incident_id);
 				}
 
 				if ( ! empty($post->alert_email))
 				{
-					$this->_send_email_alert($post->alert_email, $post->alert_lon,
-					    $post->alert_lat, $post->alert_radius);
+					$this->_set_email_alert($post->alert_email, $alert_lon,
+					    $alert_lat, $alert_radius, $alert_incident_id);
 				}
 
 				$this->session->set('alert_mobile', $post->alert_mobile);
@@ -102,6 +122,20 @@ class Alerts_Controller extends Main_Controller {
 			$form['alert_lat'] = Kohana::config('settings.default_lat');
 			$form['alert_lon'] = Kohana::config('settings.default_lon');
 			$form['alert_radius'] = 20;
+			$get = $this->input->get();
+			if (!empty($get["incident_id"]))
+			{
+ 				$form['alert_incident_id'] = $get["incident_id"];
+			}
+		}
+		
+		if (!empty($form['alert_incident_id']))
+		{
+			$incident = ORM::factory('incident', $form['alert_incident_id']);
+			if ($incident->loaded) 
+			{
+				$form['alert_incident_title'] = $incident->incident_title;
+			}
 		}
 		
 		$this->template->content->form = $form;
@@ -255,7 +289,7 @@ class Alerts_Controller extends Main_Controller {
 	}
 
 
-	private function _send_mobile_alert($alert_mobile, $alert_lon, $alert_lat, $alert_radius)
+	private function _set_mobile_alert($alert_mobile, $alert_lon, $alert_lat, $alert_radius, $alert_incident_id = NULL)
 	{
 		// For Mobile Alerts, Confirmation Code
 		// Should be 6 distinct characters
@@ -301,6 +335,7 @@ class Alerts_Controller extends Main_Controller {
 			$alert->alert_lon = $alert_lon;
 			$alert->alert_lat = $alert_lat;
 			$alert->alert_radius = $alert_radius;
+			$alert->alert_incident_id = $alert_incident_id;
 			$alert->save();
 
 			return TRUE;
@@ -309,7 +344,7 @@ class Alerts_Controller extends Main_Controller {
 		return FALSE;
 	}
 
-	private function _send_email_alert($alert_email, $alert_lon, $alert_lat, $alert_radius)
+	private function _set_email_alert($alert_email, $alert_lon, $alert_lat, $alert_radius, $alert_incident_id = NULL)
 	{
 		// Email Alerts, Confirmation Code
 		$alert_code = text::random('alnum', 20);
@@ -330,6 +365,7 @@ class Alerts_Controller extends Main_Controller {
 			$alert->alert_lon = $alert_lon;
 			$alert->alert_lat = $alert_lat;
 			$alert->alert_radius = $alert_radius;
+			$alert->alert_incident_id = $alert_incident_id;
 			$alert->save();
 			
 			return TRUE;

@@ -1570,6 +1570,12 @@ a.show-more {
 	margin-bottom:15px;
 }
 /*---alerts-block---*/
+.alert-for-incident {
+  font-size: 150%;
+  padding-top: 100px;
+  width: 400px;
+  float: left;
+}
 .step-1 {
 	float:left;
 	width:430px;
@@ -1940,6 +1946,10 @@ ul.pager li a.active {background:#f2f7fa;}
 	padding:0 4px;
 	cursor:pointer;
 	background:url(../img/green-btn-r.gif) no-repeat 100% 0;
+}
+#report_subscription {
+  font-size: 80%;
+  background: #fff;
 }
 .discussion-box-official {
   border:orange 1px solid;

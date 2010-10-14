@@ -30,8 +30,8 @@ class S_Alerts_Controller extends Controller {
 		$unsubscribe_message = Kohana::lang('alerts.unsubscribe')
 								.url::site().'alerts/unsubscribe/';
 
-                $database_settings = kohana::config('database'); //around line 33
-                $this->table_prefix = $database_settings['default']['table_prefix']; //around line 34
+        $database_settings = kohana::config('database'); //around line 33
+        $this->table_prefix = $database_settings['default']['table_prefix']; //around line 34
 
 		$settings = NULL;
 		$sms_from = NULL;
@@ -140,7 +140,7 @@ class S_Alerts_Controller extends Controller {
 						}
 					}
 				}
-			} // End For Each Loop
+			} // End For Each Loop for alerts
 			
 			
 			// Update Incident - All Alerts Have Been Sent!
@@ -150,6 +150,45 @@ class S_Alerts_Controller extends Controller {
 				$update_incident->incident_alert_status = 2;
 				$update_incident->save();
 			}
+		} // End For Each Loop for incidents
+
+		/* Find All Alerts with the following parameters
+		- comment_alert_status = 1 -- Comment has been tagged for sending
+		
+		Comment Alert Statuses - similar to Incident Alert Statuses, see above.
+		*/
+		$comments = $db->query(
+				"SELECT c.id, c.comment_author, c.comment_description, c.comment_email, " .
+				"i.incident_title FROM comment c INNER JOIN incident i ON c.incident_id = i.id WHERE " .
+				"c.comment_alert_status = 1 AND c.comment_active = 1");
+		foreach ($comments as $comment)
+		{
+			// Get all alertees
+			$alertees = ORM::factory('alert')
+				->where('alert_confirmed','1')
+				->find_all();
+			
+			foreach ($alertees as $alertee)
+			{
+				if ($alertee->alert_recipient == $comment->comment_email) continue;  // Don't send own comments.
+				$to = $alertee->alert_recipient;
+				$from = $alerts_email;
+				$subject = "[$site_name] ".$comment->incident_title;
+				$message = "<p>Новый комментарий к яме <b>" . $comment->incident_title . "</b></p><p>" .
+					"Автор: <b>" . $comment->comment_author . "</b></p><p>" . $comment->comment_description
+					. "</p><p>" . $unsubscribe_message . $alertee->alert_code . "</p>";
+	
+				email::send($to, $from, $subject, $message, TRUE);
+			}
+
+            // Mark the comment as processed.
+			$update_comment = ORM::factory('comment', $comment->id);
+			if ($update_comment->loaded)
+			{
+				$update_comment->comment_alert_status = 2;
+				$update_comment->save();
+			}
 		}
+		
 	}
 }

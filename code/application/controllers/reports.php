@@ -746,6 +746,7 @@ class Reports_Controller extends Main_Controller {
 								break;
 						}
 					}
+					$comment->comment_alert_status = 1;
 
 					// Activate comment for now
 

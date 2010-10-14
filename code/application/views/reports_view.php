@@ -67,6 +67,10 @@
 												echo 'Длина: '.$pit_length.' Ширина: '.$pit_width.' Глубина: '.$pit_depth;
 										?>
 									</li>
+									<li>
+										<small>Подписка на комментарии</small>
+										<a href="/alerts?incident_id=<?php echo $incident_id; ?>" id="report_subscription">Подписаться</a>
+									</li>
 								</ul>
 							</div>
 							<div class="location">

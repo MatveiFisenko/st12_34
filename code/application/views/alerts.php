@@ -39,43 +39,53 @@
 							}
 							?>
 							<?php print form::open() ?>
-							<div class="step-1">
-								<h2><?php echo Kohana::lang('ui_main.alerts_step1_select_city'); ?></h2>
-								<div class="map">
-									<p><?php echo Kohana::lang('ui_main.alerts_place_spot'); ?></p>
-									<div class="map-holder" id="divMap"></div>
-								</div>
-								<div class="report-find-location">
-								    <div class="alert_radius_title">
-								      <?php echo Kohana::lang('ui_main.alert_radius_title') ?>
-								    </div>
-									<div class="alert_slider">
-										<select name="alert_radius" id="alert_radius">
-											<option value="1">1 KM</option>
-											<option value="5">5 KM</option>
-											<option value="10">10 KM</option>
-											<option value="20" selected="selected">20 KM</option>
-											<option value="50">50 KM</option>
-											<option value="100">100 KM</option>
-										</select>
+							<?php if (empty($form["alert_incident_id"])) { ?>
+								<div class="step-1">
+									<h2><?php echo Kohana::lang('ui_main.alerts_step1_select_city'); ?></h2>
+									<div class="map">
+										<p><?php echo Kohana::lang('ui_main.alerts_place_spot'); ?></p>
+										<div class="map-holder" id="divMap"></div>
 									</div>
-									<div class="find_location_section">
-									   <div><?php echo Kohana::lang('ui_main.find_location_title') ?></div>
-										<?php print form::input('location_find', '', ' title="' . Kohana::lang('ui_main.find_location_hint') . '" class="findtext"'); ?>
-										<div style="float:left;margin:5px 0 0 5px;"><input type="button" name="button" id="button" 
-											 value="<?php echo Kohana::lang('ui_main.find_location') ?>" class="btn_find" /></div>
-										<div id="find_loading" class="report-find-loading"></div>
-										<div style="clear:both;" id="find_text">
-											<?php echo Kohana::lang('ui_main.find_location_description') ?>
+									<div class="report-find-location">
+									    <div class="alert_radius_title">
+									      <?php echo Kohana::lang('ui_main.alert_radius_title') ?>
+									    </div>
+										<div class="alert_slider">
+											<select name="alert_radius" id="alert_radius">
+												<option value="1">1 KM</option>
+												<option value="5">5 KM</option>
+												<option value="10">10 KM</option>
+												<option value="20" selected="selected">20 KM</option>
+												<option value="50">50 KM</option>
+												<option value="100">100 KM</option>
+											</select>
 										</div>
-									 </div>
+										<div class="find_location_section">
+										   <div><?php echo Kohana::lang('ui_main.find_location_title') ?></div>
+											<?php print form::input('location_find', '', ' title="' . Kohana::lang('ui_main.find_location_hint') . '" class="findtext"'); ?>
+											<div style="float:left;margin:5px 0 0 5px;"><input type="button" name="button" id="button" 
+												 value="<?php echo Kohana::lang('ui_main.find_location') ?>" class="btn_find" /></div>
+											<div id="find_loading" class="report-find-loading"></div>
+											<div style="clear:both;" id="find_text">
+												<?php echo Kohana::lang('ui_main.find_location_description') ?>
+											</div>
+										 </div>
+									</div>
 								</div>
-							</div>
-							<input type="hidden" id="alert_lat" name="alert_lat" value="<?php echo $form['alert_lat']; ?>">
-							<input type="hidden" id="alert_lon" name="alert_lon" value="<?php echo $form['alert_lon']; ?>">
+								<input type="hidden" id="alert_lat" name="alert_lat" value="<?php echo $form['alert_lat']; ?>">
+								<input type="hidden" id="alert_lon" name="alert_lon" value="<?php echo $form['alert_lon']; ?>">
+							<?php 	} // if $incident_specific_mode 
+									else
+									{ 
+										print form::hidden("alert_incident_id", $form["alert_incident_id"]);
+										?>
+										<div class="alert-for-incident">
+										    Подписка на комментарии для <b><?php echo $form["alert_incident_title"]; ?></b>.
+										</div>
+							<?php   } // end else if $incident_specific_mode ?>
 							<div class="step-2-holder">
 								<div class="step-2">
-									<h2><?php echo Kohana::lang('ui_main.alerts_step2_send_alerts'); ?></h2>
+									<h2><?php if (empty($form["alert_incident_id"])) echo Kohana::lang('ui_main.alerts_step2_send_alerts'); ?></h2>
 									<div class="holder">
 										<div class="box">
 											<label>
@@ -117,7 +127,7 @@
 							</div>
 							<?php print form::close(); ?>
 														<?php
-								if ($allow_feed == 1 )
+								if ($allow_feed == 1 && empty($form["alert_incident_id"]))
 								{
 							?>
 							<div class="step-2-holder">

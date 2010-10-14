@@ -71,17 +71,24 @@ class Alert_Model extends ORM
      */
 	public function validate(array & $array, $save = FALSE)
 	{
+		$incident_related = array_key_exists("alert_incident_id", $array);
 		// Initialise the validation library and setup some rules
 		$array = Validation::factory($array)
 			->pre_filter('trim')
 			->add_rules('alert_mobile', 'numeric', 'length[6,20]')
 			->add_rules('alert_email', 'email', 'length[3,64]')
-			->add_rules('alert_lat', 'required', 'between[-90,90]')
-			->add_rules('alert_lon', 'required', 'between[-180,180]')
-			->add_rules('alert_radius', 'required', 'in_array[1,5,10,20,50,100]')
 			->add_callbacks('alert_mobile', array($this, '_mobile_or_email'))
 			->add_callbacks('alert_mobile', array($this, '_mobile_check'))
 			->add_callbacks('alert_email', array($this, '_email_check'));
+
+        // Either incident id or a circle (coords + radius) must be set.
+        if (!$incident_related)
+        {
+        	$array = $array
+        	    ->add_rules('alert_radius', 'required', 'in_array[1,5,10,20,50,100]')        	
+				->add_rules('alert_lat', 'required', 'between[-90,90]')
+				->add_rules('alert_lon', 'required', 'between[-180,180]');
+        }
 
 		return parent::validate($array, $save);
 	} // END function validate
@@ -100,12 +107,24 @@ class Alert_Model extends ORM
             || array_key_exists('alert_lon', $array->errors()))
             return;
 
-        if ($array->alert_mobile && (bool) $this->db
+       if (!$array->alert_mobile) return;
+
+	    if (empty($array->alert_incident_id) &&
+	    	(bool) $this->db
 			->where(array(
 				'alert_type' => 1,
 				'alert_recipient' => $array->alert_mobile,
 				'alert_lat' => $array->alert_lat,
 				'alert_lon' => $array->alert_lon
+				))
+			->count_records($this->table_name)
+			||
+			!empty($array->alert_incident_id) &&
+	    	(bool) $this->db
+			->where(array(
+				'alert_type' => 1,
+				'alert_recipient' => $array->alert_mobile,
+				'alert_incident_id' => $array->alert_incident_id
 				))
 			->count_records($this->table_name) )
 		{
@@ -127,12 +146,24 @@ class Alert_Model extends ORM
             || array_key_exists('alert_lon', $array->errors()))
             return;
 
-        if ( $array->alert_email && (bool) $this->db
+       if (!$array->alert_email) return;
+
+	    if (empty($array->alert_incident_id) &&
+	    	(bool) $this->db
 			->where(array(
 				'alert_type' => 2,
 				'alert_recipient' => $array->alert_email,
 				'alert_lat' => $array->alert_lat,
 				'alert_lon' => $array->alert_lon
+				))
+			->count_records($this->table_name)
+			||
+			!empty($array->alert_incident_id) &&
+	    	(bool) $this->db
+			->where(array(
+				'alert_type' => 2,
+				'alert_recipient' => $array->alert_email,
+				'alert_incident_id' => $array->alert_incident_id
 				))
 			->count_records($this->table_name) )
 		{

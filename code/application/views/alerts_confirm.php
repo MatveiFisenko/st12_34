@@ -18,7 +18,7 @@
 						
 						<!-- start alerts block -->
 						<div class="big-block">
-							<h1>Get Alerts</h1>
+							<h1><?php echo Kohana::lang('ui_main.alerts_get'); ?></h1>
 							
 							<!-- Mobile Alert -->
 							<div class="green-box">
@@ -45,7 +45,7 @@
 										print form::open('/alerts/verify');
 										print "Verification Code:<BR>".form::input('alert_code', '', ' class="text"')."<BR>";
 										print "Mobile Phone:<BR>".form::input('alert_mobile', $alert_mobile, ' class="text"')."<BR>";
-										print form::submit('button', 'Confirm My Alert Request', ' class="btn_submit"');
+										print form::submit('button', Kohana::lang('alerts.confirm_alert_request'), ' class="btn_submit"');
 										print form::close();
 										?>
 									</div>
@@ -67,8 +67,8 @@
 									<?php 
 									if ($alert_email)
 									{
-										echo Kohana::lang('alerts.email_alert_request_created')."<u><strong>".
-											$alert_email."</strong></u>.".
+										echo Kohana::lang('alerts.email_alert_request_created')."<u><strong> ".
+											$alert_email."</strong></u>. ".
 											Kohana::lang('alerts.verify_code');
 									}
 									?>
@@ -80,7 +80,7 @@
 										print form::open('/alerts/verify');
 										print "Verification Code:<BR>".form::input('alert_code', '', ' class="text"')."<BR>";
 										print "Email Address:<BR>".form::input('alert_email', $alert_email, ' class="text"')."<BR>";
-										print form::submit('button', 'Confirm My Alert Request', ' class="btn_submit"');
+										print form::submit('button', Kohana::lang('alerts.confirm_alert_request'), ' class="btn_submit"');
 										print form::close();
 										?>
 									</div>

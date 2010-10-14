@@ -41,6 +41,7 @@ $lang = array
     'code_not_found' => 'This verification code was not found! Please confirm that you have the correct URL.',
     'code_already_verified' => 'This code has been verified before!',
     'code_verified' => ' Your code was verified correctly. You will now receive alerts about incidents as they happen.',
+    'confirm_alert_request' => 'Confirm My Alert Request',
     'mobile_alert_request_created' => 'Your Mobile Alert request has been created and verification message has been sent to ',
 	'verify_code' => 'You will not receive alerts on this location until you confirm your request.',
 	'mobile_code' => 'Please enter the SMS confirmation code you received on your mobile phone below: ',

@@ -43,10 +43,11 @@ class S_Gibdd_Reminders_Controller extends Controller {
 			$to = $comment->comment_email;
 			$from = $alerts_email;
 			$subject = "[$site_name] ".$comment->incident_title; 
+			$link_url = url::site(). "reports/view/" . $comment->incident_id;
 			$message = "Здравствуйте, " . $comment->comment_author . "!<br><br>" .
 			           "45 дней назад вами было отправлено заявление в ГИБДД.<br>" .
 			           "Если ответ из ГИБДД получен, пожалуйста, зарегистрируйте его на сайте " .
-			           "<a href='http://www.st1234.ru/reports/view/" . $comment->incident_id . "'>st1234.ru</a>. " .
+			           "<a href='" . $link_url . "'>" . $link_url . "</a>. " .
 			           "Если яма была устранена, пожалуйста, также укажите это на сайте.<br><br>" .
 			           "С уважением, команда st1234.ru";
 			if (email::send($to, $from, $subject, $message, TRUE) == 1)

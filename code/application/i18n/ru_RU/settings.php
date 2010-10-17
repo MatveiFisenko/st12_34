@@ -28,7 +28,7 @@ $lang = array
     'site' => array
 	(
 		'display_contact_page' => 'Показать страницу контактов',
-        'display_howtohelp_page' => 'Показать страницу "Как помочь" ',
+        'display_howtohelp_page' => 'Показать страницу "Что делать?" ',
         'email_alerts' => 'Адрес электронной почты для оповещения',
         'email_notice' => '<span>In order to receive reports by email, please <a href="'.url::base().'admin/settings/email">configure your email account settings</a>.</span>',
         'email_site' => 'Электронная почта сайта',

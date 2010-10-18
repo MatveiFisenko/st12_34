@@ -32,6 +32,7 @@
 							<li><a href="#" onclick="reportAction('u','UNAPPROVE', '');"><?php echo Kohana::lang('ui_main.disapprove');?></a></li>
 							<li><a href="#" onclick="reportAction('v','VERIFY', '');"><?php echo Kohana::lang('ui_main.verify');?></a></li>
 							<li><a href="#" onclick="reportAction('d','DELETE', '');"><?php echo Kohana::lang('ui_main.delete');?></a></li>
+							<li><a href="#" onclick="reportAction('r','RESOLVE', '');"><?php echo Kohana::lang('ui_main.resolve');?></a></li>
 						</ul>
 					</div>
 				</div>
@@ -152,6 +153,7 @@
 									// Incident Status
 									$incident_approved = $incident->incident_active;
 									$incident_verified = $incident->incident_verified;
+									$incident_resolved = $incident->pit_resolved;
 									
 									// Get Any Translations
 									$i = 1;
@@ -191,6 +193,7 @@
 												<li class="none-separator"><a href="#"<?php if ($incident_approved) echo " class=\"status_yes\"" ?> onclick="reportAction('a','APPROVE', '<?php echo $incident_id; ?>');"><?php echo Kohana::lang('ui_main.approve');?></a></li>
 												<li><a href="#"<?php if ($incident_verified) echo " class=\"status_yes\"" ?> onclick="reportAction('v','VERIFY', '<?php echo $incident_id; ?>');"><?php echo Kohana::lang('ui_main.verify');?></a></li>
 												<li><a href="#" class="del" onclick="reportAction('d','DELETE', '<?php echo $incident_id; ?>');"><?php echo Kohana::lang('ui_main.delete');?></a></li>
+												<li><a href="#"<?php if ($incident_resolved) echo " class=\"status_yes\"" ?>  onclick="reportAction('r','RESOLVE', '<?php echo $incident_id; ?>');"><?php echo Kohana::lang('ui_main.resolve');?></a></li>
 											</ul>
 										</td>
 									</tr>

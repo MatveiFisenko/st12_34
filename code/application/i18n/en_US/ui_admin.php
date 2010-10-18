@@ -147,6 +147,7 @@ $lang = array
     'reporters' => 'Reporters',
     'reports' => 'Reports',
     'required' => 'Required',
+    'resolved' => 'Resolved',
     'results' => 'Results',
     'select_field_type' => '--- Select A Field Type ---',
     'select_item' => 'Please select an item',

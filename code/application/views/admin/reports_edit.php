@@ -464,6 +464,19 @@
 									}?>> <?php echo Kohana::lang('ui_main.no');?>									
 								</div>
 								<div class="row">
+									<div class="f-col-bottom-1-col"><?php echo Kohana::lang('ui_main.resolve_this_report');?>?</div>
+									<input type="radio" name="pit_resolved" value="1"
+									<?php if ($form['pit_resolved'] == 1)
+									{
+										echo " checked=\"checked\" ";
+									}?>> <?php echo Kohana::lang('ui_main.yes');?>
+									<input type="radio" name="pit_resolved" value="0"
+									<?php if ($form['pit_resolved'] == 0)
+									{
+										echo " checked=\"checked\" ";
+									}?>> <?php echo Kohana::lang('ui_main.no');?>									
+								</div>
+								<div class="row">
 									<div class="f-col-bottom-1-col"><?php echo Kohana::lang('ui_main.report_edit_dropdown_1_title');?>:</div>
 									<?php print form::dropdown('incident_source', 
 									array(""=> Kohana::lang('ui_main.report_edit_dropdown_1_default'), 

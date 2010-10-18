@@ -147,6 +147,7 @@ $lang = array
     'reporters' => 'Обозреватели',
     'reports' => 'Сообщения',
     'required' => 'Обязательно',
+    'resolved' => 'Устранение подтверждено',
     'results' => 'Результаты',
     'select_field_type' => '--- Выберите Тип поля ---',
     'select_item' => 'Выберите пункт',

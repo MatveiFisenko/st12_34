@@ -203,6 +203,28 @@ class Reports_Controller extends Admin_Controller
 					}
 					$form_action = strtoupper(Kohana::lang('ui_admin.deleted'));
 				}
+				elseif ($post->action == 'r')		// Resolve Action
+				{
+					foreach($post->incident_id as $item)
+					{
+						$update = new Incident_Model($item);
+						if ($update->loaded == true) {
+							$update->pit_resolved = '1';
+
+							// Tag this as a report that needs to be sent out as an alert
+							$update->incident_alert_status = '1';
+							$update->save();
+
+							$verify = new Verify_Model();
+							$verify->incident_id = $item;
+							$verify->verified_status = '4';
+							$verify->user_id = $_SESSION['auth_user']->id;			// Record 'Verified By' Action
+							$verify->verified_date = date("Y-m-d H:i:s",time());
+							$verify->save();
+						}
+					}
+					$form_action = strtoupper(Kohana::lang('ui_admin.resolved'));
+				}
 				$form_saved = TRUE;
 			}
 			else
@@ -298,7 +320,8 @@ class Reports_Controller extends Admin_Controller
 			'incident_information' => '',
 			'pit_length' => '',
 			'pit_width' => '',
-			'pit_depth' => ''
+			'pit_depth' => '',
+			'pit_resolved' => ''
 	    );
 
 		//  copy the form as errors, so the errors will be stored with keys corresponding to the form field names
@@ -563,6 +586,7 @@ class Reports_Controller extends Admin_Controller
 				$incident->pit_length = $post->pit_length;
 				$incident->pit_width = $post->pit_width;
 				$incident->pit_depth = $post->pit_depth;
+				$incident->pit_resolved = $post->pit_resolved;
 
 				$incident_date=explode("/",$post->incident_date);
 				// where the $_POST['date'] is a value posted by form in mm/dd/yyyy format
@@ -625,6 +649,10 @@ class Reports_Controller extends Admin_Controller
 				elseif ($post->incident_active == 1 && $post->incident_verified == 1)
 				{
 					$verify->verified_status = '3';
+				}
+				elseif ($post->incident_resolved == 1)
+				{
+					$verify->verified_status = '4';
 				}
 				else
 				{
@@ -856,7 +884,8 @@ class Reports_Controller extends Admin_Controller
 						'incident_information' => $incident->incident_information,
 						'pit_length' => $incident->pit_length,
 						'pit_width' => $incident->pit_width,
-						'pit_depth' => $incident->pit_depth
+						'pit_depth' => $incident->pit_depth,
+						'pit_resolved' => $incident->pit_resolved,
 				    );
 
 					// Merge To Form Array For Display

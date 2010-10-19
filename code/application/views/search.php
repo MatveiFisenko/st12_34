@@ -19,6 +19,7 @@
 						<!-- start search block -->
 						<div class="big-block">
 							<h1><?php echo Kohana::lang('ui_main.search_results');?></h1>
+							<p>Поиск осуществляется только по названию и описанию ямы.</p>
 							<div class="search_block">
 								<?php echo $search_info; ?>
 								<?php echo $search_results; ?>

@@ -191,6 +191,7 @@ class Reports_Controller extends Main_Controller {
 
 		$this->template->content->total_reports = $total_reports;
 		$this->template->content->total_verified = $total_verified;
+		$this->template->content->total_resolved = Incident_Model::get_total_reports_by_resolved(true);
 		$this->template->content->avg_reports_per_day = $avg_reports_per_day;
 		$this->template->content->percent_verified = $percent_verified;
 	}
@@ -689,9 +690,9 @@ class Reports_Controller extends Main_Controller {
 
 					$comment = new Comment_Model();
 
-				 // Process scan image.
-  				$scan_filenames = upload::save('comment_scan');
-  				$new_scan_filename = '';
+					 // Process scan image.
+	  				$scan_filenames = upload::save('comment_scan');
+	  				$new_scan_filename = '';
 					if (count($scan_filenames) > 0) {
 					  $new_scan_filename = $comment->id."_".time();
 

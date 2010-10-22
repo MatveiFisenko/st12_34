@@ -214,6 +214,21 @@ class Reports_Controller extends Admin_Controller
 							// Tag this as a report that needs to be sent out as an alert
 							$update->incident_alert_status = '1';
 							$update->save();
+							
+							// Add a comment. This comment will be also e-mailed to the incident subscribers.
+							$current_user = new User_Model($_SESSION['auth_user']->id);
+							$comment = new Comment_Model();
+							$comment->incident_id = $item;
+							$comment->comment_author = $current_user->name;
+							$comment->comment_email = $current_user->email;
+							$comment->comment_description = "Яма помечена как устраненная.";
+							$comment->comment_date = date("Y-m-d H:i:s",time());
+							$comment->comment_type = "comment";
+							$comment->comment_alert_status = 1;
+							$comment->comment_spam = 0;
+							$comment->comment_active = 1;
+							$comment->save();
+							 
 
 							$verify = new Verify_Model();
 							$verify->incident_id = $item;

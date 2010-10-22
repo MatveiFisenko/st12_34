@@ -75,7 +75,23 @@ class Incident_Model extends ORM
 	}
 
 	/*
-	* get the total number of verified or unverified reports
+	* get the total number of resolved or unresolved reports
+	* @param resolved - Only count resolved reports if true, unresolved if false
+	*/
+	public static function get_total_reports_by_resolved($resolved=false)
+	{
+		if($resolved)
+		{
+			$count = ORM::factory('incident')->where('pit_resolved', '1')->count_all();
+		}else{
+			$count = ORM::factory('incident')->where('pit_resolved', '0')->count_all();
+		}
+
+		return $count;
+	}
+
+	/*
+	* get the oldest timestamp of approved or all reports
 	* @param approved - Oldest approved report timestamp if true (oldest overall if false)
 	*/
 	public static function get_oldest_report_timestamp($approved=true)

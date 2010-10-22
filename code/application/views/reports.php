@@ -40,12 +40,12 @@
 									<tr>
 										<th>В среднем в день</th>
 										<th>Потверждённых ям</th>
-										<th>Доля подтверждённых ям</th>
+										<th>Устраненных ям</th>
 									</tr>
 									<tr>
 										<td><?php echo $avg_reports_per_day; ?></td>
 										<td><?php echo $total_verified; ?></td>
-										<td><?php echo $percent_verified; ?></td>
+										<td><?php echo $total_resolved; ?></td>
 									</tr>
 								</table>
 							</div>

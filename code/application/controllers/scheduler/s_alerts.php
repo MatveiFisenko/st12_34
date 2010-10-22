@@ -159,13 +159,13 @@ class S_Alerts_Controller extends Controller {
 		*/
 		$comments = $db->query(
 				"SELECT c.id, c.comment_author, c.comment_description, c.comment_email, " .
-				"i.incident_title FROM comment c INNER JOIN incident i ON c.incident_id = i.id WHERE " .
+				"i.incident_title, c.incident_id FROM comment c INNER JOIN incident i ON c.incident_id = i.id WHERE " .
 				"c.comment_alert_status = 1 AND c.comment_active = 1");
 		foreach ($comments as $comment)
 		{
 			// Get all alertees
 			$alertees = ORM::factory('alert')
-				->where('alert_confirmed','1')
+				->where('alert_confirmed','1')->where('alert_incident_id', $comment->incident_id)
 				->find_all();
 			
 			foreach ($alertees as $alertee)

@@ -59,6 +59,8 @@ class Admin_Controller extends Template_Controller
 		// Get version coded numbers to display
 		$this->template->code_version = Kohana::config('version.ushahidi_version');
 		$this->template->db_version = Kohana::config('version.ushahidi_db_version');
+        include 'version.php';
+		$this->template->svn_version = "SVN ревизия: " . $svn_code_version;
 
 		// Get version from the db
 		$this->template->actual_code_version = Kohana::config('settings.ushahidi_version');

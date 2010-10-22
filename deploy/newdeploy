@@ -105,7 +105,11 @@ if ((depltype & FLG_CODE)) ; then
 	cd /tmp/src.$$
 
 	svn export ${repo_path}trunk/code . --force $quiet
-
+	
+	# Write the current SVN version for further usage in PHP code.
+	version=$(svn info ${repo_path}trunk/code | grep "Revision:" | sed "s/Revision: //g")
+	echo '<?php $svn_code_version' = ${version}';' > version.php
+  
 	findCommand="find /var/www/1234/ -mindepth 1 -maxdepth 1 -print0"
 
 	rmFilesCommand="find /var/www/1234/ -type f ! -path *media/uploads* -print0"

@@ -121,6 +121,8 @@
 				 - 
 				<?php echo ucfirst(Kohana::lang('ui_admin.database')); ?> <?php echo Kohana::lang('ui_admin.version'); ?> <?php echo $actual_db_version; ?>
 				<?php if($db_version != $actual_db_version) echo '<span>'.Kohana::lang('ui_admin.db_out_of_sync').' v'.$db_version.'</span>'; ?>
+				 -
+				<?php echo $svn_version ?>
 				</strong>
 				<ul>
 					<li class="none-separator"> <?php echo Kohana::lang('ui_admin.welcome');echo $admin_name; ?>!</li>

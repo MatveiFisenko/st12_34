@@ -100,12 +100,14 @@ $("#incident_minute option[value='"+ms+"']").attr("selected","true");
 										</script>
 
 								<div class="report_row">
-									<h4><?php echo Kohana::lang('ui_main.reports_categories'); ?></h4>
+									<h4 class="report_category_title"><?php echo Kohana::lang('ui_main.reports_categories'); ?></h4>
 									<div class="report_category" id="categories">
 										<?php
 										$selected_categories = array();
-                    if (!empty($form['incident_category']) && is_array($form['incident_category'])) {
+					                    if (!empty($form['incident_category']) && is_array($form['incident_category'])) {
 											$selected_categories = $form['incident_category'];
+										} else {
+											$selected_categories[] = 4;  // Яма  
 										}
 										$columns = 2;
 										echo category::tree($categories, $selected_categories, 'incident_category', $columns);
@@ -114,16 +116,16 @@ $("#incident_minute option[value='"+ms+"']").attr("selected","true");
 								</div>
 								<div class="report_row">
 									<h4><?php echo Kohana::lang('ui_main.pit_length'); ?>, <?php print Kohana::lang('ui_main.cm'); ?></h4>
-                  <?php print form::input('pit_length', $form['pit_length'], ' class="text short"'); ?>
-                </div>
+									  <?php print form::input('pit_length', $form['pit_length'], ' class="text short"'); ?>
+									</div>
 								<div class="report_row">
 									<h4><?php echo Kohana::lang('ui_main.pit_width'); ?>, <?php print Kohana::lang('ui_main.cm'); ?></h4>
-                  <?php print form::input('pit_width', $form['pit_width'], ' class="text short"'); ?>
-                </div>
+									  <?php print form::input('pit_width', $form['pit_width'], ' class="text short"'); ?>
+									</div>
 								<div class="report_row">
 									<h4><?php echo Kohana::lang('ui_main.pit_depth'); ?>, <?php print Kohana::lang('ui_main.cm'); ?></h4>
-                  <?php print form::input('pit_depth', $form['pit_depth'], ' class="text short"'); ?>
-                </div>
+									  <?php print form::input('pit_depth', $form['pit_depth'], ' class="text short"'); ?>
+									</div>
 
 								<div id="custom_forms">
 
@@ -328,7 +330,7 @@ $("#incident_minute option[value='"+ms+"']").attr("selected","true");
 								<div class="report_row">
 									<strong>Введите текст c картинки:</strong><br />
 									<?php print $captcha->render(); ?><br />
-									<?php print form::input('captcha', $form['captcha'], ' class="text"'); ?>
+									<?php print form::input('captcha', '', ' class="text"'); ?>
 								</div>
 								<div class="report_row">
 									<input name="submit" type="submit" value="<?php echo Kohana::lang('ui_main.reports_btn_submit'); ?>" class="btn_submit" />

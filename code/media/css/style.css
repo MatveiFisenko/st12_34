@@ -1321,10 +1321,15 @@ label.error {
 	float:left;
 	margin-right:10px;
 }
+.report_category_title {
+  display: none;  /* На данный момент используется только категория Яма */
+}
 .report_category {
 	clear:both;
 	overflow:hidden;
 	font-size:90%;
+
+	display:none;  /* На данный момент используется только категория Яма */
 }
 .report_category ul{
 	width:50%;

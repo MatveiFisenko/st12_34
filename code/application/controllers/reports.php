@@ -290,9 +290,9 @@ class Reports_Controller extends Main_Controller {
 			$post->add_rules('location_name', 'required', 'length[3,200]');
 
 			// Pit-specific :)
-			$post->add_rules('pit_length', 'required', 'between[15, 1000]');
-			$post->add_rules('pit_width', 'required', 'between[60, 1000]');
-			$post->add_rules('pit_depth', 'required', 'between[5, 1000]');
+			$post->add_rules('pit_length', 'required', 'between[1, 1000]');
+			$post->add_rules('pit_width', 'required', 'between[1, 1000]');
+			$post->add_rules('pit_depth', 'required', 'between[1, 1000]');
 
 			//XXX: Hack to validate for no checkboxes checked
 			if (!isset($_POST['incident_category'])) {

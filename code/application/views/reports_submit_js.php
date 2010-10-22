@@ -56,6 +56,13 @@
 
 		$().ready(function() {
 			// validate signup form on keyup and submit
+			jQuery.validator.addMethod('pit_size_big_enough', function(val, el) {
+				w = parseInt($("#pit_width")[0].value);
+				l = parseInt($("#pit_length")[0].value);
+				d = parseInt($("#pit_depth")[0].value);
+				return w > 60 || l > 15 || d > 5; 
+			    },
+			    "Чтобы яма нарушала условия ГОСТ Р 50597-93 п. 3.1.2, ее ширина должна быть больше 60 см, либо длина больше 15 см, либо глубина больше 5 см. ");
 			$("#reportForm").validate({
 				rules: {
 					incident_title: {
@@ -101,15 +108,16 @@
 					},
 					pit_length: {
 					  required: true,
-					  range: [15, 1000]
+					  range: [1, 1000]
 					},
 					pit_width: {
 					  required: true,
-					  range: [60, 1000]
+					  range: [1, 1000]
 					},
 					pit_depth: {
 					  required: true,
-					  range: [5, 1000]
+					  range: [1, 1000],
+					  pit_size_big_enough: true
 					},
 				  "incident_photo[]": {
 				      required: true
@@ -162,22 +170,22 @@
 					},
 					pit_length: {
 					  required: "Пожалуйста, укажите длину ямы",
-					  range: "Длина ямы по ГОСТ Р 50597-93 п. 3.1.2 допустима до 15см. Введите значение от 16 до 1000 см."
-          },
+					  range: "Введите значение от 1 до 1000 см."
+					},
 					pit_width: {
 					  required: "Пожалуйста, укажите ширину ямы",
-					  range: "Ширина ямы по ГОСТ Р 50597-93 п. 3.1.2 допустима до 60см. Введите значение от 61 до 1000 см."
-          },
+					  range: "Введите значение от 1 до 1000 см."
+					},
 					pit_depth: {
 					  required: "Пожалуйста, укажите глубину ямы",
-					  range: "Глубина ямы по ГОСТ Р 50597-93 п. 3.1.2 допустима до 5см. Введите значение от 6 до 1000 см."
-          },
+					  range: "Введите значение от 1 до 1000 см."
+					},
           			captcha: {
 					  required: "Пожалуйста, введите текст с картинки"
-          },
-          "incident_photo[]": {
-            required: "<div style=\"clear:both\">Обязательно должна быть приложена фотография</div>"
-          }
+					},
+					"incident_photo[]": {
+					  required: "<div style=\"clear:both\">Обязательно должна быть приложена фотография</div>"
+					}
 				},
 				groups: {
 					incident_date_time: "incident_date incident_hour",

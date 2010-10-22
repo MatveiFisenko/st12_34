@@ -38,19 +38,19 @@
 								<?php print form::close(); ?>
 								<table>
 									<tr>
-										<th>Всего ям</th>
 										<th>В среднем в день</th>
-										<th>% подтверждённых</th>
+										<th>Потверждённых ям</th>
+										<th>Доля подтверждённых ям</th>
 									</tr>
 									<tr>
-										<td><?php echo $total_reports; ?></td>
 										<td><?php echo $avg_reports_per_day; ?></td>
+										<td><?php echo $total_verified; ?></td>
 										<td><?php echo $percent_verified; ?></td>
 									</tr>
 								</table>
 							</div>
 
-							<h1><?php echo Kohana::lang('ui_main.reports').": ";?> <?php echo ($category_title) ? " in $category_title" : ""?>
+							<h1><?php echo "Количество ям: ";?> <?php echo ($category_title) ? " в категории $category_title" : ""?>
 								<?php echo $pagination_stats; ?></h1>
 
 							<div style="clear:both;"></div>
@@ -63,9 +63,6 @@
 								  }
 							?>
 							<div class="report_rowtitle">
-								<div class="report_col1">
-									<strong><?php echo strtoupper(Kohana::lang('ui_main.media'));?></strong>
-								</div>
 								<div class="report_col2">
 									<strong><?php echo strtoupper(Kohana::lang('ui_main.report_title'));?></strong>
 								</div>
@@ -138,10 +135,6 @@
 							?>
 
 							<div class="report_row1">
-
-								<div class="report_thumb report_col1">
-									&nbsp<?php if(isset($media_icons[$incident_id])) echo $media_icons[$incident_id]; ?>
-								</div>
 
 								<div class="report_details report_col2">
 									<h3><a href="<?php echo url::site(); ?>reports/view/<?php echo $incident_id; ?>"><?php echo $incident_title; ?></a></h3>

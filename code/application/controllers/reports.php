@@ -123,7 +123,7 @@ class Reports_Controller extends Main_Controller {
 
 				$this->template->content->pagination = $pagination;
 			} else { // If we don't want to show pagination
-				$this->template->content->pagination_stats = $pagination->total_items.' '.Kohana::lang('ui_admin.reports');
+				$this->template->content->pagination_stats = $pagination->total_items;
 			}
 		} else {
 			$this->template->content->pagination_stats = '('.$pagination->total_items.' report'.$plural.')';
@@ -187,9 +187,10 @@ class Reports_Controller extends Main_Controller {
 		// Percent Verified
 
 		$total_verified = Incident_Model::get_total_reports_by_verified(true);
-		$percent_verified = ($total_reports == 0) ? '-' : round((($total_verified / $total_reports) * 100),2).'%';
+		$percent_verified = ($total_reports == 0) ? '-' : round((($total_verified / $total_reports) * 100), 0).'%';
 
 		$this->template->content->total_reports = $total_reports;
+		$this->template->content->total_verified = $total_verified;
 		$this->template->content->avg_reports_per_day = $avg_reports_per_day;
 		$this->template->content->percent_verified = $percent_verified;
 	}

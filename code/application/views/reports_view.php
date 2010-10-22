@@ -29,6 +29,17 @@
 										"<span>Не проверена</span>";
 									?>
 								</div>
+								<div class="resolved <?php
+								if ($pit_resolved == 1)
+								{
+									echo " resolved_yes";
+								}
+								?>"><?php
+									echo ($pit_resolved == 1) ?
+										"<span>Устранена</span>" :
+										"<span>Не устранена</span>";
+									?>
+								</div>
 								<h1><?php
 								echo $incident_title;
 

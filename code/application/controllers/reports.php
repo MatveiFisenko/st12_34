@@ -835,6 +835,7 @@ class Reports_Controller extends Main_Controller {
 			}
 
 			$this->template->content->incident_verified = $incident->incident_verified;
+			$this->template->content->pit_resolved = $incident->pit_resolved;
 
 			// Retrieve Comments (Additional Information)
 			$this->template->content->comments = "";

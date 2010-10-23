@@ -683,7 +683,7 @@ div.resolved, div.verified{
     margin: 0 0 0 10px;
 }
 div.resolved_yes, div.verified_yes{
-	background: #368c00; width:65px;
+	background: #368c00; width:85px;
 }
 div.verified span{
     color: #FFF;

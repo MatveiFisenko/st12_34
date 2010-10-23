@@ -86,6 +86,7 @@ class Stats_Controller extends Admin_Controller
 		$report_data = array();
 		$colors = array();
 		$reports_per_cat = array();
+		print $cats[3];
 		foreach($data['category_counts'] as $category_id => $count) {
 			$category_name = $cats[$category_id]['category_title'];
 			$report_data[$category_name] = $count;

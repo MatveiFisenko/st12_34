@@ -188,7 +188,7 @@ if (( depltype & FLG_SQL_MIG_S )); then
 
 	read -e -s -p "Enter sql root password (server side): " root_pass;
 
-	read -e -s -p "Enter migration number to deploy: " migration_number;
+	read -e -p "Enter migration number to deploy: " migration_number;
 
 	db_name=ushahidi
 

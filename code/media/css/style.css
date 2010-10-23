@@ -84,7 +84,7 @@ body#page{
 /* wrapper setup */
 div.rapidxwpr{
     margin: auto;
-    width: 1024px;
+    width: 90%;
 }
 
 /* header */
@@ -1493,33 +1493,33 @@ a.show-more {
 	padding-right:8px;
 }
 .report_col1{
-	width:85px;
+	width:12%;
 }
 .report_col2{
-	width:240px;
+	width:14%;
 }
 .report_col3{
-	width:85px;
+	width:12%;
 	text-align:center;
 }
 .report_col4{
-	width:105px;
+	width:20%;
 	text-align:center;
 }
 .report_col5{
-	width:85px;
+	width:12%;
 	text-align:center;
 }
 .report_col6{
-	width:95px;
+	width:10%;
 	text-align:center;
 }
 .report_col7{
-	width:85px;
+	width:10%;
 	text-align:center;
 }
 .report_col8{
-	width:105px;
+	width:14%;
 	text-align:left;
 }
 .report_row1, .report_row2, .org_row1, .org_row2{

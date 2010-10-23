@@ -330,7 +330,7 @@ $("#incident_minute option[value='"+ms+"']").attr("selected","true");
 								<div class="report_row">
 									<strong>Введите текст c картинки:</strong><br />
 									<?php print $captcha->render(); ?><br />
-									<?php print form::input('captcha', '', ' class="text"'); ?>
+									<?php print form::input('captcha', '', ' autocomplete=off class="text"'); ?>
 								</div>
 								<div class="report_row">
 									<input name="submit" type="submit" value="<?php echo Kohana::lang('ui_main.reports_btn_submit'); ?>" class="btn_submit" />

@@ -78,7 +78,7 @@
 											<div class="org_contact_row">
 												<h4>Security Code:</h4>
 												<?php print $captcha->render(); ?><br />
-												<?php print form::input('captcha', $form['captcha'], ' class="text"'); ?>
+												<?php print form::input('captcha', '', ' autocomplete=off class="text"'); ?>
 					            </div>
 											<div class="org_contact_row">
 					              <input class="btn_blue" type="submit" value="Send Message" />

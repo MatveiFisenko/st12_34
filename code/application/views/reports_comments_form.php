@@ -77,7 +77,7 @@
 		<div class="report_row">
 			<strong>Введите текст с картинки:</strong><br />
 			<?php print $captcha->render(); ?><br />
-			<?php print form::input('captcha', $form['captcha'], ' class="text"'); ?>
+			<?php print form::input('captcha', '', ' autocomplete=off class="text"'); ?>
 		</div>
 		<div class="report_row">
 			<input name="submit" type="submit" value="Оставить комментарий" class="btn_blue" />

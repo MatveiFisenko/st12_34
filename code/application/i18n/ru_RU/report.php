@@ -2,6 +2,11 @@
 
 $lang = array
 (
+	'captcha' => array
+	(
+		'required' => 'Введите защитный код.', 
+		'default' => 'Введите правильный защитный код'
+	),
 	'locale' => array
 	(
 		'required'		=> 'Введите язык.',

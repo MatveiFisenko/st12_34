@@ -131,7 +131,7 @@
 			<div id="searchbox">
 				<div class="addthis_toolbox addthis_default_style addthis_custom_style">
 				    <a class="addthis_button_vk" title="Опубликовать ВКонтакте"></a>
-				    <a class="addthis_button_twitter" title="Опубликовать в Tweeter"></a>
+				    <a class="addthis_button_twitter" title="Опубликовать в Twitter"></a>
 				    <a class="addthis_button_facebook" title="Опубликовать в Facebook"></a>
 				    <a class="addthis_button_livejournal" title="Опубликовать в LiveJournal"></a>
 				    <span class="addthis_separator">|</span>

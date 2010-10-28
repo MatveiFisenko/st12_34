@@ -58,5 +58,31 @@
 
         <!-- script for share button -->
         <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pub=ushahidi"></script>
+
+<!-- Reformal -->
+<script type="text/javascript"><!--
+reformal_wdg_domain    = "st1234";
+reformal_wdg_mode    = 0;
+reformal_wdg_title   = "Борьба с ямами ";
+reformal_wdg_ltitle  = "Оставьте свой отзыв";
+reformal_wdg_lfont   = "";
+reformal_wdg_lsize   = "";
+reformal_wdg_color   = "#FFA000";
+reformal_wdg_bcolor  = "#516683";
+reformal_wdg_tcolor  = "#FFFFFF";
+reformal_wdg_align   = "right";
+reformal_wdg_charset = "utf-8";
+reformal_wdg_waction = 0;
+reformal_wdg_vcolor  = "#9FCE54";
+reformal_wdg_cmline  = "#E0E0E0";
+reformal_wdg_glcolor  = "#105895";
+reformal_wdg_tbcolor  = "#FFFFFF";
+ 
+reformal_wdg_bimage = "7688f5685f7701e97daa5497d3d9c745.png";
+ //-->
+</script>
+
+<script type="text/javascript" language="JavaScript" src="http://widget.reformal.ru/tab6.js"></script><noscript><a href="http://st1234.reformal.ru">Борьба с ямами  feedback </a> <a href="http://reformal.ru"><img src="http://reformal.ru/i/logo.gif" /></a></noscript>
+
 </body>
 </html>

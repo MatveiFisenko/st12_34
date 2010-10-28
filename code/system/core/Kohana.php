@@ -578,12 +578,16 @@ final class Kohana {
 				if ((time() - filemtime($path)) < $lifetime)
 				{
 					// Cache is valid
-					return unserialize(file_get_contents($path));
+					// Here we may have race condition when file is deleted by someone else
+					$data = @unserialize(file_get_contents($path));
+					return empty($data) ? NULL : $data;
 				}
 				else
 				{
 					// Cache is invalid, delete it
-					unlink($path);
+					//If file does not exist, there are error generated in /var/log/apache/st1234.error.log we don't want it!
+					if (is_file($path))
+						@unlink($path);
 				}
 			}
 		}

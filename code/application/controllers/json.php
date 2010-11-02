@@ -389,14 +389,17 @@ class Json_Controller extends Template_Controller
 			$db = new Database();
 
 			// Get Neighboring Markers Within 50 Kms (31 Miles)
-			$query = $db->query("SELECT DISTINCT i.*, l.`latitude`, l.`longitude`,
-			((ACOS(SIN($latitude * PI() / 180) * SIN(l.`latitude` * PI() / 180) + COS($latitude * PI() / 180) * COS(l.`latitude` * PI() / 180) * COS(($longitude - l.`longitude`) * PI() / 180)) * 180 / PI()) * 60 * 1.1515) AS distance
-			 FROM `".$this->table_prefix."incident` AS i INNER JOIN `".$this->table_prefix."location` AS l ON (l.`id` = i.`location_id`) INNER JOIN `".$this->table_prefix."incident_category` AS ic ON (i.`id` = ic.`incident_id`) INNER JOIN `".$this->table_prefix."category` AS c ON (ic.`category_id` = c.`id`) WHERE /*i.incident_active=1*/ 1 = 1 $filter
-			HAVING distance<='62'
-			 ORDER BY i.`id` ASC ");
+//			$query = $db->query("SELECT DISTINCT i.*, l.`latitude`, l.`longitude`,
+//			((ACOS(SIN($latitude * PI() / 180) * SIN(l.`latitude` * PI() / 180) + COS($latitude * PI() / 180) * COS(l.`latitude` * PI() / 180) * COS//(($longitude - l.`longitude`) * PI() / 180)) * 180 / PI()) * 60 * 1.1515) AS distance
+//			 FROM `".$this->table_prefix."incident` AS i INNER JOIN `".$this->table_prefix."location` AS l ON (l.`id` = i.`location_id`) INNER JOIN `".$this->table_prefix."incident_category` AS ic ON (i.`id` = ic.`incident_id`) INNER JOIN `".$this->table_prefix."category` AS c ON (ic.`category_id` = c.`id`) WHERE /*i.incident_active=1*/ 1 = 1 $filter
+//			HAVING distance<='62'
+//			 ORDER BY i.`id` ASC ");
+			 
+			$neighbors = $this->_get_neighbors($latitude, $longitude);
 
-			foreach ($query as $row)
+			foreach ($neighbors as $row)
 			{
+				if($row->id == $marker->id) continue;
 				$json_item = "{";
 	            $json_item .= "\"type\":\"Feature\",";
 	            $json_item .= "\"properties\": {";
@@ -407,7 +410,7 @@ class Json_Controller extends Template_Controller
 	            $json_item .= "},";
 	            $json_item .= "\"geometry\": {";
 	            $json_item .= "\"type\":\"Point\", ";
-	            $json_item .= "\"coordinates\":[" . $row->longitude . ", " . $row->latitude . "]";
+	            $json_item .= "\"coordinates\":[" . $row->location->longitude . ", " . $row->location->latitude . "]";
 	            $json_item .= "}";
 	            $json_item .= "}";
 
@@ -654,5 +657,29 @@ class Json_Controller extends Template_Controller
 			"ne"=>$ne
 		);
     }
+    
+/*
+	* Retrieves Neighboring Incidents
+	*/
+	private function _get_neighbors($latitude = 0, $longitude = 0)
+	{
+		$proximity = new Proximity($latitude, $longitude, 1); // within 1 km
+
+		// Generate query from proximity calculator
+		$radius_query = "location.latitude >= '" . $proximity->minLat . "'
+			AND ".$this->table_prefix."location.latitude <= '" . $proximity->maxLat . "'
+			AND ".$this->table_prefix."location.longitude >= '" . $proximity->minLong . "'
+			AND ".$this->table_prefix."location.longitude <= '" . $proximity->maxLong . "'
+			AND incident_active = 1";
+
+		$neighbors = ORM::factory('incident')
+							 	 ->join('location', 'incident.location_id', 'location.id','INNER')
+								 ->select('incident.*')
+								 ->where($radius_query)
+								 ->limit('5')
+								 ->find_all();
+
+		return $neighbors;
+	}
 
 }

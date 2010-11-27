@@ -230,7 +230,7 @@
 
 								</tbody>
 							</table>
-							<a class="more" href="<?php echo url::site() . 'reports/' ?>">View More...</a>
+							<a class="more" href="<?php echo url::site() . 'reports/' ?>">Показать ещё...</a>
 						</div>
 						<!-- / left content block -->
 
@@ -265,7 +265,7 @@
 									?>
 								</tbody>
 							</table>
-							<a class="more" href="<?php echo url::site() . 'feeds' ?>">View More...</a>
+							<a class="more" href="<?php echo url::site() . 'feeds' ?>">Показать ещё...</a>
 						</div>
 						<!-- / right content block -->
 

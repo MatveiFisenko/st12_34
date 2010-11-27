@@ -2012,3 +2012,11 @@ div.green-box ul, div.red-box ul{
 .alert_confirm .label{
 	margin-bottom:10px;
 }
+
+#divNews.report_row {
+  display:none
+}
+#divVideo.report_row {
+  display:none
+}
+

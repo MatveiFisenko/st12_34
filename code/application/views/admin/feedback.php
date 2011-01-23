@@ -127,7 +127,7 @@
 							$feedback_title = text::limit_chars($feedback->feedback_mesg, 10, "...", true);
 							$feedback_mesg = text::limit_chars($feedback->feedback_mesg, 150, "...", true);
 							$feedback_dateadd = $feedback->feedback_dateadd;
-							$feedback_dateadd = date('Y-m-d', strtotime($feedback->feedback_dateadd));
+							$feedback_dateadd = date('d.m.Y', strtotime($feedback->feedback_dateadd));
 							$feedback_read = $feedback->feedback_status;
 							$person_ip = $feedback->person_ip;
 							

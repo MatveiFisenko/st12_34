@@ -91,7 +91,7 @@
 									$incident_title = $incident->incident_title;
 									$incident_description = substr($incident->incident_description, 0, 150);
 									$incident_date = $incident->incident_date;
-									$incident_date = date('Y-m-d', strtotime($incident->incident_date));
+									$incident_date = date('d.m.Y', strtotime($incident->incident_date));
 									$incident_mode = $incident->incident_mode;	// Mode of submission... WEB/SMS/EMAIL?
 									
 									if ($incident_mode == 1)

@@ -119,7 +119,7 @@
 						        	$comment_scan = $comment->comment_scan;
 									$comment_spam = $comment->comment_spam;
 									$comment_rating = $comment->comment_rating;
-									$comment_date = date('Y-m-d', strtotime($comment->comment_date));
+									$comment_date = date('d.m.Y', strtotime($comment->comment_date));
 									
 									$incident_id = $comment->incident->id;
 									$incident_title = $comment->incident->incident_title;
